@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:31:49 by arendon-          #+#    #+#             */
-/*   Updated: 2021/08/17 16:31:49 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/08/17 16:43:45 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int main ()
 {
-    printf ("Hello Anahi re/n");
+    printf ("Hello Anahi, ");
     return (0);
 }
