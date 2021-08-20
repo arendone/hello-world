@@ -5,36 +5,22 @@
 #                                                     +:+ +:+         +:+      #
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/08/20 16:20:05 by arendon-          #+#    #+#              #
-#    Updated: 2021/08/20 17:21:19 by arendon-         ###   ########.fr        #
+#    Created: 2021/08/20 19:33:19 by arendon-          #+#    #+#              #
+#    Updated: 2021/08/20 19:46:36 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-all: libft.a
+NAME = test_toupperlower
 
-libft.a: libft.o
-	ar rcs libft.o -o libft.a
+SRC = test_toupperlower.c 
+
+all = $(NAME)
+
+$(NAME): $(NAME).o header.h ft_tolower.o ft_toupper.o
+	gcc $(SRC) ft_tolower.o ft_toupper.o -o $(NAME)
 	
-libft.o: libft.h ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_isprint.o
-	gcc -c ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.o ft_isprint.o ft_isprint.o
+ft_tolower.o: ft_tolower.c header.h
+	gcc -c ft_tolower.c
 	
-ft_isalnum.o: ft_isalnum.c
-	gcc -c ft_isalnum.c
-	
-ft_isalpha.o: ft_isalpha.c
-	gcc -c ft_isalpha.c
-	
-ft_isascii.o: ft_isascii.c
-	gcc -c ft_isascii.c
-	
-ft_isdigit.o: ft_isdigit.c
-	gcc -c ft_isdigit.c
-	
-ft_isprint.o: ft_isprint.c
-	gcc -c ft_isprint.c
-	
-ft_strlen.o: ft_strlen.c
-	gcc -c ft_strlen.c
-	
-clean:
-	rm -f *.o test123456
+ft_toupper.o: ft_toupper.c header.h
+	gcc -c ft_toupper.c
