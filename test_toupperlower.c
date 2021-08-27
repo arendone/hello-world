@@ -6,14 +6,14 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 12:35:01 by arendon-          #+#    #+#             */
-/*   Updated: 2021/08/20 15:49:25 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/08/23 18:32:48 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ctype.h>
 #include <stdio.h>
 
-#include "header.h"
+#include "libft.h"
 
 int	main()
 {

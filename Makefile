@@ -5,22 +5,29 @@
 #                                                     +:+ +:+         +:+      #
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/08/20 19:33:19 by arendon-          #+#    #+#              #
-#    Updated: 2021/08/20 19:46:36 by arendon-         ###   ########.fr        #
+#    Created: 2021/08/20 16:20:05 by arendon-          #+#    #+#              #
+#    Updated: 2021/08/27 15:18:21 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = test_toupperlower
+NAME= libft.a
 
-SRC = test_toupperlower.c 
+SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
+ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c \
+ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
 
-all = $(NAME)
+all: $(NAME)
 
-$(NAME): $(NAME).o header.h ft_tolower.o ft_toupper.o
-	gcc $(SRC) ft_tolower.o ft_toupper.o -o $(NAME)
-	
-ft_tolower.o: ft_tolower.c header.h
-	gcc -c ft_tolower.c
-	
-ft_toupper.o: ft_toupper.c header.h
-	gcc -c ft_toupper.c
+$(NAME):
+	gcc  -Wall -Werror -Wextra -c $(SRC)
+	ar -crs $(NAME) *.o 
+
+clean: 
+	rm -f *.o
+	rm -f *~
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+

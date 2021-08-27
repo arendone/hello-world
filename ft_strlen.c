@@ -6,11 +6,11 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 14:13:50 by arendon-          #+#    #+#             */
-/*   Updated: 2021/08/19 14:54:11 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:47:51 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 int	ft_strlen(char *str)
 {
