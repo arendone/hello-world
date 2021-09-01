@@ -6,13 +6,9 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/19 11:31:16 by arendon-          #+#    #+#             */
-/*   Updated: 2021/08/20 16:46:21 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/01 10:46:02 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//ME HACE RUIDO QUE PARA LA FUNCION STRLEN TENGA QUE DEFINIR DISTINTO CUANDO IMPRIMO... 
-// DEBERIA SER UNSIGNED LONG INT O SOLO INT O ????
-//gcc -Wall -o test123456 test123456.c ft_isprint.c ft_strlen.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c
 
 #include <stdio.h>
 #include <ctype.h>
@@ -148,13 +144,13 @@ int main()
     printf("La funcion isprint develve: %i para -1 \n", isprint(-1));
 	
 	printf("\n");
-	printf("Length of the string ft funtion:%d \n", ft_strlen(""));
+	printf("Length of the string ft funtion:%lu \n", ft_strlen(""));
 	printf("Length of the string original funtion:%lu \n", strlen(""));
-	printf("Length of the string ft funtion:%d \n", ft_strlen("wie geht es dir?"));
+	printf("Length of the string ft funtion:%lu \n", ft_strlen("wie geht es dir?"));
 	printf("Length of the string original funtion:%lu \n", strlen("wie geht es dir?"));
-	printf("Length of the string ft funtion:%d \n", ft_strlen("wie geht es \0 dir?"));
+	printf("Length of the string ft funtion:%lu \n", ft_strlen("wie geht es \0 dir?"));
 	printf("Length of the string original funtion:%lu \n", strlen("wie geht es \0 dir?"));
-	printf("Length of the string ft funtion:%d \n", ft_strlen("wie geht es \n dir? "));
+	printf("Length of the string ft funtion:%lu \n", ft_strlen("wie geht es \n dir? "));
 	printf("Length of the string original funtion:%lu \n", strlen("wie geht es \n dir? "));
 	
     return (0);
