@@ -17,6 +17,15 @@
 
 int	main(void)
 {
-	
-	
+    printf ("Return: %d \n", ft_strncmp("hola", "hola", 3));	
+	printf ("Return: %d \n", strncmp("hola", "hola", 3));
+
+    printf ("Return: %d \n", ft_strncmp("hoLa", "hola", 3));	
+	printf ("Return: %d \n", strncmp("hoLa", "hola", 3));
+
+    printf ("Return: %d \n", ft_strncmp("ho ", "hola", 3));	
+	printf ("Return: %d \n", strncmp("ho ", "hola", 3));
+
+    printf ("Return: %d \n", ft_strncmp("ho\0la", "ho\0La", 5));	
+	printf ("Return: %d \n", strncmp("ho\0la", "ho\0La", 5));
 }
