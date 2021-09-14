@@ -6,16 +6,16 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:30:01 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/09 17:49:48 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/09 18:42:45 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	count(char *s, int c)
+static int	countwords(char *s, int c)
 {
-	int	words; //static int	words???
+	int	words;
 	int	i;
 
 	i = 0;
@@ -36,6 +36,11 @@ int	count(char *s, int c)
 		i++;
 	}
 	return (words);
+}
+//keep the words in an array
+void	*newarray(char *s, int c)
+{
+	
 }
 
 /*
@@ -72,7 +77,7 @@ char	**ft_split(char const *s, char c)
 int main (void)
 {
 
-	printf("words: %d\n", count("cuenta las palabras ", 'a'));
+	printf("words: %d\n", count("cuenta las palabras ", ' '));
 	printf("words: %d\n", count("", ' '));
 	printf("words: %d\n", count(" cuen    ta  las p a l a     bras   ", ' '));
 	printf("words: %d\n", count("   cuenta las palabras    a", ' '));
