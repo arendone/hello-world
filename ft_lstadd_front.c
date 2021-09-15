@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/06 15:47:37 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/15 19:06:50 by arendon-         ###   ########.fr       */
+/*   Created: 2021/09/15 18:55:29 by arendon-          #+#    #+#             */
+/*   Updated: 2021/09/15 19:38:24 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	char			*sub;
-	unsigned int	i;
-
-	if (s == NULL)
-		return (NULL);
-	else if (start <= (unsigned int)ft_strlen(s))
+	if (new != NULL)
 	{
-		sub = malloc(len + 1);
-		if (sub == NULL)
-			return (NULL);
-		i = start;
-		ft_strlcpy(sub, &s[i], len + 1);
-		return (sub);
+		new->next = *lst;
+		*lst = new;
 	}
-	else
-		return (ft_strdup(""));
 }

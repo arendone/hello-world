@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 16:20:05 by arendon-          #+#    #+#              #
-#    Updated: 2021/09/14 15:37:59 by arendon-         ###   ########.fr        #
+#    Updated: 2021/09/15 19:40:12 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,15 @@ ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c \
 ft_substr.c ft_strjoin.c ft_strtrim.c ft_itoa.c ft_strmapi.c \
 ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
-all: $(NAME)
+BONUS = ft_lstnew.c ft_lstadd_front.c
+
+all: $(NAME) bonus  #remove bonus ???!!!!!!!
 
 $(NAME):
 	gcc $(CFLAGS) -c $(SRC)
-	ar -crs $(NAME) *.o 
+	ar -crs $(NAME) *.o
 
-clean: 
+clean:
 	rm -f *.o
 	rm -f *~
 
@@ -35,3 +37,7 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+bonus:
+	gcc $(CFLAGS) -c $(BONUS)
+	ar -crs $(NAME) *.o 
