@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 15:55:40 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/15 19:11:10 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/16 13:41:04 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int main(void)
 	printf(" %d ", *(int *)(head->content));
 	printf(" %d ", *(int *)second->content);
 	printf(" %d ", *(int *)third->content);
+
+	printf("alementos de la lista: %d \n", ft_lstsize(head));
 	
 	return (0);
 }

@@ -6,14 +6,13 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:30:01 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/15 19:14:12 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/17 16:32:11 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-static int	countwords(char *s, int c)
+static int	countwords(const char *s, int c)
 {
 	int	words;
 	int	i;
@@ -37,49 +36,59 @@ static int	countwords(char *s, int c)
 	}
 	return (words);
 }
-//keep the words in an array
-void	*newarray(char *s, int c)
-{
-	
-}
 
-/*
-char	**ft_split(char const *s, char c)
+char	**newarray(char const *s, char **split, char c)
 {
-	char	array[3][5];
-	char 	**parray;
-	int		i = 0;
-	int		j = 0;
-	size_t	k = 0;
-	
-	array = (char **)malloc(sizeof(char *) * 3);
+	int	i;
+	int	k;
+	int	start;
+	int	end;
 
-	while (k < ft_strlen(s))
+	i = 0;
+	k = 0;
+	while (s[k] == c)
 	{
-		if (s[k] == c)
-		{
-			array[j][i] = s[k];
-			j++;
-			i = 0;
-		}
-		else
-		{
-			array[j][i] = s[k];
-			//if (i == 0)
-				//parray[j] = &array[j][0];
-			i++;
-		}
 		k++;
 	}
-	return (array)
+	while (s[k] != '\0')
+	{
+		start = k;
+		while (s[k] != c && s[k] != '\0')
+			k++;
+		end = k;
+		split[i] = ft_substr(s, start, end - start);
+		i++;
+		while (s[k] == c)
+			k++;
+	}
+	split[i] = NULL;
+	return (split);
 }
-*/
-int main (void)
-{
 
-	printf("words: %d\n", count("cuenta las palabras ", ' '));
-	printf("words: %d\n", count("", ' '));
-	printf("words: %d\n", count(" cuen    ta  las p a l a     bras   ", ' '));
-	printf("words: %d\n", count("   cuenta las palabras    a", ' '));
-	return (0);
+char	**ft_split(char const *s, char c)
+{
+	int		words;
+	char	**split;
+	char	*set;
+
+	if (s == NULL)
+		return (NULL);
+	words = countwords(s, c);
+	split = (char **)malloc(sizeof(char *) * (words + 1));
+	if (split == NULL)
+		return (NULL);
+	if (words == 0)
+	{
+		split[0] = NULL;
+		return (split);
+	}
+	set = &c;
+	if (words == 1)
+	{
+		split[0] = ft_strtrim(s, set);
+		split[1] = NULL;
+		return (split);
+	}
+	else
+		return (newarray(s, split, c));
 }

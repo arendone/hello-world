@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   test_24split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/02 14:53:26 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/16 15:17:13 by arendon-         ###   ########.fr       */
+/*   Created: 2021/09/17 14:18:17 by arendon-          #+#    #+#             */
+/*   Updated: 2021/09/17 14:26:04 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int main (void)
 {
-	size_t			i;
-	unsigned char	*us1;
-	unsigned char	*us2;
-
-	us1 = (unsigned char *)s1;
-	us2 = (unsigned char *)s2;
-	i = 0;
-	while (i < n)
+	char **split;
+	int i = 0;
+	char s[10]= " cuenta  ";
+	split = ft_split(s, ' ');
+	while(split[i] != NULL)
 	{
-		if (us1[i] < us2[i])
-			return (us1[i] - us2[i]);
-		else if (us1[i] > us2[i])
-			return (us1[i] - us2[i]);
-		else
-			i++;
+		printf("%s", *(split + i));
+		i++;
 	}
+	free (split);
+	/*
+	printf("words: %d\n", countwords("", ' '));
+	printf("words: %d\n", countwords(" cuen    ta  las p a l a     bras   ", ' '));
+	printf("words: %d\n", countwords("   cuenta las palabras    a", ' '));*/
 	return (0);
 }
