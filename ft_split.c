@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:30:01 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/17 16:32:11 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/20 14:25:33 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,3 +92,7 @@ char	**ft_split(char const *s, char c)
 	else
 		return (newarray(s, split, c));
 }
+
+/*deberia usar free despues de cada fallo en 
+la acomodacion de memoria (luego de strtrim y substr) ?
+luego free a split[i] y devolver null?*/

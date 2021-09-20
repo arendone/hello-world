@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   test2_3strtrim.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 11:57:11 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/20 20:29:35 by arendon-         ###   ########.fr       */
+/*   Created: 2021/09/08 16:56:11 by arendon-          #+#    #+#             */
+/*   Updated: 2021/09/09 10:27:38 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+int	main()
 {
-	char			*str;
-	unsigned int	i;
-
-	if (s == 0 || f == NULL)
-		return (NULL);
-	str = (char *)malloc(ft_strlen(s) + 1);
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		str[i] = f(i, s[i]);
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	printf("%s.\n", ft_strtrim(" hola camaradas ", " s"));
+	printf("%s.\n", ft_strtrim("", " s"));
+	printf("%s.\n", ft_strtrim("hola camaradas ", "h"));
+	printf("%s.\n", ft_strtrim(" hola camaradas ", "a"));
+	printf("%s.\n", ft_strtrim(" hola camaradas ", " "));
+	printf("%s.\n", ft_strtrim(NULL, " "));
 }

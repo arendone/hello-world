@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   test_24split.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 11:57:11 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/20 20:29:35 by arendon-         ###   ########.fr       */
+/*   Created: 2021/09/17 14:18:17 by arendon-          #+#    #+#             */
+/*   Updated: 2021/09/17 14:26:04 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+int main (void)
 {
-	char			*str;
-	unsigned int	i;
-
-	if (s == 0 || f == NULL)
-		return (NULL);
-	str = (char *)malloc(ft_strlen(s) + 1);
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0')
+	char **split;
+	int i = 0;
+	char s[10]= " cuenta  ";
+	split = ft_split(s, ' ');
+	while(split[i] != NULL)
 	{
-		str[i] = f(i, s[i]);
+		printf("%s", *(split + i));
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	free (split);
+	/*
+	printf("words: %d\n", countwords("", ' '));
+	printf("words: %d\n", countwords(" cuen    ta  las p a l a     bras   ", ' '));
+	printf("words: %d\n", countwords("   cuenta las palabras    a", ' '));*/
+	return (0);
 }
