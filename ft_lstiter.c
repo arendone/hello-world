@@ -6,15 +6,13 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:17:17 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/20 18:27:41 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:29:28 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (lst == NULL)
-		return ;
 	while (lst != NULL)
 	{
 		f(lst->content);

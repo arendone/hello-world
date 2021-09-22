@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   test_2910putstrputnbr_fd.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/25 11:23:10 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/22 16:07:56 by arendon-         ###   ########.fr       */
+/*   Created: 2021/09/22 10:05:19 by arendon-          #+#    #+#             */
+/*   Updated: 2021/09/22 10:15:28 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+int main(void)
 {
-	char	*cdst;
-	char	*csrc;
-	size_t	i;
+	ft_putstr_fd("numero extremo neg : ", 1);
+	ft_putnbr_fd(-2147483648, 1);
+	ft_putstr_fd("\n numero extremo positivo: ", 1);
+	ft_putnbr_fd(2147483647, 1);
+	ft_putstr_fd("\n el 0: ", 1);
+	ft_putnbr_fd(0, 1);
+	ft_putstr_fd("\n numero cualquiera: ", 1);
+	ft_putnbr_fd(-283648, 1);
 
-	if (!dst && !src)
-		return (NULL);
-	csrc = (char *)src;
-	cdst = (char *)dst;
-	i = 0;
-	if (csrc > cdst)
-	{
-		while (len--)
-		{
-			cdst[i] = csrc[i];
-			i++;
-		}
-	}
-	else
-		while (len--)
-			*(cdst + len) = *(csrc + len);
-	return (cdst);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:47:37 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/15 19:06:50 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:56:02 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	else if (start <= (unsigned int)ft_strlen(s))
 	{
-		sub = malloc(len + 1);
+		if (ft_strlen(s) < len)
+			sub = (char *)malloc(ft_strlen(s) + 1);
+		else
+			sub = (char *)malloc(len + 1);
 		if (sub == NULL)
 			return (NULL);
 		i = start;
