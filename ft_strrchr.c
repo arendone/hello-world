@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:15:10 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/01 17:48:06 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:58:59 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ char	*ft_strrchr(const char *s, int c)
 	char	*cs;
 
 	cs = (char *)s;
-	len = ft_strlen(cs) + 1;
-	while (--len >= 0)
+	len = ft_strlen(cs);
+	while (len >= 0)
 	{
-		if (cs[len] == c)
+		if (cs[len] == (c % 256))
 			return (&cs[len]);
+		len--;
 	}
 	return (NULL);
 }

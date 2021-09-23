@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 11:23:10 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/22 16:07:56 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/23 12:35:58 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,17 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	i = 0;
 	if (csrc > cdst)
 	{
-		while (len--)
+		while (i < len)
 		{
-			cdst[i] = csrc[i];
+			*(cdst + i) = *(csrc + i);
 			i++;
 		}
+		return (cdst);
 	}
-	else
-		while (len--)
-			*(cdst + len) = *(csrc + len);
+	while (len)
+	{
+		len--;
+		*(cdst + len) = *(csrc + len);
+	}
 	return (cdst);
 }

@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 15:55:40 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/22 12:28:40 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/23 15:26:09 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@ void	printList(t_list *n)
 {
 	while (n != NULL)
 	{
-        printf(" %d ", *(int *)n->content);
+        printf(" %c ", *(char *)n->content);
         n = n->next;
     }
 }
 
-void	*del(void *elem)
+void	del(void *elem)
 {
-	elem = (void *)0;
-	return (elem);
+	free (elem);
 }
 	/*ANOTHER WAY TO HAVE ACCESS TO THE ELEMENTS
 	printf(" %d ", *(int *)(head->content));
@@ -39,28 +38,23 @@ int main(void)
 	t_list	*head = NULL;
 	t_list	*newelement = NULL;
 
-	int a = 1;
-	int b = 2;
-	int c = 3;
-	int d = 4;
- 
     // allocate 3 nodes in the heap
     head = (t_list*)malloc(sizeof(t_list));
     second = (t_list*)malloc(sizeof(t_list));
     third = (t_list*)malloc(sizeof(t_list));
 
-	head->content = &a;
+	head->content = ft_itoa(1);
 	head->next = second;
-    second->content = &b; // assign data to second node
+    second->content = ft_itoa(2); // assign data to second node
     second->next = third;  // Link second node with the third node
-	third->content = &c;
+	third->content = ft_itoa(3);
     third->next = NULL;
 
 	printList(head);
 	printf("| Elementos de la lista: %d \n", ft_lstsize(head));
 
 	printf("| Elementos de la lista si es NULL: %d \n", ft_lstsize(newelement));
-	newelement= ft_lstnew(&d);
+	newelement= ft_lstnew(ft_itoa(4));
 	printList(newelement);
 	printf("Elementos de la nueva lista: %d \n", ft_lstsize(newelement));
 
@@ -69,13 +63,13 @@ int main(void)
 	printf("| Elementos de la lista con elemento anadido al final: %d \n", ft_lstsize(head));
 
 
-	/*ft_lstclear(&third, del(third->content));
+	//ft_lstclear(&third, &del);
 	printList(head);
 	printf("| Elementos de la lista despues de borrar elemento (2): %d \n", ft_lstsize(head));
-	*/
+	
 	free (head);
 	free (second);
-	free (third);
-	free (newelement);
+	//free (third);
+	//free (newelement);
 	return (0);
 }

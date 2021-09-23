@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:30:01 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/22 16:06:03 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:09:15 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,21 @@ static int	countwords(const char *s, int c)
 	return (words);
 }
 
-char	**newarray(char const *s, char **split, char c)
+static char	**clean(char **split, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i <= n)
+	{
+		free (split[i]);
+		i++;
+	}
+	free(split);
+	return (NULL);
+}
+
+static char	**newarray(char const *s, char **split, char c)
 {
 	int	i;
 	int	k;
@@ -47,9 +61,7 @@ char	**newarray(char const *s, char **split, char c)
 	i = 0;
 	k = 0;
 	while (s[k] == c)
-	{
 		k++;
-	}
 	while (s[k] != '\0')
 	{
 		start = k;
@@ -57,6 +69,8 @@ char	**newarray(char const *s, char **split, char c)
 			k++;
 		end = k;
 		split[i] = ft_substr(s, start, end - start);
+		if (split[i] == NULL)
+			clean(split, i);
 		i++;
 		while (s[k] == c)
 			k++;
@@ -65,11 +79,22 @@ char	**newarray(char const *s, char **split, char c)
 	return (split);
 }
 
+static char	**onewordarray(char const *s, char **split, char c)
+{
+	char	*set;
+
+	set = &c;
+	split[0] = ft_strtrim(s, set);
+	if (split[0] == NULL)
+		clean(split, 0);
+	split[1] = NULL;
+	return (split);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	int		words;
 	char	**split;
-	char	*set;
 
 	if (s == NULL)
 		return (NULL);
@@ -82,12 +107,9 @@ char	**ft_split(char const *s, char c)
 		split[0] = NULL;
 		return (split);
 	}
-	set = &c;
 	if (words == 1)
 	{
-		split[0] = ft_strtrim(s, set);
-		split[1] = NULL;
-		return (split);
+		return (onewordarray(s, split, c));
 	}
 	else
 		return (newarray(s, split, c));
