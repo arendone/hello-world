@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 16:20:05 by arendon-          #+#    #+#              #
-#    Updated: 2021/09/20 20:46:56 by arendon-         ###   ########.fr        #
+#    Updated: 2021/09/23 16:17:15 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
-all: $(NAME) bonus  #remove bonus ???!!!!!!!
+all: $(NAME) bonus
 
 $(NAME):
 	gcc $(CFLAGS) -c $(SRC)

@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 12:35:34 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/20 18:32:40 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/22 12:11:09 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (lst == NULL)
-		return ;
 	del(lst->content);
 	free(lst);
 }

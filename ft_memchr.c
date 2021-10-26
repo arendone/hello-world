@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 14:19:09 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/02 14:51:24 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/23 14:30:03 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	*ft_memchr(const void *s, int c, size_t n)
 
 	us = (unsigned char *)s;
 	i = 0;
-	while (us[i] != (unsigned char)c)
+	while (i < n)
 	{
-		if (i == n - 1)
+		if (us[i] == (unsigned char)c)
 		{
-			return (NULL);
+			return ((void *)&us[i]);
 		}
 		i++;
 	}
-	return ((void *)&us[i]);
+	return (NULL);
 }

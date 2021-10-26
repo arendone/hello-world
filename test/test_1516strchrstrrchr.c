@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test1516strchrstrrchr.c                            :+:      :+:    :+:   */
+/*   test_1516strchrstrrchr.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 12:17:54 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/02 12:37:40 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:50:53 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	main(void)
 	char str[8] = "saludos";
 
 	//strchr
-	printf("adress of first s: %p \n", ft_strchr(str, 's'));
-	printf("adress of first s: %p \n", strchr(str, 's'));
+	printf("adress of first s: %p \n", ft_strchr(str, 'o' + 256));
+	printf("adress of first s: %p \n", strchr(str, 'o' + 256));
 	printf("adress of first e: %p \n", ft_strchr(str, 'e'));
 	printf("adress of first e: %p \n", strchr(str, 'e'));
 	printf("adress of first \\0: %p \n", ft_strchr(str, '\0'));

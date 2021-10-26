@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2_3strtrim.c                                   :+:      :+:    :+:   */
+/*   test_2910putstrputnbr_fd.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 16:56:11 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/22 15:50:12 by arendon-         ###   ########.fr       */
+/*   Created: 2021/09/22 10:05:19 by arendon-          #+#    #+#             */
+/*   Updated: 2021/09/22 10:15:28 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-int	main()
+int main(void)
 {
-	printf("%s.\n", ft_strtrim(" hola camaradas ", " s"));
-	printf("%s.\n", ft_strtrim("", " s"));
-	printf("%s.\n", ft_strtrim("hola camaradas ", "h"));
-	printf("%s.\n", ft_strtrim(" hola camaradas ", "a"));
-	printf("%s.\n", ft_strtrim(" hola camaradas ", "  "));
-	printf("%s.\n", ft_strtrim(NULL, " "));
+	ft_putstr_fd("numero extremo neg : ", 1);
+	ft_putnbr_fd(-2147483648, 1);
+	ft_putstr_fd("\n numero extremo positivo: ", 1);
+	ft_putnbr_fd(2147483647, 1);
+	ft_putstr_fd("\n el 0: ", 1);
+	ft_putnbr_fd(0, 1);
+	ft_putstr_fd("\n numero cualquiera: ", 1);
+	ft_putnbr_fd(-283648, 1);
+
+	return (0);
 }
