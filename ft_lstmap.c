@@ -28,10 +28,20 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	i = 0;
 	while (i < size)
 	{
-		map[i]->content = f(lst->content);
-		map[i]->next = map[i + 1];
-		lst = lst->next;
-		i++;
+        if (f(lst->content))
+        {
+            map[i]->content = f(lst->content);
+		    map[i]->next = map[i + 1];
+		    lst = lst->next;
+		    i++;
+        }
+        else
+        {
+            
+            ft_lstdelone(map[i], del);
+		    i++; 
+        }
+
 	}
 	i = 0;
 	map[i]->next = NULL;
