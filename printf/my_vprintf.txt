@@ -1,0 +1,6 @@
+my debug info value of var is 123 
+my debug info value of var1 is 5678 
+[33]My debug info in function1 var 3456 
+[5]My debug info in function1 var 3456 
+[35]My debug info in function1 var 3456 
+[36]My debug info in function1 var 3456 
