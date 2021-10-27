@@ -25,7 +25,7 @@ int main(void)
 	char str3[15]= "  -2147483648";
 	printf("ft_atoi returns: %d\n", ft_atoi(str3));
 	
-	char str4[10]= "  419*a 3";
+	char str4[18]= "  2147483647*a 3";
 	printf("ft_atoi returns: %d\n", ft_atoi(str4));
  	
 	char str5[10]= "  a419";
@@ -40,7 +40,7 @@ int main(void)
 	char tr3[15]= "  -2147483648";
 	printf("ft_atoi returns: %d\n", atoi(tr3));
 	
-	char tr4[10]= "  419*a 3";
+	char tr4[18]= "  2147483647*a 3";
 	printf("ft_atoi returns: %d\n", atoi(tr4));
  	
 	char tr5[10]= "  a419";
