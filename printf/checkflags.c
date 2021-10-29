@@ -14,9 +14,7 @@
 
 int	flags_characters(char *format, int i, t_print *t_spec)
 {
-	while (format[i] == '#' || format[i] == '0' || format[i] == '-'
-		|| format[i] == ' ' || format[i] == '+' || format[i] == '*'
-		|| (format[i] >= '0' && format[i] <= '9') || format[i] == '.')
+	while (ft_strchr("csdiupxX%", format[i]) == NULL)
 	{
 		if (format[i] == '#')
 			t_spec->number = true;
@@ -28,7 +26,7 @@ int	flags_characters(char *format, int i, t_print *t_spec)
 			t_spec->space = true;
 		if (format[i] == '+')
 			t_spec->sign = true;
-		if (format[i] == '*')
+		if ((format[i] == '*') || ft_isdigit(format[i]))
 			i = flag_width(format, i, t_spec);
 		if (format[i] == '.')
 			i = flag_precision(format, i, t_spec);
@@ -40,22 +38,56 @@ int	flags_characters(char *format, int i, t_print *t_spec)
 //funciones incompletas!!!!
 int	flag_width(char *format, int i, t_print *t_spec)
 {
+    int width;
+
+    width = 0;
 	t_spec->width = true;
-	/*if (format[i] == '*')
+	//if (format[i] == '*')
+        
 		//son 2 casos.... solo asterisco y hay que tomar el num de la lista y recorrer la lista o *m$ y hay que sacar a m 
 		//para guardarla en t_spec->width_details
 	
-	if(format[i] >= '0' && format[i] <= '9')*/
+	if(ft_isdigit(format[i]))
+    {
+        while (ft_isdigit(format[i]))
+	    {
+		    width = width * 10 + (format[i] - '0');
+		    i++;
+	    }   
+        t_spec->width_details = width;
+    }
 		//convertir el num a int para saber t_spec->width_details
 	
 		//chechar otras condiciones y si hay mas caracteres que forman parte de esta no olvidar incrementar a la i (recuerda que ya se incrementa en 1) y si es necesario modificar a struct t_print
-	return (i);
+	return (i-1);
 }
 
 int	flag_precision(char *format, int i, t_print *t_spec)
 {
-	if (format[i] == '.')
-		t_spec->precision = true;
+    int precision;
+
+    i++;
+    t_spec->precision = true;
+    precision = 0;
+    if (format[i] == '-')
+    {
+        i++;
+        while (ft_isdigit(format[i]))
+            i++;
+        return (i);
+    }
+    else while (ft_isdigit(format[i]))
+	    {
+		    precision = precision * 10 + (format[i] - '0');
+		    i++;
+	    }
+    t_spec->precision_details = precision;
 		//chechar otras condiciones y si hay mas caracteres que forman parte de esta no olvidar incrementar a la i (recuerda que ya se incrementa en 1) y si es necesario modificar a struct t_print
+        //caso con *$
+        //que pasa cuando hay prec negativo?
 	return (i);
 }
+
+/*while (format[i] == '#' || format[i] == '0' || format[i] == '-'
+		|| format[i] == ' ' || format[i] == '+' || format[i] == '*'
+		|| ft_isdigit(format[i]) || format[i] == '.')*/

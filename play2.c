@@ -1,59 +1,7 @@
-#include <unistd.h>
+#include "libft.h"
 #include <stdarg.h>
 
-void	ft_putnbr_fd(int n, int fd);
-void	ft_putchar_fd(char c, int fd);
 void	checkformat(char format, va_list args);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_printf(char *str, ...);
-
-void	ft_putnbr_fd(int n, int fd)
-{
-	int		i;
-	char	d;
-
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return ;
-	}
-	i = 0;
-	if (n < 0)
-	{
-		write(fd, "-", 1);
-		n = n * (-1);
-	}
-	if (n <= 9)
-	{
-		d = '0' + n;
-		write(fd, &d, 1);
-	}
-	else
-	{
-		ft_putnbr_fd(((n - (n % 10)) / 10), fd);
-		d = '0' + (n % 10);
-		write(fd, &d, 1);
-	}
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	if (s == NULL)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
 
 void	checkformat(char format, va_list args)
 {
@@ -84,7 +32,19 @@ void	ft_printf(char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			checkformat(str[i+1], args);
+			//checkformat(str[i+1], args);
+            if (str[i+1] == 'd')
+	        {
+		        int num = va_arg(args, int);
+		        ft_putnbr_fd(num, 1);
+	        }
+	        else if (str[i+1] == 'c')
+	        {
+		        char c = (char) va_arg(args, int);
+		        ft_putchar_fd(c, 1);
+	        }
+	        else
+		        write(1, "error", 5);
 			i = i + 2;
 		}
 		else
@@ -105,6 +65,7 @@ int main(void)
 	printint("%s", "hola");*/
 	ft_printf("Quiero imprimir el numero %d por favor\n", 42);
 	ft_printf("Quiero imprimir la letra %c por favor\n", 'A');
-	ft_printf("Quiero imprimir el numero %d por favor y la letra %c y la letra %c tambien\n", 42, 'A', 'Z');
+	ft_printf("Quiero imprimir el numero %d por favor y la letra %d y la letra %c tambien\n", 42, 7, 'Z');
+    ft_printf("Quiero imprimir los numeros %d, %d y %d tambien\n", 42, 7, -4);
 	return 0;
 }

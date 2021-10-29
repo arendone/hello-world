@@ -28,7 +28,7 @@ typedef struct s_print
 	bool	width;
 	int		width_details;
 	bool	precision;
-	int		precision_details;
+	size_t		precision_details;
 	int		len_total;
 }t_print;
 
@@ -37,5 +37,6 @@ t_print	*ft_spec_reset(t_print *t_spec);
 int		flags_characters(char *format, int i, t_print *t_spec);
 int		flag_width(char *format, int i, t_print *t_spec);
 int		flag_precision(char *format, int i, t_print *t_spec);
+int     ft_print_char(char *format, int i, t_print *t_spec);
 
 #endif

@@ -1,22 +1,6 @@
 #include "libftprintf.h"
 #include <stdio.h>
 
-void	checkformat(char format, va_list args)
-{
-	if (format == 'd')
-	{
-		int num = va_arg(args, int);
-		ft_putnbr_fd(num, 1);
-	}
-	else if (format == 'c')
-	{
-		char c = (char) va_arg(args, int);
-		ft_putchar_fd(c, 1);
-	}
-	else
-		write(1, "error", 5);
-}
-
 int ft_printf(char *format, ...)
 {
 	int           i;
@@ -36,6 +20,7 @@ int ft_printf(char *format, ...)
 		{
             i++;
             i = flags_characters(format, i , t_spec);
+            //printf("- width: %d -", t_spec->width_details);
             //print according kind of variable
             if (format[i] == 'd')
 	        {
@@ -52,12 +37,7 @@ int ft_printf(char *format, ...)
 	        }
 
 	        else if (format[i] == 'c')
-	        {
-		        char c = (char) va_arg(t_spec->args, int);
-		        ft_putchar_fd(c, 1);
-                count++;
-                i++;
-	        }
+                i = ft_print_char(format, i, t_spec);
 	        /*else
 		        write(1, "error", 5);
 			i =++;*/
@@ -85,8 +65,6 @@ int main(void)
 	printint("%s", "hola");*/
 	value=ft_printf("Quiero imprimir el numero %d por favor\n", 42);
     ft_printf("%d \n", value);
-	value=ft_printf("Quiero imprimir la letra %c por favor\n", 'A');
-    ft_printf("%d \n", value);
 	value=ft_printf("Quiero imprimir el numero %d por favor y la letra %c y la letra %c tambien\n", 42, 's', 'Z');
     ft_printf("%d \n", value);
     value=ft_printf("Quiero imprimir los numeros %+d, %d y %d tambien\n", 42, 7, -4);
@@ -94,9 +72,7 @@ int main(void)
     value=ft_printf("Quiero imprimir los numeros %d, %+d y %d tambien\n", 42, 7, -4);
     ft_printf("%d \n", value);
 	ft_printf("----------------------------\n");
-    value=printf("Quiero imprimir el numero %d por favor\n", 42);
-    ft_printf("%d \n", value);
-	value=printf("Quiero imprimir la letra %c por favor\n", 'A');
+    value=printf("Quiero imprimir el numero %5d por favor\n", 42);
     ft_printf("%d \n", value);
 	value=printf("Quiero imprimir el numero %d por favor y la letra %c y la letra %c tambien\n", 42, 's', 'Z');
     ft_printf("%d \n", value);
@@ -105,10 +81,27 @@ int main(void)
     value=printf("Quiero imprimir los numeros %d, %+d y %d tambien\n", 42, 7, -4);
     ft_printf("%d \n", value);
 	ft_printf("----------------------------\n");
-	printf("Quiero imprimir la letra:%*c por favor\n", 3, 'A');
-	printf("Quiero imprimir la letra:%-*c por favor\n", 3, 'A');
-	printf("Quiero imprimir la letra:%45c por favor\n", 'A');
-	printf("Quiero imprimir la letra:%*c por favor\n", 45, 'A');
+	value=printf("Quiero imprimir la cadena:%s por favor\n", "HOLA");
+    ft_printf("%d \n", value);
+	value=printf("Quiero imprimir la cadena:%.3s por favor\n", "HOLA");
+    ft_printf("%d \n", value);
+	value=printf("Quiero imprimir la cadena:%-033s por favor\n", "HOLA");
+    ft_printf("%d \n", value);
+	value=printf("Quiero imprimir la cadena:%.4s por favor\n", "hola\0");
+    ft_printf("%d \n", value);
+    value=printf("Quiero imprimir la cadena:%10.3s por favor\n", NULL);
+    ft_printf("%d \n", value);
+    value=printf("Quiero imprimir la cadena:%30s por favor\n", NULL);
+    ft_printf("%d \n", value);
+    ft_printf("----------------------------\n");
+    value=ft_printf("Quiero imprimir la letra %03c por favor\n", 'A');
+    ft_printf("%d \n", value);
+    value=printf("Quiero imprimir la letra %-3c por favor\n", 'A');
+    ft_printf("%d \n", value);
+    value=ft_printf("Quiero imprimir la letra %5c por favor\n", 'A');
+    ft_printf("%d \n", value);
+    value=printf("Quiero imprimir la letra %5c por favor\n", 'A');
+    ft_printf("%d \n", value);
 
 	return 0;
 }
