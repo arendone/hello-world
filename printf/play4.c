@@ -18,8 +18,10 @@ int ft_printf(char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-            i++;
-            i = flags_characters(format, i , t_spec);
+			i++;
+            flags_characters(format, i , t_spec);
+			while (ft_strchr("csdiupxX%", format[i]) == NULL)
+				i++;
             //printf("- width: %d -", t_spec->width_details);
             //print according kind of variable
             if (format[i] == 'd')
@@ -35,9 +37,12 @@ int ft_printf(char *format, ...)
                 i++;
                 //falta contar digitos
 	        }
-
 	        else if (format[i] == 'c')
-                i = ft_print_char(format, i, t_spec);
+                ft_print_char(format, i, t_spec);
+			else if (format[i] == 's')
+				ft_print_str(format, i, t_spec);
+			i++;
+            	//i = ft_print_str(format, i, t_spec);
 	        /*else
 		        write(1, "error", 5);
 			i =++;*/
@@ -59,10 +64,6 @@ int ft_printf(char *format, ...)
 int main(void)
 {
     int value;
-	/*printint("%d", 4563);
-	printint("%c", 'f');
-	printint("%d", 4563);
-	printint("%s", "hola");*/
 	value=ft_printf("Quiero imprimir el numero %d por favor\n", 42);
     ft_printf("%d \n", value);
 	value=ft_printf("Quiero imprimir el numero %d por favor y la letra %c y la letra %c tambien\n", 42, 's', 'Z');
@@ -80,33 +81,44 @@ int main(void)
     ft_printf("%d \n", value);
     value=printf("Quiero imprimir los numeros %d, %+d y %d tambien\n", 42, 7, -4);
     ft_printf("%d \n", value);
-	ft_printf("----------------------------\n");
-	value=printf("Quiero imprimir la cadena:%s por favor\n", "HOLA");
+	ft_printf("-----------PRUEBA STR-----------------\n");
+	value=printf("Quiero imprimir la cadena:%77s por favor\n", "HOLA");
+    ft_printf("%d \n", value);
+	value=ft_printf("Quiero imprimir la cadena:%77s por favor\n", "HOLA");
     ft_printf("%d \n", value);
 	value=printf("Quiero imprimir la cadena:%.3s por favor\n", "HOLA");
     ft_printf("%d \n", value);
-	value=printf("Quiero imprimir la cadena:%-033s por favor\n", "HOLA");
+	value=ft_printf("Quiero imprimir la cadena:%.3s por favor\n", "HOLA");
     ft_printf("%d \n", value);
-	value=printf("Quiero imprimir la cadena:%.4s por favor\n", "hola\0");
+	value=printf("Quiero imprimir la cadena:%-33s por favor\n", "HOLA");
+    ft_printf("%d \n", value);
+	value=ft_printf("Quiero imprimir la cadena:%-33s por favor\n", "HOLA");
+    ft_printf("%d \n", value);
+	value=printf("Quiero imprimir la cadena:%10.2s por favor\n", "hola\0");
+    ft_printf("%d \n", value);
+	value=ft_printf("Quiero imprimir la cadena:%10.2s por favor\n", "hola\0");
     ft_printf("%d \n", value);
     value=printf("Quiero imprimir la cadena:%10.3s por favor\n", NULL);
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir la cadena:%30s por favor\n", NULL);
+	value=ft_printf("Quiero imprimir la cadena:%10.3s por favor\n", NULL);
+    ft_printf("%d \n", value);
+    value=printf("Quiero imprimir la cadena:%.3s por favor\n", NULL);
+    ft_printf("%d \n", value);
+	value=ft_printf("Quiero imprimir la cadena:%.3s por favor\n", NULL);
     ft_printf("%d \n", value);
     ft_printf("----------------------------\n");
-    value=ft_printf("Quiero imprimir la letra %03c por favor\n", 'A');
+    value=ft_printf("Quiero imprimir la letra %3c por favor\n", 'A');
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir la letra %-3c por favor\n", 'A');
+    value=printf("Quiero imprimir la letra %3c por favor\n", 'A');
     ft_printf("%d \n", value);
     value=ft_printf("Quiero imprimir la letra %5c por favor\n", 'A');
     ft_printf("%d \n", value);
     value=printf("Quiero imprimir la letra %5c por favor\n", 'A');
     ft_printf("%d \n", value);
-
-	return 0;
+	return (0);
 }
 
-void	howisit(t_print *t_spec)
+/*void	howisit(t_print *t_spec)
 {
 	if(t_spec->number == true)
 		printf(" # is true ");
@@ -122,7 +134,7 @@ void	howisit(t_print *t_spec)
 		printf(" width is true ");
 	if(t_spec->precision == true)
 		printf(" precision is true ");	
-}
+}*/
 
 //importante!!!!
 //el valor que regresa la funcion cuenta qué? exactamente... es lo mismo imprimir 4 que 44 o deberia entonces contar 1 y 2?!!!!!
