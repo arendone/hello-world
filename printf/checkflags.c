@@ -49,7 +49,7 @@ void	*flags_characters(char *format, int i, t_print *t_spec)
 //funciones incompletas!!!!
 void	*flag_width(char *format, int i, t_print *t_spec)
 {
-	int	width;
+	size_t	width;
 
 	width = 0;
 	t_spec->width = true;

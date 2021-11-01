@@ -22,26 +22,13 @@ int ft_printf(char *format, ...)
             flags_characters(format, i , t_spec);
 			while (ft_strchr("csdiupxX%", format[i]) == NULL)
 				i++;
-            //printf("- width: %d -", t_spec->width_details);
-            //print according kind of variable
             if (format[i] == 'd')
-	        {
-                			//print according the flags
-                if((t_spec->sign == true) && (t_spec->args >= 0))
-                    {
-                        write(1, "+", 1);
-                        t_spec->len_total++;
-                    }
-		        int num = va_arg(t_spec->args, int);
-		        ft_putnbr_fd(num, 1);
-                i++;
-                //falta contar digitos
-	        }
+                i= print_d(i, t_spec);
 	        else if (format[i] == 'c')
-                ft_print_char(format, i, t_spec);
+                i= print_char(i, t_spec);
 			else if (format[i] == 's')
-				ft_print_str(format, i, t_spec);
-			i++;
+				i= print_str(i, t_spec);
+
             	//i = ft_print_str(format, i, t_spec);
 	        /*else
 		        write(1, "error", 5);
@@ -64,23 +51,24 @@ int ft_printf(char *format, ...)
 int main(void)
 {
     int value;
-	value=ft_printf("Quiero imprimir el numero %d por favor\n", 42);
+    ft_printf("-----------PRUEBA D-I-----------------\n");
+	value=ft_printf("Quiero imprimir el numero %+04.0d por favor\n", NULL);
     ft_printf("%d \n", value);
-	value=ft_printf("Quiero imprimir el numero %d por favor y la letra %c y la letra %c tambien\n", 42, 's', 'Z');
+    value=printf("Quiero imprimir el numero %+04.0d por favor\n", 0);
     ft_printf("%d \n", value);
-    value=ft_printf("Quiero imprimir los numeros %+d, %d y %d tambien\n", 42, 7, -4);
+	value=ft_printf("Quiero imprimir el numero %7d por favor y la letra %c y la letra %c tambien\n", 42, 's', 'Z');
     ft_printf("%d \n", value);
-    value=ft_printf("Quiero imprimir los numeros %d, %+d y %d tambien\n", 42, 7, -4);
+    value=printf("Quiero imprimir el numero %7d por favor y la letra %c y la letra %c tambien\n", 42, 's', 'Z');
     ft_printf("%d \n", value);
-	ft_printf("----------------------------\n");
-    value=printf("Quiero imprimir el numero %5d por favor\n", 42);
+    value=ft_printf("Quiero imprimir los numeros %+2d, %d y %.5d tambien\n", 42, 7, -4);
     ft_printf("%d \n", value);
-	value=printf("Quiero imprimir el numero %d por favor y la letra %c y la letra %c tambien\n", 42, 's', 'Z');
+    value=printf("Quiero imprimir los numeros %+2d, %d y %.5d tambien\n", 42, 7, -4);
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir los numeros %+d, %+d y %+d tambien\n", 42, 7, -4);
+    value=ft_printf("Quiero imprimir los numeros %4d, %3d y %-10d tambien\n", -42, 7, 4);
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir los numeros %d, %+d y %d tambien\n", 42, 7, -4);
+    value=printf("Quiero imprimir los numeros %4d, %3d y %-10d tambien\n", -42, 7, 4);
     ft_printf("%d \n", value);
+	
 	ft_printf("-----------PRUEBA STR-----------------\n");
 	value=printf("Quiero imprimir la cadena:%77s por favor\n", "HOLA");
     ft_printf("%d \n", value);
@@ -107,13 +95,13 @@ int main(void)
 	value=ft_printf("Quiero imprimir la cadena:%.3s por favor\n", NULL);
     ft_printf("%d \n", value);
     ft_printf("----------------------------\n");
-    value=ft_printf("Quiero imprimir la letra %3c por favor\n", 'A');
+    value=ft_printf("Quiero imprimir la letra %3c, la cadena %025s, y la cadena %20.4s \n", 'A', "cadena", NULL);
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir la letra %3c por favor\n", 'A');
+    value=printf("Quiero imprimir la letra %3c, la cadena %025s, y la cadena %20.4s \n", 'A', "cadena", NULL);
     ft_printf("%d \n", value);
-    value=ft_printf("Quiero imprimir la letra %5c por favor\n", 'A');
+    value=ft_printf("Quiero imprimir la letra %-5c por favor\n", 'A');
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir la letra %5c por favor\n", 'A');
+    value=printf("Quiero imprimir la letra %-5c por favor\n", 'A');
     ft_printf("%d \n", value);
 	return (0);
 }
