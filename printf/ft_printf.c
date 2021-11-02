@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minimum_sizet.c                                 :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 11:24:22 by marvin            #+#    #+#             */
-/*   Updated: 2021/11/02 15:37:00 by arendon-         ###   ########.fr       */
+/*   Created: 2021/11/02 12:30:52 by arendon-          #+#    #+#             */
+/*   Updated: 2021/11/02 12:36:32 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-size_t	ft_minimum_sizet(size_t n, ...)
+int	ft_printf(char *format, ...)
 {
-	size_t	i;
-	size_t	val;
-	size_t	minimum;
-	va_list	vl;
+	int		i;
+	int		count;
+	t_print	*t_spec;
 
-	va_start (vl, n);
-	minimum = va_arg(vl, size_t);
-	i = 1;
-	while (i < n)
-	{
-		val = va_arg(vl, size_t);
-		if (minimum > val)
-			minimum = val;
-		i++;
-	}
-	va_end(vl);
-	return (minimum);
+	t_spec = (t_print *)malloc(sizeof(t_print));
+	if (!t_spec)
+		return (-1);
+	ft_spec_init(t_spec);
+	va_start(t_spec->args, format);
+	i = 0;
+	count = print_format(format, i, t_spec);
+	count += t_spec->len_total;
+	va_end(t_spec->args);
+	free(t_spec);
+	return (count);
 }
