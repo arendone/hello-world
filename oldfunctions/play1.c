@@ -3,7 +3,7 @@
 
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
-void	printint(char *format, ...);
+void	checkformat(char *format, ...);
 void	ft_putstr_fd(char *s, int fd);
 
 void	ft_putnbr_fd(int n, int fd)
@@ -54,7 +54,7 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-void	printint(char *format, ...)
+void	checkformat(char *format, ...)
 {
 	va_list args;
 	va_start(args, format);
@@ -78,13 +78,37 @@ void	printint(char *format, ...)
 	va_end(args);
 }
 
+void	ft_printf(char *str, ...)
+{
+	int	i;
+	va_list args;
+	va_start(args, str);
+
+	if (str == NULL)
+		return ;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '%')
+		{
+			checkformat("%d", va_arg(args, int));
+			i = i + 2;
+		}
+		else
+		{
+			write(1, &str[i], 1);
+			i++;
+		}
+	}
+}
 
 
 int main(void)
 {
-	printint("%d", 4563);
+	/*printint("%d", 4563);
 	printint("%c", 'f');
 	printint("%d", 4563);
-	printint("%s", "hola");
+	printint("%s", "hola");*/
+	ft_printf("Quiero imprimir el numero %d por favor\n", 42);
 	return 0;
 }

@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   printf_aux.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/23 12:06:19 by arendon-          #+#    #+#             */
-/*   Updated: 2021/10/19 17:39:27 by arendon-         ###   ########.fr       */
+/*   Created: 2021/11/01 17:16:20 by marvin            #+#    #+#             */
+/*   Updated: 2021/11/02 15:58:09 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_print_zeros(int zeros)
 {
-	int		i;
-	char	*cs;
+	int	j;
 
-	cs = (char *)s;
-	i = 0;
-	while (cs[i] != (char)c)
+	j = 0;
+	while (j < zeros)
 	{
-		if (cs[i] == '\0')
-		{
-			return (NULL);
-		}
-		i++;
+		ft_putchar_fd('0', 1);
+		j++;
 	}
-	return (&cs[i]);
+	return (zeros);
+}
+
+int	ft_print_spaces(int spaces)
+{
+	int	j;
+
+	j = 0;
+	while (j < spaces)
+	{
+		ft_putchar_fd(' ', 1);
+		j++;
+	}
+	return (spaces);
 }

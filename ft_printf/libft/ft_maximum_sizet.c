@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_maximum_sizet.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/16 14:14:23 by arendon-          #+#    #+#             */
-/*   Updated: 2021/10/19 16:49:09 by arendon-         ###   ########.fr       */
+/*   Created: 2021/10/28 10:57:36 by marvin            #+#    #+#             */
+/*   Updated: 2021/11/05 11:26:16 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+size_t	ft_maximum_sizet(size_t n, ...)
 {
-	t_list		*last;
+	size_t	i;
+	size_t	val;
+	size_t	largest;
+	va_list	vl;
 
-	if (new == NULL)
-		return ;
-	if (*lst == NULL)
+	va_start (vl, n);
+	largest = va_arg(vl, size_t);
+	i = 1;
+	while (i < n)
 	{
-		*lst = new;
-		new->next = NULL;
-		return ;
+		val = va_arg(vl, size_t);
+		if (largest < val)
+			largest = val;
+		i++;
 	}
-	last = ft_lstlast(*lst);
-	last->next = new;
+	va_end(vl);
+	return (largest);
 }
