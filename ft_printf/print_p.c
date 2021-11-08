@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_upperX.c                                     :+:      :+:    :+:   */
+/*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 15:40:36 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/08 15:55:37 by arendon-         ###   ########.fr       */
+/*   Created: 2021/11/08 15:49:53 by arendon-          #+#    #+#             */
+/*   Updated: 2021/11/08 16:20:05 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static size_t	len_unum(unsigned int n)
+static size_t	len_unum(unsigned long int n)
 {
 	size_t	digits;
 
@@ -25,33 +25,32 @@ static size_t	len_unum(unsigned int n)
 	return (digits);
 }
 
-static void	ft_putnum_base(unsigned int n, int fd, char *base)
+static void	ft_putnum_base(unsigned long int n, int fd, char *base)
 {
 	if (n / 16)
 		ft_putnum_base(n / 16, fd, base);
 	ft_putchar_fd(base[n % 16], fd);
 }
 
-static size_t	print_numu_sign(unsigned int num, size_t len, t_print *t_spec)
+static size_t	print_numu_sign(unsigned long int n, size_t l, t_print *t_spec)
 {
 	size_t	count;
 
 	count = 0;
-	if ((t_spec->number) && (num != 0))
-		count += write(1, "0X", 2);
-	if (len > 0)
+	count += write(1, "0x", 2);
+	if (l > 0)
 	{
-		if (t_spec->precision_details > len)
+		if (t_spec->precision_details > l)
 		{
-			ft_print_zeros(t_spec->precision_details - len);
-			count += (t_spec->precision_details - len);
+			ft_print_zeros(t_spec->precision_details - l);
+			count += (t_spec->precision_details - l);
 		}
 	}
-	ft_putnum_base(num, 1, "0123456789ABCDEF");
-	return (len + count);
+	ft_putnum_base(n, 1, "0123456789abcdef");
+	return (l + count);
 }
 
-static size_t	p_w(unsigned int num, size_t len, size_t max, t_print *t_spec)
+static size_t	p_w(unsigned long int n, size_t l, size_t max, t_print *t_spec)
 {
 	if (!t_spec->dash)
 	{
@@ -59,11 +58,11 @@ static size_t	p_w(unsigned int num, size_t len, size_t max, t_print *t_spec)
 			t_spec->precision_details = t_spec->width_details;
 		else
 			ft_print_spaces(t_spec->width_details - max);
-		len = print_numu_sign(num, len, t_spec);
+		l = print_numu_sign(n, l, t_spec);
 	}
 	else
 	{
-		len = print_numu_sign(num, len, t_spec);
+		l = print_numu_sign(n, l, t_spec);
 		if ((t_spec->zero == true) && (t_spec->precision == false))
 			ft_print_zeros(t_spec->width_details - max);
 		else
@@ -72,19 +71,15 @@ static size_t	p_w(unsigned int num, size_t len, size_t max, t_print *t_spec)
 	return (t_spec->width_details);
 }
 
-int	print_upperX(int i, t_print *t_spec)
+int	print_p(int i, t_print *t_spec)
 {
-	unsigned int	num;
-	size_t			len;
-	size_t			max;
+	unsigned long int	num;
+	size_t				len;
+	size_t				max;
 
-	num = va_arg(t_spec->args, unsigned int);
+	num = (unsigned long int)va_arg(t_spec->args, void *);
 	len = len_unum(num);
-	if ((num == 0) && (t_spec->precision) && (t_spec->precision_details == 0))
-		len = 0;
-	max = ft_maximum_sizet(2, len, t_spec->precision_details);
-	if ((t_spec->number) && (num != 0))
-		max = max + 2;
+	max = ft_maximum_sizet(2, len, t_spec->precision_details) + 2;
 	if (!t_spec->precision)
 		t_spec->precision_details = 1;
 	if (t_spec->width_details > max)

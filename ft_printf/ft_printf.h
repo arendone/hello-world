@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:12:13 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/05 16:49:29 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:10:23 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		print_d(int i, t_print *t_spec);
 int		print_unsigned(int i, t_print *t_spec);
 int		print_x(int i, t_print *t_spec);
 int		print_upperX(int i, t_print *t_spec);
+int		print_p(int i, t_print *t_spec);
 int		ft_print_zeros(int zeros);
 int		ft_print_spaces(int spaces);
 

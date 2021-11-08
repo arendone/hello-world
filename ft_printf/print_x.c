@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:40:36 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/05 16:52:10 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:55:04 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ static size_t	print_numu_sign(unsigned int num, size_t len, t_print *t_spec)
 	size_t	count;
 
 	count = 0;
-	if (t_spec->sign)
-		count += write(1, "+", 1);
-	else if (t_spec->space == true)
-		count += write(1, " ", 1);
+	if ((t_spec->number) && (num != 0))
+		count += write(1, "0x", 2);
 	if (len > 0)
 	{
 		if (t_spec->precision_details > len)
@@ -85,8 +83,8 @@ int	print_x(int i, t_print *t_spec)
 	if ((num == 0) && (t_spec->precision) && (t_spec->precision_details == 0))
 		len = 0;
 	max = ft_maximum_sizet(2, len, t_spec->precision_details);
-	if ((t_spec->sign == true) || (t_spec->space == true))
-		max++;
+	if ((t_spec->number) && (num != 0))
+		max = max + 2;
 	if (!t_spec->precision)
 		t_spec->precision_details = 1;
 	if (t_spec->width_details > max)

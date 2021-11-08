@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 15:11:13 by arendon-          #+#    #+#              #
-#    Updated: 2021/11/05 16:49:57 by arendon-         ###   ########.fr        #
+#    Updated: 2021/11/08 15:58:50 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC= init_reset_struct.c checkflags.c print_c_s.c \
 print_d.c printf_aux.c checkconversion.c print_u.c \
-print_x.c print_upperX.c ft_printf.c \
+print_x.c print_upperX.c print_p.c ft_printf.c \
 
 OBJ = $(SRC:.c=.o)
 

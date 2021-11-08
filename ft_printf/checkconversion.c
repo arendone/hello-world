@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 12:07:11 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/05 16:50:58 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:59:24 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ int	check_conversion(const char *format, int i, t_print *t_spec)
 		i = print_x(i, t_spec);
 	else if (format[i] == 'X')
 		i = print_upperX(i, t_spec);
+	else if (format[i] == 'p')
+		i = print_p(i, t_spec);
 	return (i);
 }
