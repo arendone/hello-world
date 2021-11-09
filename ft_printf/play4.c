@@ -7,13 +7,13 @@ int main(void)
 {
     int value;
     ft_printf("-----------PRUEBA D-I-----------------\n");
-	value=ft_printf("Quiero imprimir el numero %+04.0d por favor\n", 0);
+	value=ft_printf("%.0uis a big number - %.0dis a big number\n", 0, 0);
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir el numero %+04.0d por favor\n", 0);
+    value=printf("%.0uis a big number - %.0dis a big number\n", 0, 0);
     ft_printf("%d \n", value);
-	value=ft_printf("Quiero imprimir el numero %2000.0008d, % 0.5d y %+11i \n", 42, 5, 13);
+	value=ft_printf("Quiero imprimir el numero %0*d, % 0.*d y %+11i \n", 13, (int)-2147483648, 3, 5, 13);
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir el numero %2000.0008d, % 0.5d y %+11i \n", 42, 5, 13);
+    value=printf("Quiero imprimir el numero %0*d, % 0.*d y %+11i \n", 13, (int)-2147483648, 3, 5, 13);
     ft_printf("%d \n", value);
     value=ft_printf("Quiero imprimir los numeros %+2d, %d y %.5d tambien\n", 42, 7, -4);
     ft_printf("%d \n", value);
@@ -27,9 +27,9 @@ int main(void)
     ft_printf("%d \n", value);
     value=printf("Quiero imprimir el numero %d, %03d, %04d por favor\n", 0, -14, -11);
     ft_printf("%d \n", value);
-	value=ft_printf("Quiero imprimir el numero %.20d, %.2d, %.14d por favor\n", 16, -1, 4294967);
+	value=ft_printf("Quiero imprimir el numero %.*d, %.2d, %.14d por favor\n", 20, 16, -1, 4294967);
     ft_printf("%d \n", value);
-    value=printf("Quiero imprimir el numero %.20d, %.2d, %.14d por favor\n", 16, -1, 4294967);
+    value=printf("Quiero imprimir el numero %.*d, %.2d, %.14d por favor\n", 20, 16, -1, 4294967);
     ft_printf("%d \n", value);
 	
 	ft_printf("-----------PRUEBA STR-----------------\n");
@@ -37,9 +37,9 @@ int main(void)
     ft_printf("%d \n", value);
 	value=ft_printf("Quiero imprimir la cadena:%77s por favor\n", "HOLA");
     ft_printf("%d \n", value);
-	value=printf("Quiero imprimir la cadena:%.3s por favor\n", "HOLA");
+	value=printf("Quiero imprimir la cadena:%.*s por favor\n", 3, "HOLA");
     ft_printf("%d \n", value);
-	value=ft_printf("Quiero imprimir la cadena:%.3s por favor\n", "HOLA");
+	value=ft_printf("Quiero imprimir la cadena:%.*s por favor\n", 3, "HOLA");
     ft_printf("%d \n", value);
 	value=printf("Quiero imprimir la cadena:%-33s por favor\n", "HOLA");
     ft_printf("%d \n", value);

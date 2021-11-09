@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 05:29:55 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/05 15:42:49 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:59:49 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static size_t	print_numu_sign(unsigned int num, size_t len, t_print *t_spec)
 			ft_print_zeros(t_spec->precision_details - len);
 			count += (t_spec->precision_details - len);
 		}
+		ft_putuinbr_fd(num, 1);
 	}
-	ft_putuinbr_fd(num, 1);
 	return (len + count);
 }
 

@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 10:47:53 by marvin            #+#    #+#             */
-/*   Updated: 2021/11/05 11:50:51 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/09 15:44:28 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 void	ft_putnstr_fd(char *s, int fd, int n);
 
-int ft_print_str_width(char *str, int len, t_print *t_spec)
+int	ft_print_str_width(char *str, int len, t_print *t_spec)
 {
-    if (!(t_spec->dash) && !(t_spec->zero))
-    {
-    	ft_print_spaces(t_spec->width_details - len);
-    	ft_putnstr_fd(str, 1, len);
-    }
-    if (t_spec->dash)
-    {
-    	ft_putnstr_fd(str, 1, len);
-    	ft_print_spaces(t_spec->width_details - len);
-    }
-    if (!(t_spec->dash) && (t_spec->zero))
-    {
-    	ft_print_zeros(t_spec->width_details - len);
-    	ft_putnstr_fd(str, 1, len);
-    }
-    return (t_spec->width_details);
+	if (!(t_spec->dash) && !(t_spec->zero))
+	{
+		ft_print_spaces(t_spec->width_details - len);
+		ft_putnstr_fd(str, 1, len);
+	}
+	if (t_spec->dash)
+	{
+		ft_putnstr_fd(str, 1, len);
+		ft_print_spaces(t_spec->width_details - len);
+	}
+	if (!(t_spec->dash) && (t_spec->zero))
+	{
+		ft_print_zeros(t_spec->width_details - len);
+		ft_putnstr_fd(str, 1, len);
+	}
+	return (t_spec->width_details);
 }
 
 int	print_char(int i, t_print *t_spec)
@@ -64,6 +64,22 @@ int	print_percentage(int i, t_print *t_spec)
 	return (i + 1);
 }
 
+static size_t	print_null(t_print *t_spec)
+{
+	size_t	len;
+
+	if (!(t_spec->precision))
+		len = 6;
+	else
+		len = ft_minimum_sizet(2, 6, t_spec->precision_details);
+	if (t_spec->width_details > len)
+		len = ft_print_str_width("(null)", len, t_spec);
+	else
+		ft_putnstr_fd("(null)", 1, len);
+	t_spec->len_total = t_spec->len_total + len;
+	return (len);
+}
+
 int	print_str(int i, t_print *t_spec)
 {
 	char	*str;
@@ -71,28 +87,19 @@ int	print_str(int i, t_print *t_spec)
 
 	str = va_arg(t_spec->args, char *);
 	if (!str)
-	{
-        if (!(t_spec->precision))
-		    len = 6;
-        else
-            len = ft_minimum_sizet(2, 6, t_spec->precision_details);
-	    if (t_spec->width_details > len)
-            len = ft_print_str_width("(null)", len, t_spec);
-	    else
-	    	ft_putnstr_fd("(null)", 1, len);
-	    t_spec->len_total = t_spec->len_total + len;
-    }
+		len = print_null(t_spec);
 	else
 	{
-	    if (!(t_spec->precision))
-		    len = ft_strlen(str);
-        else
-            len = ft_minimum_sizet(2, ft_strlen(str), t_spec->precision_details);
-	    if (t_spec->width_details > len)
-            len = ft_print_str_width(str, len, t_spec);
-	    else
-	    	ft_putnstr_fd(str, 1, len);
-	    t_spec->len_total = t_spec->len_total + len;
-    }
+		if (!(t_spec->precision))
+			len = ft_strlen(str);
+		else
+			len = ft_minimum_sizet(2, ft_strlen(str),
+					t_spec->precision_details);
+		if (t_spec->width_details > len)
+			len = ft_print_str_width(str, len, t_spec);
+		else
+			ft_putnstr_fd(str, 1, len);
+		t_spec->len_total = t_spec->len_total + len;
+	}
 	return (i + 1);
 }

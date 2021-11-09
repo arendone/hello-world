@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 15:59:05 by marvin            #+#    #+#             */
-/*   Updated: 2021/11/05 15:45:44 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:42:17 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,15 @@ static size_t	print_prec(int num, size_t len, size_t counter, t_print *t_spec)
 {
 	if (t_spec->precision_details > len)
 	{
+		if (num == -2147483648)
+			write(1, "-", 1);
 		ft_print_zeros(t_spec->precision_details - len);
 		counter += (t_spec->precision_details - len);
 	}
-	ft_putnbr_fd(num, 1);
+	if ((num == -2147483648) && (t_spec->precision_details > len))
+		write(1, "2147483648", 10);
+	else
+		ft_putnbr_fd(num, 1);
 	return (counter);
 }
 

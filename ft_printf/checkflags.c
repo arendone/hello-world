@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:52:08 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/05 15:04:58 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/09 15:20:15 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*flags_characters(const char *format, int i, t_print *t_spec)
 			t_spec->space = true;
 		if (format[i] == '+')
 			t_spec->sign = true;
-		if (ft_isdigit(format[i]))
+		if (ft_isdigit(format[i]) || (format[i] == '*'))
 			i = flag_width(format, i, t_spec);
 		if (format[i] == '.')
 			i = flag_precision(format, i + 1, t_spec);
@@ -41,6 +41,11 @@ int	flag_width(const char *format, int i, t_print *t_spec)
 
 	width = 0;
 	t_spec->width = true;
+	if (format[i] == '*')
+	{
+		t_spec->width_details = va_arg(t_spec->args, int);
+		i++;
+	}
 	if (ft_isdigit(format[i]))
 	{
 		while (ft_isdigit(format[i]))
@@ -59,11 +64,19 @@ int	flag_precision(const char *format, int i, t_print *t_spec)
 
 	t_spec->precision = true;
 	precision = 0;
-	while (ft_isdigit(format[i]))
+	if (format[i] == '*')
 	{
-		precision = precision * 10 + (format[i] - '0');
+		t_spec->precision_details = va_arg(t_spec->args, int);
 		i++;
 	}
-	t_spec->precision_details = precision;
+	else
+	{
+		while (ft_isdigit(format[i]))
+		{
+			precision = precision * 10 + (format[i] - '0');
+			i++;
+		}
+		t_spec->precision_details = precision;
+	}
 	return (i - 1);
 }

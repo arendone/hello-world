@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 15:11:13 by arendon-          #+#    #+#              #
-#    Updated: 2021/11/08 15:58:50 by arendon-         ###   ########.fr        #
+#    Updated: 2021/11/09 16:00:11 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ $(NAME): $(OBJ)
 
 clean:
 	rm -f *.o
+	cd ./libft && make clean
 	
 fclean: clean
 	rm -f $(NAME)
