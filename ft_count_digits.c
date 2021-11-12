@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_count_digits.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 13:16:59 by marvin            #+#    #+#             */
-/*   Updated: 2021/11/01 13:16:59 by marvin           ###   ########.fr       */
+/*   Updated: 2021/11/11 14:18:43 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_count_digits(long n)
 	return (digits);
 }
 
-int	ft_count_digits_base(long n, u_int base)
+int	ft_count_digits_base(long n, int base)
 {
 	int	digits;
 

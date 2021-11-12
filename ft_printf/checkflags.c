@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:52:08 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/09 15:20:15 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/11 14:15:26 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ void	*flags_characters(const char *format, int i, t_print *t_spec)
 	return (t_spec);
 }
 
+static size_t	width_details(t_print *t_spec)
+{
+	int				width;
+
+	width = va_arg((t_spec->args), int);
+	if (width < 0)
+	{
+		width = width * (-1);
+		t_spec->dash = true;
+		t_spec->zero = false;
+	}
+	return ((size_t)width);
+}
+
 int	flag_width(const char *format, int i, t_print *t_spec)
 {
 	size_t	width;
@@ -43,7 +57,7 @@ int	flag_width(const char *format, int i, t_print *t_spec)
 	t_spec->width = true;
 	if (format[i] == '*')
 	{
-		t_spec->width_details = va_arg(t_spec->args, int);
+		t_spec->width_details = width_details(t_spec);
 		i++;
 	}
 	if (ft_isdigit(format[i]))
@@ -58,6 +72,19 @@ int	flag_width(const char *format, int i, t_print *t_spec)
 	return (i - 1);
 }
 
+static size_t	precision_details(t_print *t_spec)
+{
+	int				precision;
+
+	precision = va_arg((t_spec->args), int);
+	if (precision < 0)
+	{
+		precision = 0;
+		t_spec->precision = false;
+	}
+	return ((size_t)precision);
+}
+
 int	flag_precision(const char *format, int i, t_print *t_spec)
 {
 	size_t	precision;
@@ -66,7 +93,7 @@ int	flag_precision(const char *format, int i, t_print *t_spec)
 	precision = 0;
 	if (format[i] == '*')
 	{
-		t_spec->precision_details = va_arg(t_spec->args, int);
+		t_spec->precision_details = precision_details(t_spec);
 		i++;
 	}
 	else

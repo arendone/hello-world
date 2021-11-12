@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 10:47:53 by marvin            #+#    #+#             */
-/*   Updated: 2021/11/09 15:44:28 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:00:40 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,12 @@ int	print_percentage(int i, t_print *t_spec)
 
 	c = '%';
 	if (t_spec->width && !(t_spec->dash))
-		ft_print_spaces(t_spec->width_details - 1);
+	{
+		if (t_spec->zero == true)
+			ft_print_zeros(t_spec->width_details - 1);
+		else
+			ft_print_spaces(t_spec->width_details - 1);
+	}
 	ft_putchar_fd(c, 1);
 	if (t_spec->width && t_spec->dash)
 		ft_print_spaces(t_spec->width_details - 1);
