@@ -103,17 +103,19 @@ char	*get_next_line(int fd)
 	line = (char *)calloc(BUFFER_SIZE + 1, 1);
 	buffer = (char *)calloc(BUFFER_SIZE + 1, 1);
 	j = 0;
-	while(j++ < ft_strlen(rest))
+	while(j < ft_strlen(rest))
+	{
 		line[j] = rest[j];
-	printf("rest:%s, line:%s.\n", rest, line);
-	while ((index = read(fd, buffer, BUFFER_SIZE)) && (flag == 1))
+		j++;
+	}
+	while ((flag == 1) && (index = read(fd, buffer, BUFFER_SIZE)))
 	{
 		i = 0;
 		buffer[index] = '\0';
 		while(buffer[i] && (buffer[i] != '\n'))
 			i++;
 		line = strjoin(line, buffer, i);
-		if (i != (BUFFER_SIZE))
+		if (i < (BUFFER_SIZE))
 			flag = -1;
 	}
 	
@@ -126,7 +128,7 @@ char	*get_next_line(int fd)
 	j = 0;
 	while(j < (BUFFER_SIZE - i))
 	{
-		rest[j] = buffer[i];
+		rest[j] = buffer[i + j];
 		j++;
 	}
 	while(j <= BUFFER_SIZE)
@@ -148,23 +150,23 @@ int	main(void)
 	}
 	int i = 1;
 	char *line = get_next_line(fd);
-	printf("cancion:%s.\n", line);
+	/*printf("cancion:%s.\n", line);
 	ifree(&line);
 	printf("--------\n");
 	line = get_next_line(fd);
 	printf("%s.\n", line);
-	ifree(&line);
-	/*while (line)
+	ifree(&line);*/
+	while (line)
 	{
 		if (line)
 		{
-			printf("fd(%d) #%d:	%s.", fd, i, line);
+			printf("%s | fd(%d) #%d", line, fd, i);
 			ifree(&line);
-			//line = get_next_line(fd);
-			//if (!line)
+			line = get_next_line(fd);
+			if (!line)
 				printf("\n");
 		}
 		i++;
-	}*/
+	}
 	return (0);
 }
