@@ -1,53 +1,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
- #include <fcntl.h>
-
-// gcc -Wall -Wextra -Werror get_next_line.c get_next_line_utils.c main.c -D BUFFER_SIZE=12
+#include <fcntl.h>
 
 void ifree(char **str)
 {
     if (*str)
         free(*str);
     *str =NULL;
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	if (s == NULL)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
-
-void	ft_putnstr_fd(char *s, int fd, int n)
-{
-	int	i;
-
-	if (s == NULL)
-		return ;
-	i = 0;
-	while ((s[i] != '\0') && (i < n))
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	n;
-
-	n = 0;
-	while (str[n] != '\0')
-		n++;
-	return (n);
 }
 
 void	*ft_memset(void *b, int c, size_t len)
@@ -79,6 +39,16 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	ft_bzero(pr, (count * size));
 	return ((void *)pr);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	n;
+
+	n = 0;
+	while (str[n] != '\0')
+		n++;
+	return (n);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -114,74 +84,45 @@ char	*strjoin(char *pre_line, char *buffer, int i) //why to use const char and n
 			return (NULL);
 		ft_strlcpy(join, pre_line, ft_strlen(pre_line) + 1);
 		ft_strlcpy(&join[ft_strlen(pre_line)], buffer, i + 1);
-		ifree(&pre_line); //no funciona con ifree
+		ifree(&pre_line);
 	}	
 	return (join);
 }
 
-int	ft_index_strchr(const char *s, char c)
-{
-	int		i;
-	char	*cs;
-
-	cs = (char *)s;
-	i = 0;
-	while (cs[i] != c)
-	{
-		if (cs[i] == '\0')
-		{
-			return (-1);
-		}
-		i++;
-	}
-	return (i);
-}
-
-/*char	*take_rest(char *rest, char *buffer, int i, int len)
-{
-	int j;
-
-	j = 0;
-	while(j < (len - i))
-	{
-		rest[j] = buffer[i];
-		j++;
-	}
-	while(j <= len)
-	{
-		rest[j] = '\0';
-		j++;
-	}
-	return (rest);
-}*/
-
 char	*get_next_line(int fd)
 {
 	int			index;
-	char		buffer[BUFFER_SIZE + 1];
-	char		*line;
 	static char	rest[BUFFER_SIZE];
-	int			i;
+	char		*line;
+	char		*buffer;
 	int			flag;
+	int			i;
 	int			j;
 
-	index = 0;
 	flag = 1;
-	
-	line = (char *)ft_calloc(1,1);
-
-	line = strjoin(line, rest, BUFFER_SIZE);
+	line = (char *)calloc(BUFFER_SIZE + 1, 1);
+	buffer = (char *)calloc(BUFFER_SIZE + 1, 1);
+	j = 0;
+	while(j++ < ft_strlen(rest))
+		line[j] = rest[j];
+	printf("rest:%s, line:%s.\n", rest, line);
 	while ((index = read(fd, buffer, BUFFER_SIZE)) && (flag == 1))
 	{
 		i = 0;
 		buffer[index] = '\0';
-		while(buffer[i] && buffer[i] != '\n')
+		while(buffer[i] && (buffer[i] != '\n'))
 			i++;
 		line = strjoin(line, buffer, i);
 		if (i != (BUFFER_SIZE))
 			flag = -1;
 	}
-	//rest = take_rest(rest, buffer, i, BUFFER_SIZE);
+	
+	if (ft_strlen(line) == 0)
+	{
+		ifree(&line);
+		ifree(&buffer);
+		return(NULL);
+	}
 	j = 0;
 	while(j < (BUFFER_SIZE - i))
 	{
@@ -193,7 +134,7 @@ char	*get_next_line(int fd)
 		rest[j] = '\0';
 		j++;
 	}
-	//free(&buffer);
+	ifree(&buffer);
 	return (line);
 }
 
@@ -209,6 +150,7 @@ int	main(void)
 	char *line = get_next_line(fd);
 	printf("cancion:%s.\n", line);
 	ifree(&line);
+	printf("--------\n");
 	line = get_next_line(fd);
 	printf("%s.\n", line);
 	ifree(&line);
