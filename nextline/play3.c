@@ -10,35 +10,21 @@ void ifree(char **str)
     *str =NULL;
 }
 
-void	*ft_memset(void *b, int c, size_t len)
+char	*ft_calloc(size_t count, size_t size)
 {
-	size_t			i;
-	unsigned char	*a;
+	char	*pr;
+	size_t	i;
 
-	i = 0;
-	a = (unsigned char *)b;
-	while (i < len)
-	{
-		a[i] = (unsigned char)c;
-		i ++;
-	}
-	return (b);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	unsigned char	*pr;
-
-	pr = (unsigned char *)malloc(count * size);
+	pr = (char *)malloc(count * size);
 	if (pr == NULL)
 		return (NULL);
-	ft_bzero(pr, (count * size));
-	return ((void *)pr);
+	i = 0;
+	while (i < (count * size))
+	{
+		pr[i] = (unsigned char)0;
+		i ++;
+	}
+	return (pr);
 }
 
 size_t	ft_strlen(const char *str)
@@ -73,7 +59,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 char	*strjoin(char *pre_line, char *buffer, int i) //why to use const char and not only char?
 {
 	char	*join;
-	int		j;
 
 	if (pre_line == NULL || buffer == NULL)
 		return (NULL); //tengo que free de todas formas?
@@ -100,22 +85,46 @@ char	*get_next_line(int fd)
 	int			j;
 
 	flag = 1;
-	line = (char *)calloc(BUFFER_SIZE + 1, 1);
-	buffer = (char *)calloc(BUFFER_SIZE + 1, 1);
+	line = ft_calloc(BUFFER_SIZE + 1, 1);
+	buffer = ft_calloc(BUFFER_SIZE + 1, 1);
 	j = 0;
-	while(j < ft_strlen(rest))
+	while(j < (int)ft_strlen(rest))
 	{
 		line[j] = rest[j];
 		j++;
 	}
+
+	i = 0;
+	while(line[i] != '\0')
+	{
+		if (line[i] == '\n')
+		{
+			j = 1;
+			while (line[i + j] != '\0')
+			{
+				rest[j - 1] = line[i + j];
+				line[i + j] = '\0';
+				j++;
+			}
+			while(j - 1 <= BUFFER_SIZE)
+			{
+				rest[j - 1] = '\0';
+				j++;
+			}
+			ifree(&buffer);
+			return (line);
+		}
+		i++;
+	}
+
 	while ((flag == 1) && (index = read(fd, buffer, BUFFER_SIZE)))
 	{
 		i = 0;
 		buffer[index] = '\0';
 		while(buffer[i] && (buffer[i] != '\n'))
 			i++;
-		line = strjoin(line, buffer, i);
-		if (i < (BUFFER_SIZE))
+		line = strjoin(line, buffer, i + 1);
+		if (i + 1 <= (BUFFER_SIZE))
 			flag = -1;
 	}
 	
@@ -126,9 +135,9 @@ char	*get_next_line(int fd)
 		return(NULL);
 	}
 	j = 0;
-	while(j < (BUFFER_SIZE - i))
+	while(j < (BUFFER_SIZE - i + 1))
 	{
-		rest[j] = buffer[i + j];
+		rest[j] = buffer[i + 1 + j];
 		j++;
 	}
 	while(j <= BUFFER_SIZE)
@@ -160,7 +169,7 @@ int	main(void)
 	{
 		if (line)
 		{
-			printf("%s | fd(%d) #%d", line, fd, i);
+			printf("fd(%d) #%d | %s", fd, i, line);
 			ifree(&line);
 			line = get_next_line(fd);
 			if (!line)
@@ -168,5 +177,6 @@ int	main(void)
 		}
 		i++;
 	}
+	system("leaks song.out");
 	return (0);
 }
