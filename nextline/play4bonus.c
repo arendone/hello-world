@@ -10,16 +10,6 @@ void ifree(char **str)
     *str =NULL;
 }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	n;
-
-	n = 0;
-	while (str[n] != '\0')
-		n++;
-	return (n);
-}
-
 char	*ft_calloc(size_t count, size_t size)
 {
 	char	*pr;
@@ -35,6 +25,16 @@ char	*ft_calloc(size_t count, size_t size)
 		i ++;
 	}
 	return (pr);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	n;
+
+	n = 0;
+	while (str[n] != '\0')
+		n++;
+	return (n);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)

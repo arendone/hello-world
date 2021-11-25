@@ -103,7 +103,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 char	*strjoin(char *pre_line, char *buffer, int i) //why to use const char and not only char?
 {
 	char	*join;
-	int		j;
 
 	if (pre_line == NULL || buffer == NULL)
 		return (NULL); //tengo que free de todas formas?
@@ -205,7 +204,7 @@ int	main(void)
 		printf("open() error");
 		return (1);
 	}
-	int i = 1;
+	//int i = 1;
 	char *line = get_next_line(fd);
 	printf("cancion:%s.\n", line);
 	ifree(&line);
