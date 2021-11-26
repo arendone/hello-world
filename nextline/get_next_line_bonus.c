@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:49:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/26 17:39:47 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/26 19:10:32 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*clean_string(char *string, size_t start)
+char	*clean_string_bonus(char *string, size_t start)
 {
-	while (string[start])
+	while (string[start] && (start < (BUFFER_SIZE - 1)))
 	{
 		string[start] = '\0';
 		start++;
@@ -39,7 +39,7 @@ int	search_nextline(char *line, char *rest)
 				line[i + 1 + j] = '\0';
 				j++;
 			}
-			clean_string(rest, j);
+			clean_string_bonus(rest, j);
 			return (i);
 		}
 		i++;
@@ -54,13 +54,13 @@ char	*read_more(int fd, char *line, char *rest)
 	char	*buffer;
 
 	buffer = ft_calloc(BUFFER_SIZE + 1, 1);
-	if (line == NULL || buffer == NULL)
+	if (buffer == NULL)
 		return (NULL);
 	index = 0;
 	while ((search_nextline(line, rest) < 0) && (index >= 0))
 	{
 		i = 0;
-		clean_string(buffer, 0);
+		clean_string_bonus(buffer, 0);
 		index = read(fd, buffer, BUFFER_SIZE);
 		buffer[index] = '\0';
 		while (buffer[i] && (buffer[i] != '\n'))
@@ -77,12 +77,12 @@ char	*clean_and_keep_rest(char *line, char *rest, char *buffer, int i)
 	int	j;
 
 	j = 0;
-	while (j < (BUFFER_SIZE - i + 1))
+	while (j < (BUFFER_SIZE - i))
 	{
 		rest[j] = buffer[i + 1 + j];
 		j++;
 	}
-	clean_string(rest, j);
+	clean_string_bonus(rest, j);
 	if (ft_strlen(line) == 0)
 	{
 		ifree(&line);
@@ -95,7 +95,7 @@ char	*clean_and_keep_rest(char *line, char *rest, char *buffer, int i)
 
 char	*get_next_line(int fd)
 {
-	static char	rest[BUFFER_SIZE];
+	static char	rest[10240][BUFFER_SIZE];
 	char		*line;
 
 	if (fd < 0 || fd > 10240 || BUFFER_SIZE < 1)
@@ -103,8 +103,8 @@ char	*get_next_line(int fd)
 	line = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (line == NULL)
 		return (NULL);
-	ft_strlcpy(line, rest, BUFFER_SIZE + 1);
-	if (search_nextline(line, rest) >= 0)
+	ft_strlcpy(line, &rest[fd][0], BUFFER_SIZE + 1);
+	if (search_nextline(line, &rest[fd][0]) >= 0)
 		return (line);
-	return (read_more(fd, line, rest));
+	return (read_more(fd, line, &rest[fd][0]));
 }
