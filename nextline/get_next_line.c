@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:49:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/26 17:39:47 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/29 10:35:46 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	*clean_and_keep_rest(char *line, char *rest, char *buffer, int i)
 	int	j;
 
 	j = 0;
-	while (j < (BUFFER_SIZE - i + 1))
+	while (j < (BUFFER_SIZE - i))
 	{
 		rest[j] = buffer[i + 1 + j];
 		j++;

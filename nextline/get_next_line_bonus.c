@@ -6,11 +6,11 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 12:49:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/11/26 19:10:32 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:55:14 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*clean_string_bonus(char *string, size_t start)
 {
