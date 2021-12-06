@@ -24,5 +24,5 @@ typedef struct s_stack{
 void	sa(t_stack *taila);
 void	sb(t_stack *tailb);
 void	ss(t_stack *taila, t_stack *tailb);
-void	pa(t_stack *taila, t_stack *tailb);
+void	pa(t_stack	**pointer_heada, t_stack	**pointer_headb,t_stack *heada, t_stack *headb);
 #endif

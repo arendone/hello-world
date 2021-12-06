@@ -26,83 +26,84 @@ t_stack	*addToEmpty(int number)
 	return (temp);
 }
 
-t_stack	*addAtBeg(t_stack *tail, int number)
+t_stack	*addAtBeg(t_stack *head, int number)
 {
 	t_stack	*new;
 	t_stack	*ex_new;
 
 	new = addToEmpty(number);
-	if (tail == NULL)
+	if (head == NULL)
 		return (new);
 	else
 	{
-		ex_new = tail->next;
-		new->prev = tail;
-		new->next = ex_new;
-		ex_new->prev = new;
-		tail->next = new;
-		return (tail);
+		ex_new = head->prev;
+		new->next = head;
+		new->prev = ex_new;
+		ex_new->next = new;
+		head->prev = new;
+		return (head);
 	}
 }
 
 //print in reverse
-void	print(t_stack *tail)
+void	print(t_stack **head)
 {
 	t_stack	*nextnum;
+    t_stack *head_here;
 
-	printf("%d \n", tail->number);
-	nextnum = tail->prev;
-	while (nextnum != tail)
+    head_here = *head;
+
+	printf("%d \n", head_here->number);
+	nextnum = head_here->next;
+	while (nextnum != head_here)
 	{
 		printf("%d \n", nextnum->number);
-		nextnum = nextnum->prev;
+		nextnum = nextnum->next;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack	*taila;
-	t_stack	*tailb;
+	t_stack	*heada;
+	t_stack	*headb;
+    t_stack	**pointer_heada;
+	t_stack	**pointer_headb;
 
-	taila = addToEmpty(45);
-	taila = addAtBeg(taila, 34);
-	taila = addAtBeg(taila, -17);
-	taila = addAtBeg(taila, 0);
-	taila = addAtBeg(taila, 42);
+    pointer_heada = &heada;
+    pointer_headb = &headb;
 
-	tailb = addToEmpty(8);
-	tailb = addAtBeg(tailb, 3);
-	tailb = addAtBeg(tailb, -97);
-	tailb = addAtBeg(tailb, 4);
-	tailb = addAtBeg(tailb, 29);
+	heada = addToEmpty(45);
+	heada = addAtBeg(heada, 34);
+	heada = addAtBeg(heada, -17);
+	heada = addAtBeg(heada, 0);
+	heada = addAtBeg(heada, 42);
+
+	headb = addToEmpty(8);
+	headb = addAtBeg(headb, 3);
+	headb = addAtBeg(headb, -97);
+	headb = addAtBeg(headb, 4);
+	headb = addAtBeg(headb, 29);
 	printf("\nstack A:\n");
-	print(taila);
+	print(pointer_heada);
 	printf("\nstack B:\n");
-	print(tailb);
-	sa(taila);
+	print(pointer_headb);
+    /*
+	sa(heada);
 	printf("\nstack A after sa:\n");
-	print(taila);
-	sb(tailb);
+	print(heada);
+	sb(headb);
 	printf("\nstack B after sb:\n");
-	print(tailb);
-	ss(taila, tailb);
+	print(headb);
+	ss(heada, headb);
 	printf("\nstack A after ss:\n");
-	print(taila);
+	print(heada);
 	printf("\nstack B after ss:\n");
-	print(tailb);
-	pa(taila, tailb);
+	print(headb);
+    */
+	pa(pointer_heada, pointer_headb, heada, headb);
 	printf("\nstack A after pa:\n");
-	print(taila);
+	print(pointer_heada);
 	//printf("\nstack B after pa:\n");
-	//print(tailb);
-	//recorrer hacia adelante 1
-	/*taila = taila->next;
-	print(taila);
-	//recorrer hacia adelante 1 otra vez
-	taila = taila->next;
-	print(taila);
-	//recorrer hacia atras
-	taila = taila->prev;
-	print(taila);*/
+	//print(pointer_headb);
 	return (0);
 }

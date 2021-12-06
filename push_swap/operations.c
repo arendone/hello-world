@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h> //QUITARLO
 
-void	sa(t_stack *taila)
+void	sa(t_stack *heada)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -20,14 +21,14 @@ void	sa(t_stack *taila)
 
 	//agregar funcion para contar num de elementos 
 	//y no hacer nada si hay menos de 2
-	first = taila;
-	second = first->prev;
+	first = heada;
+	second = first->next;
 	first_num = first->number;
 	first->number = second->number;
 	second->number = first_num;
 }
 
-void	sb(t_stack *tailb)
+void	sb(t_stack *headb)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -35,37 +36,44 @@ void	sb(t_stack *tailb)
 
 	//agregar funcion para contar num de elementos 
 	//y no hacer nada si hay menos de 2
-	first = tailb;
-	second = first->prev;
+	first = headb;
+	second = first->next;
 	first_num = first->number;
 	first->number = second->number;
 	second->number = first_num;
 }
 
-void	ss(t_stack *taila, t_stack *tailb)
+void	ss(t_stack *heada, t_stack *headb)
 {
-	sa(taila);
-	sb(tailb);
+	sa(heada);
+	sb(headb);
 }
 
-void	pa(t_stack *taila, t_stack *tailb)
+void	pa(t_stack	**pointer_heada, t_stack	**pointer_headb,t_stack *heada, t_stack *headb)
 {
 	t_stack	*last_stacka;
-	t_stack	*new_first_stacka;
-	t_stack	*newteil_b;
-	t_stack	*new_teilb;
+	t_stack	*new_heada;
+	t_stack	*last_stackb;
+
 	
-	//do nothing if b is empty
-	last_stacka = taila->next;
-	new_first_stacka = taila->prev;
-	newteil_b = taila;
+	//AGREGAR <do nothing if b is empty>
+	last_stacka = heada->prev;
+    printf("last_stack: %d\n", last_stacka->number);
+	new_heada = heada->next;
+    printf("new_head: %d\n", new_heada);
+
 	//close A
-	last_stacka->prev = taila->prev;
-	new_first_stacka->next = last_stacka;
-	//add to stack b
+	last_stacka->next = new_heada;
+    printf("last_stacka->next: %d\n", last_stacka->next);
+	new_heada->prev = last_stacka;
+    printf("new_heada->prev: %d\n", new_heada->prev);
 	
-	//last_stacka->prev = tailb;
-	//last_stacka->next =*newteil_b;
-	//*newteil_b->prev =last_stacka;
-	//tailb->next =last_stacka;
+    //add to stack b
+	last_stackb->next = heada;
+    heada->prev = last_stackb;
+	headb->prev = heada;
+	heada->next = headb;
+	
+    //pointer_heada = &new_heada;
+    //pointer_headb = &heada;
 }
