@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/03 18:31:14 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/07 16:28:15 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ typedef struct s_stack{
 	struct s_stack	*next;
 }	t_stack;
 
-void	sa(t_stack *taila);
-void	sb(t_stack *tailb);
-void	ss(t_stack *taila, t_stack *tailb);
-void	pa(t_stack	**pointer_heada, t_stack	**pointer_headb,t_stack *heada, t_stack *headb);
+t_stack	*addToEmpty(int number);
+t_stack	**addAtEnd(t_stack **head, int number);
+void	sa(t_stack **pointer_heada);
+void	sb(t_stack **pointer_headb);
+void	ss(t_stack **pointer_heada, t_stack **pointer_headb);
+void	pa(t_stack **pointer_heada, t_stack **pointer_headb);
+void	pb(t_stack **pointer_heada, t_stack **pointer_headb);
 #endif
