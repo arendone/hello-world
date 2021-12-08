@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/07 17:18:25 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:06:05 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,33 @@ int	main(int argc, char **argv)
 	printf("\nstack B after pa:\n");
 	print(pointer_headb);
 	pb(pointer_heada, pointer_headb);
-	printf("\nstack A after pb:\n");
+	pb(pointer_heada, pointer_headb);
+	pb(pointer_heada, pointer_headb);
+	printf("\nstack A after 3 times pb:\n");
 	print(pointer_heada);
-	printf("\nstack B after pb:\n");
+	printf("\nstack B after 3 times pb:\n");
+	print(pointer_headb);
+	ra(pointer_heada);
+	printf("\nstack A after ra:\n");
+	print(pointer_heada);
+	rb(pointer_headb);
+	printf("\nstack B after rb:\n");
+	print(pointer_headb);
+	rr(pointer_heada, pointer_headb);
+	printf("\nstack A after rr:\n");
+	print(pointer_heada);
+	printf("\nstack B after rr:\n");
+	print(pointer_headb);
+	rra(pointer_heada);
+	printf("\nstack A after rra:\n");
+	print(pointer_heada);
+	rrb(pointer_headb);
+	printf("\nstack B after rrb:\n");
+	print(pointer_headb);
+	rrr(pointer_heada, pointer_headb);
+	printf("\nstack A after rrr:\n");
+	print(pointer_heada);
+	printf("\nstack B after rrr:\n");
 	print(pointer_headb);
 	return (0);
 }

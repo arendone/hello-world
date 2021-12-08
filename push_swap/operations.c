@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:58:49 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/07 17:12:21 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:13:07 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,7 @@ void	sa(t_stack **pointer_heada)
 
 void	sb(t_stack **pointer_headb)
 {
-	t_stack	*first;
-	t_stack	*second;
-	int		first_num;
-
-	if (*pointer_headb != NULL)
-	{
-		first = *pointer_headb;
-		second = first->next;
-		first_num = first->number;
-		first->number = second->number;
-		second->number = first_num;
-	}
+	sa(pointer_headb);
 }
 
 void	ss(t_stack **pointer_heada, t_stack **pointer_headb)
@@ -94,6 +83,7 @@ void	pa(t_stack **pointer_heada, t_stack **pointer_headb)
 
 	if ((*pointer_headb != NULL))
 	{
+		new_headb = NULL;
 		if (*pointer_headb != ((*pointer_headb)->next))
 		{
 			new_headb = (*pointer_headb)->next;
@@ -101,8 +91,6 @@ void	pa(t_stack **pointer_heada, t_stack **pointer_headb)
 			(last_stackb->next) = new_headb;
 			(new_headb->prev) = last_stackb;
 		}
-		else
-			new_headb = NULL;
 		((*pointer_headb)->next) = *pointer_headb;
 		((*pointer_headb)->prev) = *pointer_headb;
 		if (*pointer_heada != NULL)
@@ -120,34 +108,49 @@ void	pa(t_stack **pointer_heada, t_stack **pointer_headb)
 
 void	pb(t_stack **pointer_heada, t_stack **pointer_headb)
 {
-	t_stack	*new_heada;
-	t_stack	*last_stacka;
-	t_stack	*last_stackb;
+	pa(pointer_headb, pointer_heada);
+}
 
-	if ((*pointer_heada != NULL))
+void	ra(t_stack **pointer_heada)
+{
+	t_stack	*temp;
+
+	if (*pointer_heada != NULL)
 	{
-		if (*pointer_heada != ((*pointer_heada)->next))
-		{
-			new_heada = (*pointer_heada)->next;
-			last_stacka = (*pointer_heada)->prev;
-			(last_stacka->next) = new_heada;
-			(new_heada->prev) = last_stacka;
-		}
-		else
-			new_heada = NULL;
-		((*pointer_heada)->next) = *pointer_heada;
-		((*pointer_heada)->prev) = *pointer_heada;
-		if (*pointer_headb != NULL)
-		{
-			last_stackb = (*pointer_headb)->prev;
-			(last_stackb->next) = (*pointer_heada);
-			((*pointer_heada)->prev) = last_stackb;
-			((*pointer_headb)->prev) = (*pointer_heada);
-			((*pointer_heada)->next) = (*pointer_headb);
-		}
-		*pointer_headb = *pointer_heada;
-		*pointer_heada = new_heada;
+		temp = (*pointer_heada)->next;
+		*pointer_heada = temp;
 	}
 }
 
+void	rb(t_stack **pointer_headb)
+{
+	ra(pointer_headb);
+}
 
+void	rr(t_stack **pointer_heada, t_stack **pointer_headb)
+{
+	ra(pointer_heada);
+	rb(pointer_headb);
+}
+
+void	rra(t_stack **pointer_heada)
+{
+	t_stack	*temp;
+
+	if (*pointer_heada != NULL)
+	{
+		temp = (*pointer_heada)->prev;
+		*pointer_heada = temp;
+	}
+}
+
+void	rrb(t_stack **pointer_headb)
+{
+	rra(pointer_headb);
+}
+
+void	rrr(t_stack **pointer_heada, t_stack **pointer_headb)
+{
+	rra(pointer_heada);
+	rrb(pointer_headb);
+}
