@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   play1.c                                            :+:      :+:    :+:   */
+/*   play2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/09 16:06:03 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:43:12 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,78 +31,35 @@ void	print(t_stack **head)
 		printf("empty stack");
 }
 
-long long int	ft_atoi(const char *str)
-{
-	long long int	n;
-	int				i;
-	int				sign;
-
-	n = 0;
-	i = 0;
-	sign = 1;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		n = n * 10 + (str[i] - '0');
-		i++;
-	}
-	return (sign * n);
-}
-
 int	main(int argc, char **argv)
 {
-	int				i;
-	int				j;
-	long long int	number;
-	t_stack			*heada;
-	t_stack			*headb;
-	t_stack			**pointer_heada;
-	t_stack			**pointer_headb;
+	t_stack	*heada;
+	t_stack	*headb;
+	t_stack	**pointer_heada;
+	t_stack	**pointer_headb;
 
 	heada = NULL;
 	headb = NULL;
 	pointer_heada = &heada;
 	pointer_headb = &headb;
-	i = 0;
-	while (i < (argc - 1))
-	{
-		j = 0;
-		/*while (argv[i][j]) //CORREGIR, COMO ESTA TIENE UN ERROR ERO AL CORREGIRLO
-		FUNCIONARIA PARA DETECTAR COSAS QUE NO SEAN DIGITOS PERO FALTARIA CONSIDERAR 
-		CUANDO SOLO ESCRIBEN SIGNO + O - Y NO HAY NUMERO DESPUES
-		{
-			if (argv[i][j] == '+' || argv[i][j] == '-')
-				j++;
-			if (argv[i][j] <= '0' || argv[i][j] >= '9')
-			{
-				write(1, "error\n", 6);
-				return (0);
-			}
-			j++;
-		}*/
-		//FALTA EL ERROR DE SI SE REPITEN LOS NUMEROS 
-		number = ft_atoi(argv[i + 1]);
-		if (((number) < -2147483648) || ((number) > 2147483647))
-		{
-			write(1, "error\n", 6);
-			return (0);
-		}
-		pointer_heada = addAtEnd(pointer_heada, (int)number);
-		i++;
-	}
 
+	pointer_heada = addAtEnd(pointer_heada, 34);
+	pointer_heada = addAtEnd(pointer_heada, 34);
+	pointer_heada = addAtEnd(pointer_heada, -17);
+	pointer_heada = addAtEnd(pointer_heada, 0);
+	pointer_heada = addAtEnd(pointer_heada, 42);
+
+	headb = addToEmpty(8);
+	/*pointer_headb = addAtEnd(pointer_headb, 3);
+	pointer_headb = addAtEnd(pointer_headb, -97);
+	pointer_headb = addAtEnd(pointer_headb, 4);
+	pointer_headb = addAtEnd(pointer_headb, 29);*/
 	printf("\nstack A:\n");
 	print(pointer_heada);
 	printf("\nstack B:\n");
 	print(&headb);
 
-	/*sa(pointer_heada);
+	sa(pointer_heada);
 	printf("\nstack A after sa:\n");
 	print(pointer_heada);
 	sb(pointer_headb);
@@ -146,6 +103,6 @@ int	main(int argc, char **argv)
 	printf("\nstack A after rrr:\n");
 	print(pointer_heada);
 	printf("\nstack B after rrr:\n");
-	print(pointer_headb);*/
+	print(pointer_headb);
 	return (0);
 }

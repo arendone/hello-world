@@ -6,12 +6,11 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:58:49 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:13:07 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:19:46 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h> //QUITARLO
 
 t_stack	*addToEmpty(int number)
 {
@@ -34,7 +33,7 @@ t_stack	**addAtEnd(t_stack **head, int number)
 	new = addToEmpty(number);
 	if (*head == NULL)
 	{
-		head = &new;
+		*head = new;
 		return (head);
 	}
 	else

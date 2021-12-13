@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/07 22:04:58 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:45:01 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 //# include "./libft/libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_stack{
 	struct s_stack	*prev;
