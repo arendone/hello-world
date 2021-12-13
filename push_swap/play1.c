@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/09 16:06:03 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/13 13:23:22 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,45 @@ void	print(t_stack **head)
 	}
 	else
 		printf("empty stack");
+}
+
+/*void	free_list(t_stack **head)
+ // NO ESTOY SEGURA DE QUE ESTE BIEN
+{
+	t_stack	*next_to_keep;
+
+	while (*head)
+	{
+		if (*head != ((*head)->next))
+		{
+			next_to_keep = (*head)->next;
+			free (*head);
+			*head = next_to_keep;
+		}
+		else
+		{
+			free(*head);
+			*head = NULL;
+		}
+	}
+}*/
+
+void	free_list(t_stack **head)
+{
+	t_stack	*temp_node;
+
+	if (*head == NULL)
+		return ;
+	temp_node = ((*head)->prev);
+	temp_node->next = NULL;
+	while ((*head)->next)
+	{
+		temp_node = (*head)->next;
+		free(*head);
+		*head = temp_node;
+	}
+	free(*head);
+	*head = NULL;
 }
 
 long long int	ft_atoi(const char *str)
@@ -73,24 +112,28 @@ int	main(int argc, char **argv)
 	while (i < (argc - 1))
 	{
 		j = 0;
-		/*while (argv[i][j]) //CORREGIR, COMO ESTA TIENE UN ERROR ERO AL CORREGIRLO
-		FUNCIONARIA PARA DETECTAR COSAS QUE NO SEAN DIGITOS PERO FALTARIA CONSIDERAR 
-		CUANDO SOLO ESCRIBEN SIGNO + O - Y NO HAY NUMERO DESPUES
+		while (argv[i + 1][j])
 		{
-			if (argv[i][j] == '+' || argv[i][j] == '-')
-				j++;
-			if (argv[i][j] <= '0' || argv[i][j] >= '9')
+			if (argv[i + 1][j] < '0' || argv[i + 1][j] > '9')
 			{
-				write(1, "error\n", 6);
-				return (0);
+				if (j == 0 && (argv[i + 1][j] == '+' || argv[i + 1][j] == '-')
+					&& (argv[i + 1][j + 1] >= '0' && argv[i + 1][j + 1] <= '9'))
+					j++;
+				else
+				{
+					write(1, "Error\n", 6);
+					free_list(pointer_heada);
+					return (0);
+				}
 			}
 			j++;
-		}*/
+		}
 		//FALTA EL ERROR DE SI SE REPITEN LOS NUMEROS 
 		number = ft_atoi(argv[i + 1]);
 		if (((number) < -2147483648) || ((number) > 2147483647))
 		{
 			write(1, "error\n", 6);
+			free_list(pointer_heada);
 			return (0);
 		}
 		pointer_heada = addAtEnd(pointer_heada, (int)number);
