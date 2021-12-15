@@ -143,7 +143,15 @@ int	main(int argc, char **argv)
 	printf("\nstack A:\n");
 	print(pointer_heada);
 	printf("\nstack B:\n");
-	print(&headb);
+	print(pointer_headb);
+
+    sort(pointer_heada, pointer_headb);
+
+    printf("\nstack A:\n");
+	print(pointer_heada);
+	printf("\nstack B:\n");
+	print(pointer_headb);
+
 
 	/*sa(pointer_heada);
 	printf("\nstack A after sa:\n");

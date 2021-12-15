@@ -35,4 +35,5 @@ void	rr(t_stack **pointer_heada, t_stack **pointer_headb);
 void	rra(t_stack **pointer_heada);
 void	rrb(t_stack **pointer_headb);
 void	rrr(t_stack **pointer_heada, t_stack **pointer_headb);
+void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
 #endif
