@@ -37,4 +37,6 @@ void	rrb(t_stack **pointer_headb);
 void	rrr(t_stack **pointer_heada, t_stack **pointer_headb);
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
 void	sort_tree(t_stack **pointer_heada);
+void	sort_four(t_stack **ha, t_stack **hb);
+int if_orden(t_stack **ha, int num);
 #endif

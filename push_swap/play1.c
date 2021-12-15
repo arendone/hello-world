@@ -145,13 +145,19 @@ int	main(int argc, char **argv)
 	printf("\nstack B:\n");
 	print(pointer_headb);
 
-    sort_tree(pointer_heada);
+    //sort_tree(pointer_heada);
+    sort_four(pointer_heada, pointer_headb);
 
     printf("\nstack A:\n");
 	print(pointer_heada);
 	printf("\nstack B:\n");
 	print(pointer_headb);
 
+    //if (if_orden(pointer_heada, 3) > 0)
+    if (if_orden(pointer_heada, 4) > 0)
+        printf ("\nSe han ordenado los numeros con exito\n");
+    else
+        printf ("\nAlgo salio mal\n");
 
 	/*sa(pointer_heada);
 	printf("\nstack A after sa:\n");
