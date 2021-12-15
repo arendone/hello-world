@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/13 13:23:22 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/15 20:24:11 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ int	main(int argc, char **argv)
 	printf("\nstack B:\n");
 	print(pointer_headb);
 
-    sort(pointer_heada, pointer_headb);
+    sort_tree(pointer_heada);
 
     printf("\nstack A:\n");
 	print(pointer_heada);

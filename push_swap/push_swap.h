@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/09 15:45:01 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/15 20:23:32 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	rra(t_stack **pointer_heada);
 void	rrb(t_stack **pointer_headb);
 void	rrr(t_stack **pointer_heada, t_stack **pointer_headb);
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
+void	sort_tree(t_stack **pointer_heada);
 #endif
