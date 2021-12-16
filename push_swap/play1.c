@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/15 20:24:11 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:26:49 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,8 @@ void	print(t_stack **head)
 		}
 	}
 	else
-		printf("empty stack");
+		printf("empty stack\n");
 }
-
-/*void	free_list(t_stack **head)
- // NO ESTOY SEGURA DE QUE ESTE BIEN
-{
-	t_stack	*next_to_keep;
-
-	while (*head)
-	{
-		if (*head != ((*head)->next))
-		{
-			next_to_keep = (*head)->next;
-			free (*head);
-			*head = next_to_keep;
-		}
-		else
-		{
-			free(*head);
-			*head = NULL;
-		}
-	}
-}*/
 
 void	free_list(t_stack **head)
 {
@@ -146,15 +125,18 @@ int	main(int argc, char **argv)
 	print(pointer_headb);
 
     //sort_tree(pointer_heada);
-    sort_four(pointer_heada, pointer_headb);
+    //sort_four(pointer_heada, pointer_headb);
+	sort(pointer_heada, pointer_headb);
+	//sort_five(pointer_heada, pointer_headb);
 
-    printf("\nstack A:\n");
-	print(pointer_heada);
-	printf("\nstack B:\n");
-	print(pointer_headb);
+    //printf("\nstack A:\n");
+	//print(pointer_heada);
+	//printf("\nstack B:\n");
+	//print(pointer_headb);
 
     //if (if_orden(pointer_heada, 3) > 0)
-    if (if_orden(pointer_heada, 4) > 0)
+    //if (if_orden(pointer_heada, 4) > 0)
+	if (if_orden(pointer_heada, 5) > 0)
         printf ("\nSe han ordenado los numeros con exito\n");
     else
         printf ("\nAlgo salio mal\n");

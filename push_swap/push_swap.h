@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/15 20:23:32 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:15:10 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ typedef struct s_stack{
 	struct s_stack	*next;
 }	t_stack;
 
+typedef struct s_subg
+{
+	int	head_right;
+	int	flag1;
+	int	head_left;
+	int	flag2;
+	int	next_right;
+	int	flag3;
+	int	next_left;
+	int	flag4;
+	int	prev_right;
+	int	flag5;
+	int	prev_left;
+	int	flag6;
+}t_subg;
+
 t_stack	*addToEmpty(int number);
 t_stack	**addAtEnd(t_stack **head, int number);
 void	sa(t_stack **pointer_heada);
@@ -35,8 +51,14 @@ void	rr(t_stack **pointer_heada, t_stack **pointer_headb);
 void	rra(t_stack **pointer_heada);
 void	rrb(t_stack **pointer_headb);
 void	rrr(t_stack **pointer_heada, t_stack **pointer_headb);
-void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
+void	sort_two(t_stack **ha);
 void	sort_tree(t_stack **pointer_heada);
 void	sort_four(t_stack **ha, t_stack **hb);
-int if_orden(t_stack **ha, int num);
+void	sort_five(t_stack **ha, t_stack **hb);
+int		if_orden(t_stack **ha, int num);
+int		count_left(t_stack **node);
+int		count_right(t_stack **node);
+int		maximum(int n, ...);
+void	data_subgroup(t_subg *sg, t_stack **head);
+void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
 #endif
