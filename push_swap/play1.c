@@ -129,10 +129,10 @@ int	main(int argc, char **argv)
 	sort(pointer_heada, pointer_headb);
 	//sort_five(pointer_heada, pointer_headb);
 
-    //printf("\nstack A:\n");
-	//print(pointer_heada);
-	//printf("\nstack B:\n");
-	//print(pointer_headb);
+    printf("\nstack A:\n");
+	print(pointer_heada);
+	printf("\nstack B:\n");
+	print(pointer_headb);
 
     //if (if_orden(pointer_heada, 3) > 0)
     //if (if_orden(pointer_heada, 4) > 0)

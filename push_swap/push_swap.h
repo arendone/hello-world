@@ -59,6 +59,9 @@ int		if_orden(t_stack **ha, int num);
 int		count_left(t_stack **node);
 int		count_right(t_stack **node);
 int		maximum(int n, ...);
+int	    minimum(int n, ...);
+int	    minimum2(int n, ...);
 void	data_subgroup(t_subg *sg, t_stack **head);
+void    send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina);
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
 #endif

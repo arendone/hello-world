@@ -35,7 +35,61 @@ int	maximum(int n, ...)
 	return (largest);
 }
 
-void	fill_flags(int max, t_subg *sg)
+int	minimum(int n, ...)
+{
+	int		i;
+	int		val;
+	int		min;
+	va_list	vl;
+
+	va_start (vl, n);
+	min = va_arg(vl, int);
+	i = 1;
+	while (i < n)
+	{
+		val = va_arg(vl, int);
+		if (min > val)
+			min = val;
+		i++;
+	}
+	va_end(vl);
+	return (min);
+}
+
+int	minimum2(int n, ...)
+{
+	int		i;
+	int		val;
+	int		min;
+    int     min2;
+	va_list	vl;
+
+	va_start (vl, n);
+	min = va_arg(vl, int);
+    printf("minimun: %d, ", min);
+    min2 = va_arg(vl, int);
+    printf("siguiente elem luego de min, %d", min2);
+	i = 1;
+	while (i < n)
+	{
+		val = va_arg(vl, int);
+        printf("val: %d, ", val);
+        if (min2 < min)
+            min2 = val;
+		if ((min2 > val) && (val > min))
+        {
+            min2 = val;
+            printf ("cambiamos min2 por val, ");
+        }
+		i++;
+        printf("minimun2: %d, en el while %d, ", min2, i);
+	}
+	va_end(vl);
+    //printf("minimun2: %d, ", min2);
+	return (min2);
+}
+
+void	fill_flags(int max, t_subg *sg) //podemos disminuirlo a 3 flags, porque no importa la direccion, vamos a tomar siempre el nuevo min
 {
 	if ((sg->head_right) == max)
 		sg->flag1 = 1;
@@ -123,11 +177,82 @@ int	count_left(t_stack **node)
 	return (i);
 }
 
+void    send_subgroup(t_stack **pointer_heada, t_stack **pointer_headb, t_stack **mina)
+{
+    t_stack *heada;
+    t_stack *nxa;
+    t_stack *pra;
+    int     min2;
+    int     max;
+    int     counter;
+
+    heada = (*pointer_heada);
+    nxa = heada->next;
+    pra = heada->prev;
+    counter = 0;
+    while (((*pointer_headb) == NULL) || (counter < 6)) //tengo que saber cuando num hay, cuandos en cada stack para no tener errores cuando un stack se queda vacio
+    {
+        if ((*mina) == (*pointer_heada))
+            pb(pointer_heada, pointer_headb);
+        else if ((*mina) == nxa)
+        {
+            sa(pointer_heada);
+            pb(pointer_heada, pointer_headb);
+        }
+        else if ((*mina) == pra)
+        {
+            rra(pointer_heada);
+            pb(pointer_heada, pointer_headb);
+        }
+        heada = (*pointer_heada);
+        nxa = heada->next;
+        pra = heada->prev;
+        max = maximum(4, heada->number, nxa->number, pra->number, (*pointer_headb)->number);
+        if (((*pointer_headb)->number) == max)
+        {
+            printf("nada mas que pasar");
+            break;
+        }
+        min2 = minimum2(3, (*pointer_headb)->number, heada->number, nxa->number, pra->number);
+        if ((heada->number) == min2)
+            mina = &heada;
+        else if ((nxa->number) == min2)
+            mina = &nxa;
+        else if ((pra->number) == min2)
+            mina = &pra;
+        counter++;
+    }
+
+}
+
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb)
 {
 	t_subg	*data;
+    t_stack *heada;
+    t_stack *nxa;
+    t_stack *pra;
+    int     min;
 
 	data = (t_subg *)malloc(sizeof(t_subg));
 	data_subgroup(data, pointer_heada);
+
+    heada = (*pointer_heada);
+    nxa = heada->next;
+    pra = heada->prev;
+
+    min = minimum(3, heada->number, nxa->number, pra->number);
+    send_subgroup(pointer_heada, pointer_headb, &pra);
+    /*if (((heada->number) == min) && (flag1 == 1 ))
+        send_subgroup(heada, headb, &heada)
+    else if (((heada->number) == min) && (flag2 == 1))
+        send_left(pointer_heada, pointer_headb, &heada);
+    else if (((nxa->number) == min) && (flag3 == 1))
+        send_right(pointer_heada, pointer_headb, &nxa);
+    else if (((nxa->number) == min) && (flag4 == 1))
+        send_left(pointer_heada, pointer_headb, &nxa);
+    else if (((pra->number) == min) && (flag5 == 1))
+        send_right(pointer_heada, pointer_headb, &prev);
+    else if (((pra->number) == min) && (flag6 == 1))
+        send_left(pointer_heada, pointer_headb, &prev);*/
 	free (data);
 }
