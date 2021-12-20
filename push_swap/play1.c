@@ -136,10 +136,10 @@ int	main(int argc, char **argv)
 
     //if (if_orden(pointer_heada, 3) > 0)
     //if (if_orden(pointer_heada, 4) > 0)
-	if (if_orden(pointer_heada, 5) > 0)
-        printf ("\nSe han ordenado los numeros con exito\n");
-    else
-        printf ("\nAlgo salio mal\n");
+	//if (if_orden(pointer_heada, 11) > 0)
+        printf ("\nSe han ordenado los numeros con exito???\n");
+    //else
+        printf ("\nAlgo salio mal???\n");
 
 	/*sa(pointer_heada);
 	printf("\nstack A after sa:\n");

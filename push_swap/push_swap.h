@@ -25,17 +25,14 @@ typedef struct s_stack{
 typedef struct s_subg
 {
 	int	head_right;
-	int	flag1;
 	int	head_left;
-	int	flag2;
+	int	flag1;
 	int	next_right;
-	int	flag3;
 	int	next_left;
-	int	flag4;
+	int	flag2;
 	int	prev_right;
-	int	flag5;
 	int	prev_left;
-	int	flag6;
+	int	flag3;
 }t_subg;
 
 t_stack	*addToEmpty(int number);

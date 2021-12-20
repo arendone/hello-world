@@ -141,32 +141,32 @@ void	pa(t_stack **pointer_heada, t_stack **pointer_headb)
 void	pb(t_stack **pointer_heada, t_stack **pointer_headb)
 {
 	//pa(pointer_headb, pointer_heada);
-	t_stack	*new_headb;
+	t_stack	*new_heada;
 	t_stack	*last_stacka;
 	t_stack	*last_stackb;
 
 	if ((*pointer_heada != NULL))
 	{
-		new_headb = NULL;
+		new_heada = NULL; //ANALIZAR QUE ONDA CON new_headb que deberia ser new_heada
 		if (*pointer_heada != ((*pointer_heada)->next))
 		{
-			new_headb = (*pointer_heada)->next;
-			last_stackb = (*pointer_heada)->prev;
-			(last_stackb->next) = new_headb;
-			(new_headb->prev) = last_stackb;
+			new_heada = (*pointer_heada)->next;
+			last_stacka = (*pointer_heada)->prev;
+			(last_stacka->next) = new_heada;
+			(new_heada->prev) = last_stacka;
 		}
 		((*pointer_heada)->next) = *pointer_heada;
 		((*pointer_heada)->prev) = *pointer_heada;
 		if (*pointer_headb != NULL)
 		{
-			last_stacka = (*pointer_headb)->prev;
-			(last_stacka->next) = (*pointer_heada);
-			((*pointer_heada)->prev) = last_stacka;
+			last_stackb = (*pointer_headb)->prev;
+			(last_stackb->next) = (*pointer_heada);
+			((*pointer_heada)->prev) = last_stackb;
 			((*pointer_headb)->prev) = (*pointer_heada);
 			((*pointer_heada)->next) = (*pointer_headb);
 		}
 		*pointer_headb = *pointer_heada;
-		*pointer_heada = new_headb;
+		*pointer_heada = new_heada;
 	}
 	write(1, "pb\n", 3);
 }

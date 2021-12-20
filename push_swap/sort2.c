@@ -66,55 +66,37 @@ int	minimum2(int n, ...)
 
 	va_start (vl, n);
 	min = va_arg(vl, int);
-    printf("minimun: %d, ", min);
     min2 = va_arg(vl, int);
-    printf("siguiente elem luego de min, %d", min2);
 	i = 1;
 	while (i < n)
 	{
 		val = va_arg(vl, int);
-        printf("val: %d, ", val);
         if (min2 < min)
             min2 = val;
 		if ((min2 > val) && (val > min))
         {
             min2 = val;
-            printf ("cambiamos min2 por val, ");
         }
 		i++;
-        printf("minimun2: %d, en el while %d, ", min2, i);
 	}
 	va_end(vl);
-    //printf("minimun2: %d, ", min2);
 	return (min2);
 }
 
 void	fill_flags(int max, t_subg *sg) //podemos disminuirlo a 3 flags, porque no importa la direccion, vamos a tomar siempre el nuevo min
 {
-	if ((sg->head_right) == max)
+	if (((sg->head_right) == max) || ((sg->head_left) == max))
 		sg->flag1 = 1;
 	else
 		sg->flag1 = 0;
-	if ((sg->head_left) == max)
+	if (((sg->next_right) == max) ||((sg->next_left) == max) )
 		sg->flag2 = 1;
 	else
 		sg->flag2 = 0;
-	if ((sg->next_right) == max)
+	if (((sg->prev_right) == max) || ((sg->prev_left) == max))
 		sg->flag3 = 1;
 	else
 		sg->flag3 = 0;
-	if ((sg->next_left) == max)
-		sg->flag4 = 1;
-	else
-		sg->flag4 = 0;
-	if ((sg->prev_right) == max)
-		sg->flag5 = 1;
-	else
-		sg->flag5 = 0;
-	if ((sg->prev_left) == max)
-		sg->flag6 = 1;
-	else
-		sg->flag6 = 0;
 }
 
 void	data_subgroup(t_subg *sg, t_stack **head)
@@ -137,8 +119,7 @@ void	data_subgroup(t_subg *sg, t_stack **head)
 	fill_flags(max, sg);
 	printf("%d, %d, %d, %d, %d, %d \n", sg->head_right, sg->head_left,
 		sg->next_right, sg->next_left, sg->prev_right, sg->prev_left);
-	printf("%d, %d, %d, %d, %d, %d \n", sg->flag1, sg->flag2,
-		sg->flag3, sg->flag4, sg->flag5, sg->flag6);
+	printf("%d, %d, %d \n", sg->flag1, sg->flag2, sg->flag3);
 }
 
 int	count_right(t_stack **node)
@@ -184,16 +165,21 @@ void    send_subgroup(t_stack **pointer_heada, t_stack **pointer_headb, t_stack 
     t_stack *pra;
     int     min2;
     int     max;
-    int     counter;
 
     heada = (*pointer_heada);
     nxa = heada->next;
     pra = heada->prev;
-    counter = 0;
-    while (((*pointer_headb) == NULL) || (counter < 6)) //tengo que saber cuando num hay, cuandos en cada stack para no tener errores cuando un stack se queda vacio
+    while ((*pointer_heada) != NULL)
     {
         if ((*mina) == (*pointer_heada))
+        {
             pb(pointer_heada, pointer_headb);
+            if ((*pointer_heada) == NULL)
+            {
+                printf("Ultimo elem de stack a");
+                break;
+            }
+        }
         else if ((*mina) == nxa)
         {
             sa(pointer_heada);
@@ -220,9 +206,18 @@ void    send_subgroup(t_stack **pointer_heada, t_stack **pointer_headb, t_stack 
             mina = &nxa;
         else if ((pra->number) == min2)
             mina = &pra;
-        counter++;
     }
+}
 
+void    reverse(t_stack **pointer_heada, t_stack **pointer_headb, t_stack **mina)
+{
+    t_stack *headb;
+    t_stack *nxb;
+
+    headb = (*pointer_headb);
+    nxb = headb->next;
+
+    if ((*mina)->number) < (nxb->number)) //AQUI ME QUEDE!!!
 }
 
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb)
@@ -232,6 +227,7 @@ void	sort(t_stack **pointer_heada, t_stack **pointer_headb)
     t_stack *nxa;
     t_stack *pra;
     int     min;
+    int     min2;
 
 	data = (t_subg *)malloc(sizeof(t_subg));
 	data_subgroup(data, pointer_heada);
@@ -241,18 +237,38 @@ void	sort(t_stack **pointer_heada, t_stack **pointer_headb)
     pra = heada->prev;
 
     min = minimum(3, heada->number, nxa->number, pra->number);
-    send_subgroup(pointer_heada, pointer_headb, &pra);
-    /*if (((heada->number) == min) && (flag1 == 1 ))
-        send_subgroup(heada, headb, &heada)
-    else if (((heada->number) == min) && (flag2 == 1))
-        send_left(pointer_heada, pointer_headb, &heada);
-    else if (((nxa->number) == min) && (flag3 == 1))
-        send_right(pointer_heada, pointer_headb, &nxa);
-    else if (((nxa->number) == min) && (flag4 == 1))
-        send_left(pointer_heada, pointer_headb, &nxa);
-    else if (((pra->number) == min) && (flag5 == 1))
-        send_right(pointer_heada, pointer_headb, &prev);
-    else if (((pra->number) == min) && (flag6 == 1))
-        send_left(pointer_heada, pointer_headb, &prev);*/
+    min2 = minimum2(3, min, heada->number, nxa->number, pra->number);
+    if (((heada->number) == min) && (data->flag1 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &heada);
+    else if (((nxa->number) == min) && (data->flag2 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &nxa);
+    else if (((pra->number) == min) && (data->flag3 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &pra);
+    else if (((heada->number) == min2) && (data->flag1 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &heada);
+    else if (((nxa->number) == min2) && (data->flag2 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &nxa);
+    else if (((pra->number) == min2) && (data->flag3 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &pra);
+
+
+    data_subgroup(data, pointer_heada);
+    heada = (*pointer_heada);
+    nxa = heada->next;
+    pra = heada->prev;  
+    min = minimum(3, heada->number, nxa->number, pra->number);
+    min2 = minimum2(3, min, heada->number, nxa->number, pra->number);
+    if (((heada->number) == min) && (data->flag1 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &heada);
+    else if (((nxa->number) == min) && (data->flag2 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &nxa);
+    else if (((pra->number) == min) && (data->flag3 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &pra);
+    else if (((heada->number) == min2) && (data->flag1 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &heada);
+    else if (((nxa->number) == min2) && (data->flag2 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &nxa);
+    else if (((pra->number) == min2) && (data->flag3 == 1))
+        send_subgroup(pointer_heada, pointer_headb, &pra);
 	free (data);
 }
