@@ -6,13 +6,13 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:58:49 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/16 12:18:29 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/21 23:41:33 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*addToEmpty(int number)
+t_stack	*addToEmpty(int numb)
 {
 	t_stack	*temp;
 
@@ -20,17 +20,17 @@ t_stack	*addToEmpty(int number)
 	if (temp == NULL)
 		return (NULL);
 	temp->prev = temp;
-	temp->number = number;
+	temp->num = numb;
 	temp->next = temp;
 	return (temp);
 }
 
-t_stack	**addAtEnd(t_stack **head, int number)
+t_stack	**addAtEnd(t_stack **head, int numb)
 {
 	t_stack	*new;
 	t_stack	*ex_new;
 
-	new = addToEmpty(number);
+	new = addToEmpty(numb);
 	if (*head == NULL)
 	{
 		*head = new;
@@ -57,9 +57,9 @@ void	sa(t_stack **pointer_heada)
 	{
 		first = *pointer_heada;
 		second = first->next;
-		first_num = first->number;
-		first->number = second->number;
-		second->number = first_num;
+		first_num = first->num;
+		first->num = second->num;
+		second->num = first_num;
 	}
 	write(1, "sa\n", 3);
 }
@@ -74,9 +74,9 @@ void	sb(t_stack **pointer_headb)
 	{
 		first = *pointer_headb;
 		second = first->next;
-		first_num = first->number;
-		first->number = second->number;
-		second->number = first_num;
+		first_num = first->num;
+		first->num = second->num;
+		second->num = first_num;
 	}
 	write(1, "sb\n", 3);
 }
@@ -91,17 +91,17 @@ void	ss(t_stack **pointer_heada, t_stack **pointer_headb)
 	{
 		first = *pointer_heada;
 		second = first->next;
-		first_num = first->number;
-		first->number = second->number;
-		second->number = first_num;
+		first_num = first->num;
+		first->num = second->num;
+		second->num = first_num;
 	}
 	if (*pointer_headb != NULL)
 	{
 		first = *pointer_headb;
 		second = first->next;
-		first_num = first->number;
-		first->number = second->number;
-		second->number = first_num;
+		first_num = first->num;
+		first->num = second->num;
+		second->num = first_num;
 	}
 	write(1, "ss\n", 3);
 }

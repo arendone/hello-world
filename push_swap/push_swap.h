@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/21 21:53:36 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/21 23:52:28 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_stack{
 	struct s_stack	*prev;
-	int				number;
+	int				num;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -64,4 +64,5 @@ void	send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina);
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
 void	reverse(t_stack **pointer_heada, t_stack **pointer_headb, int mina);
 void	hide_min(t_stack **pointer_heada, t_subg *data);
+void	send_back(t_stack **heada, t_stack **headb);
 #endif

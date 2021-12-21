@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/16 17:26:49 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/22 00:11:39 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	print(t_stack **head)
 
 	if (*head != NULL)
 	{
-		printf("%d \n", (*head)->number);
+		printf("%d \n", (*head)->num);
 		nextnum = (*head)->next;
 		while (nextnum != *head)
 		{
-			printf("%d \n", nextnum->number);
+			printf("%d \n", nextnum->num);
 			nextnum = nextnum->next;
 		}
 	}
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 {
 	int				i;
 	int				j;
-	long long int	number;
+	long long int	num;
 	t_stack			*heada;
 	t_stack			*headb;
 	t_stack			**pointer_heada;
@@ -108,14 +108,14 @@ int	main(int argc, char **argv)
 			j++;
 		}
 		//FALTA EL ERROR DE SI SE REPITEN LOS NUMEROS 
-		number = ft_atoi(argv[i + 1]);
-		if (((number) < -2147483648) || ((number) > 2147483647))
+		num = ft_atoi(argv[i + 1]);
+		if (((num) < -2147483648) || ((num) > 2147483647))
 		{
 			write(1, "error\n", 6);
 			free_list(pointer_heada);
 			return (0);
 		}
-		pointer_heada = addAtEnd(pointer_heada, (int)number);
+		pointer_heada = addAtEnd(pointer_heada, (int)num);
 		i++;
 	}
 
@@ -136,55 +136,10 @@ int	main(int argc, char **argv)
 
     //if (if_orden(pointer_heada, 3) > 0)
     //if (if_orden(pointer_heada, 4) > 0)
-	//if (if_orden(pointer_heada, 11) > 0)
-        printf ("\nSe han ordenado los numeros con exito???\n");
-    //else
-        printf ("\nAlgo salio mal???\n");
+	if (if_orden(pointer_heada, 30) > 0)
+        printf ("\nSe han ordenado los numeros\n");
+    else
+        printf ("\nAlgo salio mal\n");
 
-	/*sa(pointer_heada);
-	printf("\nstack A after sa:\n");
-	print(pointer_heada);
-	sb(pointer_headb);
-	printf("\nstack B after sb:\n");
-	print(pointer_headb);
-	ss(pointer_heada, pointer_headb);
-	printf("\nstack A after ss:\n");
-	print(pointer_heada);
-	printf("\nstack B after ss:\n");
-	print(pointer_headb);
-	pa(pointer_heada, pointer_headb);
-	printf("\nstack A after pa:\n");
-	print(pointer_heada);
-	printf("\nstack B after pa:\n");
-	print(pointer_headb);
-	pb(pointer_heada, pointer_headb);
-	pb(pointer_heada, pointer_headb);
-	pb(pointer_heada, pointer_headb);
-	printf("\nstack A after 3 times pb:\n");
-	print(pointer_heada);
-	printf("\nstack B after 3 times pb:\n");
-	print(pointer_headb);
-	ra(pointer_heada);
-	printf("\nstack A after ra:\n");
-	print(pointer_heada);
-	rb(pointer_headb);
-	printf("\nstack B after rb:\n");
-	print(pointer_headb);
-	rr(pointer_heada, pointer_headb);
-	printf("\nstack A after rr:\n");
-	print(pointer_heada);
-	printf("\nstack B after rr:\n");
-	print(pointer_headb);
-	rra(pointer_heada);
-	printf("\nstack A after rra:\n");
-	print(pointer_heada);
-	rrb(pointer_headb);
-	printf("\nstack B after rrb:\n");
-	print(pointer_headb);
-	rrr(pointer_heada, pointer_headb);
-	printf("\nstack A after rrr:\n");
-	print(pointer_heada);
-	printf("\nstack B after rrr:\n");
-	print(pointer_headb);*/
 	return (0);
 }
