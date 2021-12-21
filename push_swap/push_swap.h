@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/16 21:15:10 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/21 21:53:36 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_subg
 
 t_stack	*addToEmpty(int number);
 t_stack	**addAtEnd(t_stack **head, int number);
+void	print(t_stack **head);
 void	sa(t_stack **pointer_heada);
 void	sb(t_stack **pointer_headb);
 void	ss(t_stack **pointer_heada, t_stack **pointer_headb);
@@ -56,9 +57,11 @@ int		if_orden(t_stack **ha, int num);
 int		count_left(t_stack **node);
 int		count_right(t_stack **node);
 int		maximum(int n, ...);
-int	    minimum(int n, ...);
-int	    minimum2(int n, ...);
+int		minimum(int n, ...);
+int		minimum2(int n, ...);
 void	data_subgroup(t_subg *sg, t_stack **head);
-void    send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina);
+void	send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina);
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
+void	reverse(t_stack **pointer_heada, t_stack **pointer_headb, int mina);
+void	hide_min(t_stack **pointer_heada, t_subg *data);
 #endif

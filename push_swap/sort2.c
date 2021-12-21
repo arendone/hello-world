@@ -6,12 +6,12 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:45:35 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/16 21:31:28 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/21 22:20:00 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-# include <stdarg.h>
+#include <stdarg.h>
 #include <stdio.h> //BORRALOOOOOOOOOO
 
 int	maximum(int n, ...)
@@ -61,35 +61,35 @@ int	minimum2(int n, ...)
 	int		i;
 	int		val;
 	int		min;
-    int     min2;
+	int		min2;
 	va_list	vl;
 
 	va_start (vl, n);
 	min = va_arg(vl, int);
-    min2 = va_arg(vl, int);
+	min2 = va_arg(vl, int);
 	i = 1;
 	while (i < n)
 	{
 		val = va_arg(vl, int);
-        if (min2 < min)
-            min2 = val;
+		if (min2 < min)
+			min2 = val;
 		if ((min2 > val) && (val > min))
-        {
-            min2 = val;
-        }
+		{
+			min2 = val;
+		}
 		i++;
 	}
 	va_end(vl);
 	return (min2);
 }
 
-void	fill_flags(int max, t_subg *sg) //podemos disminuirlo a 3 flags, porque no importa la direccion, vamos a tomar siempre el nuevo min
+void	fill_flags(int max, t_subg *sg)
 {
 	if (((sg->head_right) == max) || ((sg->head_left) == max))
 		sg->flag1 = 1;
 	else
 		sg->flag1 = 0;
-	if (((sg->next_right) == max) ||((sg->next_left) == max) )
+	if (((sg->next_right) == max) || ((sg->next_left) == max))
 		sg->flag2 = 1;
 	else
 		sg->flag2 = 0;
@@ -158,117 +158,208 @@ int	count_left(t_stack **node)
 	return (i);
 }
 
-void    send_subgroup(t_stack **pointer_heada, t_stack **pointer_headb, t_stack **mina)
+void	send_subgroup(t_stack **pointer_heada, t_stack **pointer_headb, t_stack **mina)
 {
-    t_stack *heada;
-    t_stack *nxa;
-    t_stack *pra;
-    int     min2;
-    int     max;
+	t_stack	*nxa;
+	t_stack	*heada;
+	t_stack	*pra;
+	int		min2;
+	int		max;
 
-    heada = (*pointer_heada);
-    nxa = heada->next;
-    pra = heada->prev;
-    while ((*pointer_heada) != NULL)
-    {
-        if ((*mina) == (*pointer_heada))
-        {
-            pb(pointer_heada, pointer_headb);
-            if ((*pointer_heada) == NULL)
-            {
-                printf("Ultimo elem de stack a");
-                break;
-            }
-        }
-        else if ((*mina) == nxa)
-        {
-            sa(pointer_heada);
-            pb(pointer_heada, pointer_headb);
-        }
-        else if ((*mina) == pra)
-        {
-            rra(pointer_heada);
-            pb(pointer_heada, pointer_headb);
-        }
-        heada = (*pointer_heada);
-        nxa = heada->next;
-        pra = heada->prev;
-        max = maximum(4, heada->number, nxa->number, pra->number, (*pointer_headb)->number);
-        if (((*pointer_headb)->number) == max)
-        {
-            printf("nada mas que pasar");
-            break;
-        }
-        min2 = minimum2(3, (*pointer_headb)->number, heada->number, nxa->number, pra->number);
-        if ((heada->number) == min2)
-            mina = &heada;
-        else if ((nxa->number) == min2)
-            mina = &nxa;
-        else if ((pra->number) == min2)
-            mina = &pra;
-    }
+	heada = (*pointer_heada);
+	nxa = heada->next;
+	pra = heada->prev;
+	while ((*pointer_heada) != NULL)
+	{
+		if ((*mina) == (*pointer_heada))
+		{
+			pb(pointer_heada, pointer_headb);
+			if ((*pointer_heada) == NULL)
+			{
+				printf("Ultimo elem de stack a");
+				break ;
+			}
+		}
+		else if ((*mina) == nxa)
+		{
+			sa(pointer_heada);
+			pb(pointer_heada, pointer_headb);
+		}
+		else if ((*mina) == pra)
+		{
+			rra(pointer_heada);
+			pb(pointer_heada, pointer_headb);
+		}
+		heada = (*pointer_heada);
+		nxa = heada->next;
+		pra = heada->prev;
+		max = maximum(4, heada->number, nxa->number, pra->number, (*pointer_headb)->number);
+		if (((*pointer_headb)->number) == max)
+		{
+			printf("nada mas que pasar");
+			break ;
+		}
+		min2 = minimum2(3, (*pointer_headb)->number, heada->number, nxa->number, pra->number);
+		if ((heada->number) == min2)
+			mina = &heada;
+		else if ((nxa->number) == min2)
+			mina = &nxa;
+		else if ((pra->number) == min2)
+			mina = &pra;
+	}
 }
 
-void    reverse(t_stack **pointer_heada, t_stack **pointer_headb, t_stack **mina)
+void	chose_subgroup(t_stack **heada, t_stack **headb, t_subg *data)
 {
-    t_stack *headb;
-    t_stack *nxb;
+	t_stack	*nxa;
+	t_stack	*pra;
+	int		min;
+	int		min2;
 
-    headb = (*pointer_headb);
-    nxb = headb->next;
+	data_subgroup(data, heada);
+	nxa = (*heada)->next;
+	pra = (*heada)->prev;
+	min = minimum(3, (*heada)->number, nxa->number, pra->number);
+	min2 = minimum2(3, min, (*heada)->number, nxa->number, pra->number);
+	if ((((*heada)->number) == min) && (data->flag1 == 1))
+		send_subgroup(heada, headb, heada);
+	else if (((nxa->number) == min) && (data->flag2 == 1))
+		send_subgroup(heada, headb, &nxa);
+	else if (((pra->number) == min) && (data->flag3 == 1))
+		send_subgroup(heada, headb, &pra);
+	else if ((((*heada)->number) == min2) && (data->flag1 == 1))
+		send_subgroup(heada, headb, heada);
+	else if (((nxa->number) == min2) && (data->flag2 == 1))
+		send_subgroup(heada, headb, &nxa);
+	else if (((pra->number) == min2) && (data->flag3 == 1))
+		send_subgroup(heada, headb, &pra);
+}
 
-    if ((*mina)->number) < (nxb->number)) //AQUI ME QUEDE!!!
+//en esta funcion se pueden hacer mejoras al algoritmo pero se complica la funcion 
+void	reverse(t_stack **pointer_heada, t_stack **pointer_headb, int mina)
+{
+	t_stack	*nxb;
+	t_stack	*nxa;
+
+	nxb = ((*pointer_headb)->next);
+	if (mina < (nxb->number))
+	{
+		while (mina < (nxb->number) && (*pointer_headb != NULL))
+		{
+			pa(pointer_heada, pointer_headb);
+			if (*pointer_headb != NULL)
+				nxb = ((*pointer_headb)->next);
+		}
+	}
+	if (((*pointer_headb != NULL) && ((*pointer_headb)->number) < (nxb->number)))
+		sb(pointer_headb);
+}
+
+/*void	reverse(t_stack **pointer_heada, t_stack **pointer_headb, t_stack **mina)
+{
+	t_stack	*nxb;
+	t_stack	*nxa;
+
+	nxb = ((*pointer_headb)->next);
+	if (((*mina)->number) < (nxb->number))
+	{
+		while (((*mina)->number) > (nxb->number))
+		{
+			pb(pointer_heada, pointer_headb);
+			nxb = ((*pointer_headb)->next);
+		}
+	}
+	else
+	{
+		pb(pointer_heada, pointer_headb); //tener cuidado con que headb sea null
+		nxb = ((*pointer_headb)->next);
+	}
+	if (((*pointer_headb)->number) < (nxb->number))
+	{
+		nxa = ((*pointer_heada)->next);
+		if (((*pointer_heada)->number) < (nxa->number))
+			ss(pointer_heada, pointer_headb);
+		else
+		sb(pointer_headb);
+	}
+}*/
+
+void	hide_min(t_stack **pointer_heada, t_subg *data)
+{
+	t_stack	*nxa;
+	t_stack	*pra;
+	int		min;
+	int		min2;
+
+	nxa = (*pointer_heada)->next;
+	pra = (*pointer_heada)->prev;
+	min = minimum(3, (*pointer_heada)->number, nxa->number, pra->number);
+	min2 = minimum2(3, min, (*pointer_heada)->number, nxa->number, pra->number);
+	if ((((*pointer_heada)->number) == min) && (data->flag1 == 1))
+		ra(pointer_heada);//NOTA QUE PODRIA USAR RR en cada ra PERO NO MANDAR EL ULTIMO.
+	else if (((nxa->number) == min) && (data->flag2 == 1))
+	{
+		sa(pointer_heada);
+		ra(pointer_heada);
+	}
+	else if ((((*pointer_heada)->number) == min2) && (data->flag1 == 1))
+		ra(pointer_heada);
+	else if (((nxa->number) == min2) && (data->flag2 == 1))
+	{
+		sa(pointer_heada);
+		ra(pointer_heada);
+	}
 }
 
 void	sort(t_stack **pointer_heada, t_stack **pointer_headb)
 {
 	t_subg	*data;
-    t_stack *heada;
-    t_stack *nxa;
-    t_stack *pra;
-    int     min;
-    int     min2;
+	t_stack	*heada;
+	t_stack	*nxa;
+	t_stack	*pra;
+	int		min;
+	int		min2;
 
 	data = (t_subg *)malloc(sizeof(t_subg));
-	data_subgroup(data, pointer_heada);
+	
+	chose_subgroup(pointer_heada, pointer_headb, data);
+	
+	printf("\nstack A:\n");
+	print(pointer_heada);
+	printf("\nstack B:\n");
+	print(pointer_headb);
+	
+	while ((*pointer_heada) != NULL)
+	{
+		printf("tenemos que esconder al min\n");
+		data_subgroup(data, pointer_heada);
+		hide_min(pointer_heada, data);
 
-    heada = (*pointer_heada);
-    nxa = heada->next;
-    pra = heada->prev;
+		printf("\nstack A:\n");
+		print(pointer_heada);
+		printf("\nstack B:\n");
+		print(pointer_headb);
 
-    min = minimum(3, heada->number, nxa->number, pra->number);
-    min2 = minimum2(3, min, heada->number, nxa->number, pra->number);
-    if (((heada->number) == min) && (data->flag1 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &heada);
-    else if (((nxa->number) == min) && (data->flag2 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &nxa);
-    else if (((pra->number) == min) && (data->flag3 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &pra);
-    else if (((heada->number) == min2) && (data->flag1 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &heada);
-    else if (((nxa->number) == min2) && (data->flag2 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &nxa);
-    else if (((pra->number) == min2) && (data->flag3 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &pra);
+		heada = (*pointer_heada);
+		nxa = heada->next;
+		pra = heada->prev;
+		printf("Reversa, para min \n");
+		reverse(pointer_heada, pointer_headb, pra->number);
+		printf("\nstack A:\n");
+		print(pointer_heada);
+		printf("\nstack B:\n");
+		print(pointer_headb);
 
+		chose_subgroup(pointer_heada, pointer_headb, data);
+	}
 
-    data_subgroup(data, pointer_heada);
-    heada = (*pointer_heada);
-    nxa = heada->next;
-    pra = heada->prev;  
-    min = minimum(3, heada->number, nxa->number, pra->number);
-    min2 = minimum2(3, min, heada->number, nxa->number, pra->number);
-    if (((heada->number) == min) && (data->flag1 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &heada);
-    else if (((nxa->number) == min) && (data->flag2 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &nxa);
-    else if (((pra->number) == min) && (data->flag3 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &pra);
-    else if (((heada->number) == min2) && (data->flag1 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &heada);
-    else if (((nxa->number) == min2) && (data->flag2 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &nxa);
-    else if (((pra->number) == min2) && (data->flag3 == 1))
-        send_subgroup(pointer_heada, pointer_headb, &pra);
+	printf("\nstack A:\n");
+	print(pointer_heada);
+	printf("\nstack B:\n");
+	print(pointer_headb);
+	
+	chose_subgroup(pointer_headb, pointer_heada, data); //misma funcion pero punteros volteados
+	//pero deber'ia ser ahora para mandar de mayor a menor, por eso no funciona
+
 	free (data);
 }
