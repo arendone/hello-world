@@ -6,13 +6,32 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:45:35 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/22 00:10:13 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:33:39 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdarg.h>
 #include <stdio.h> //BORRALOOOOOOOOOO
+
+int	lstsize(t_stack **head)
+{
+	int		size;
+	t_stack	*tem;
+
+	size = 0;
+	if ((*head) != NULL)
+	{
+		size = 1;
+		tem = ((*head)->next);
+		while (tem != (*head))
+		{
+			size++;
+			tem = tem->next;
+		}
+	}
+	return (size);
+}
 
 int	maximum(int n, ...)
 {
@@ -255,130 +274,147 @@ void	chose_subgroup(t_stack **heada, t_stack **headb, t_subg *data)
 }
 
 //en esta funcion se pueden hacer mejoras al algoritmo pero se complica la funcion 
-void	reverse(t_stack **pointer_heada, t_stack **pointer_headb, int mina)
+void	reverse(t_stack **heada, t_stack **headb, int mina)
 {
 	t_stack	*nxb;
 	t_stack	*nxa;
 
-	nxb = ((*pointer_headb)->next);
+	nxb = ((*headb)->next);
 	if (mina < (nxb->num))
 	{
-		while (mina < (nxb->num) && (*pointer_headb != NULL))
+		while (mina < (nxb->num) && (*headb != NULL))
 		{
-			pa(pointer_heada, pointer_headb);
-			if (*pointer_headb != NULL)
-				nxb = ((*pointer_headb)->next);
+			pa(heada, headb);
+			if (*headb != NULL)
+				nxb = ((*headb)->next);
 		}
 	}
-	if (((*pointer_headb != NULL) && ((*pointer_headb)->num) < (nxb->num)))
-		sb(pointer_headb);
+	if (((*headb != NULL) && ((*headb)->num) < (nxb->num)))
+		sb(headb);
 }
 
-/*void	reverse(t_stack **pointer_heada, t_stack **pointer_headb, t_stack **mina)
+/*void	reverse(t_stack **heada, t_stack **headb, t_stack **mina)
 {
 	t_stack	*nxb;
 	t_stack	*nxa;
 
-	nxb = ((*pointer_headb)->next);
+	nxb = ((*headb)->next);
 	if (((*mina)->num) < (nxb->num))
 	{
 		while (((*mina)->num) > (nxb->num))
 		{
-			pb(pointer_heada, pointer_headb);
-			nxb = ((*pointer_headb)->next);
+			pb(heada, headb);
+			nxb = ((*headb)->next);
 		}
 	}
 	else
 	{
-		pb(pointer_heada, pointer_headb); //tener cuidado con que headb sea null
-		nxb = ((*pointer_headb)->next);
+		pb(heada, headb); //tener cuidado con que headb sea null
+		nxb = ((*headb)->next);
 	}
-	if (((*pointer_headb)->num) < (nxb->num))
+	if (((*headb)->num) < (nxb->num))
 	{
-		nxa = ((*pointer_heada)->next);
-		if (((*pointer_heada)->num) < (nxa->num))
-			ss(pointer_heada, pointer_headb);
+		nxa = ((*heada)->next);
+		if (((*heada)->num) < (nxa->num))
+			ss(heada, headb);
 		else
-		sb(pointer_headb);
+		sb(headb);
 	}
 }*/
 
-void	hide_min(t_stack **pointer_heada, t_subg *data)
+void	hide_min(t_stack **heada, t_subg *data)
 {
 	t_stack	*nxa;
 	t_stack	*pra;
 	int		min;
 	int		min2;
 
-	nxa = (*pointer_heada)->next;
-	pra = (*pointer_heada)->prev;
-	min = minimum(3, (*pointer_heada)->num, nxa->num, pra->num);
-	min2 = minimum2(3, min, (*pointer_heada)->num, nxa->num, pra->num);
-	if ((((*pointer_heada)->num) == min) && (data->flag1 == 1))
-		ra(pointer_heada);//NOTA QUE PODRIA USAR RR en cada ra PERO NO MANDAR EL ULTIMO.
+	nxa = (*heada)->next;
+	pra = (*heada)->prev;
+	min = minimum(3, (*heada)->num, nxa->num, pra->num);
+	min2 = minimum2(3, min, (*heada)->num, nxa->num, pra->num);
+	if ((((*heada)->num) == min) && (data->flag1 == 1))
+		ra(heada);//NOTA QUE PODRIA USAR RR en cada ra PERO NO MANDAR EL ULTIMO.
 	else if (((nxa->num) == min) && (data->flag2 == 1))
 	{
-		sa(pointer_heada);
-		ra(pointer_heada);
+		sa(heada);
+		ra(heada);
 	}
-	else if ((((*pointer_heada)->num) == min2) && (data->flag1 == 1))
-		ra(pointer_heada);
+	else if ((((*heada)->num) == min2) && (data->flag1 == 1))
+		ra(heada);
 	else if (((nxa->num) == min2) && (data->flag2 == 1))
 	{
-		sa(pointer_heada);
-		ra(pointer_heada);
+		sa(heada);
+		ra(heada);
 	}
 }
 
-void	sort(t_stack **pointer_heada, t_stack **pointer_headb)
+void	pre_sort(t_stack **heada, t_stack **headb)
+{
+	int		size;
+
+	size = lstsize(heada);
+	if (if_orden(heada, size) == 0)
+	{
+		if (size == 2)
+			sa(heada);
+		else if (size == 3)
+			sort_tree(heada);
+		else if (size == 4)
+			sort_four(heada, headb);
+		else if (size == 5)
+			sort_five(heada, headb);
+		else
+			sort(heada, headb, size);
+	}
+}
+
+void	sort(t_stack **heada, t_stack **headb, int size)
 {
 	t_subg	*data;
-	t_stack	*heada;
 	t_stack	*nxa;
 	t_stack	*pra;
 	int		min;
 	int		min2;
 
 	data = (t_subg *)malloc(sizeof(t_subg));
-	
-	chose_subgroup(pointer_heada, pointer_headb, data);
+	chose_subgroup(heada, headb, data);
 	
 	printf("\nstack A:\n");
-	print(pointer_heada);
+	print(heada);
 	printf("\nstack B:\n");
-	print(pointer_headb);
+	print(headb);
 	
-	while ((*pointer_heada) != NULL)
+	while ((*heada) != NULL)
 	{
 		printf("tenemos que esconder al min\n");
-		data_subgroup(data, pointer_heada);
-		hide_min(pointer_heada, data);
+		data_subgroup(data, heada);
+		hide_min(heada, data);
 
 		printf("\nstack A:\n");
-		print(pointer_heada);
+		print(heada);
 		printf("\nstack B:\n");
-		print(pointer_headb);
+		print(headb);
 
-		heada = (*pointer_heada);
-		nxa = heada->next;
-		pra = heada->prev;
+		nxa = (*heada)->next;
+		pra = (*heada)->prev;
 		printf("Reversa, para min \n");
-		reverse(pointer_heada, pointer_headb, pra->num);
+		reverse(heada, headb, pra->num);
 		printf("\nstack A:\n");
-		print(pointer_heada);
+		print(heada);
 		printf("\nstack B:\n");
-		print(pointer_headb);
+		print(headb);
 
-		chose_subgroup(pointer_heada, pointer_headb, data);
+		chose_subgroup(heada, headb, data);
 	}
 
 	printf("\nstack A:\n");
-	print(pointer_heada);
+	print(heada);
 	printf("\nstack B:\n");
-	print(pointer_headb);
+	print(headb);
 	
-	send_back(pointer_heada, pointer_headb);
+	send_back(heada, headb);
 	free (data);
-	if (if_orden(pointer_heada, 30) == 0)
-		sort(pointer_heada, pointer_headb);
+	if (if_orden(heada, size) == 0)
+		sort(heada, headb, size);
 }

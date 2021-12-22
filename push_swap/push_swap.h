@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/21 23:52:28 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:49:22 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,15 @@ void	sort_five(t_stack **ha, t_stack **hb);
 int		if_orden(t_stack **ha, int num);
 int		count_left(t_stack **node);
 int		count_right(t_stack **node);
+int		lstsize(t_stack **head);
 int		maximum(int n, ...);
 int		minimum(int n, ...);
 int		minimum2(int n, ...);
 void	data_subgroup(t_subg *sg, t_stack **head);
 void	send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina);
-void	sort(t_stack **pointer_heada, t_stack **pointer_headb);
-void	reverse(t_stack **pointer_heada, t_stack **pointer_headb, int mina);
-void	hide_min(t_stack **pointer_heada, t_subg *data);
+void	pre_sort(t_stack **heada, t_stack **headb);
+void	sort(t_stack **heada, t_stack **headb, int size);
+void	reverse(t_stack **heada, t_stack **headb, int mina);
+void	hide_min(t_stack **heada, t_subg *data);
 void	send_back(t_stack **heada, t_stack **headb);
 #endif

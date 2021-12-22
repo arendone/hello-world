@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 20:29:45 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/21 23:39:36 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:52:35 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	if_orden(t_stack **ha, int numb)
 	t_stack		*sig1;
 	t_stack		*sig2;
 
+	if (numb == 0 || numb == 1)
+		return (1);
 	sig1 = (*ha);
 	sig2 = sig1->next;
 	i = 0;
@@ -30,7 +32,7 @@ int	if_orden(t_stack **ha, int numb)
 		sig2 = sig1->next;
 	}
 	if (i == (numb - 1))
-		return (i);
+		return (1);
 	else
 		return (0);
 }

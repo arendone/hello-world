@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/22 00:11:39 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/22 22:17:44 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,28 @@ long long int	ft_atoi(const char *str)
 	return (sign * n);
 }
 
+int	check_rep(t_stack **heada, int numb)
+{
+	t_stack	*tem;
+
+	if ((*heada) != NULL)
+	{
+		if (((*heada)->num) == numb)
+			return (1);
+		else
+		{
+			tem = ((*heada)->next);
+			while (tem != (*heada))
+			{
+				if ((tem->num) == numb)
+					return (1);
+				tem = tem->next;
+			}
+		}
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	int				i;
@@ -80,13 +102,11 @@ int	main(int argc, char **argv)
 	long long int	num;
 	t_stack			*heada;
 	t_stack			*headb;
-	t_stack			**pointer_heada;
-	t_stack			**pointer_headb;
 
+	if (argc < 2)
+		return (0);
 	heada = NULL;
 	headb = NULL;
-	pointer_heada = &heada;
-	pointer_headb = &headb;
 	i = 0;
 	while (i < (argc - 1))
 	{
@@ -101,45 +121,35 @@ int	main(int argc, char **argv)
 				else
 				{
 					write(1, "Error\n", 6);
-					free_list(pointer_heada);
+					free_list(&heada);
 					return (0);
 				}
 			}
 			j++;
 		}
-		//FALTA EL ERROR DE SI SE REPITEN LOS NUMEROS 
 		num = ft_atoi(argv[i + 1]);
-		if (((num) < -2147483648) || ((num) > 2147483647))
+		if (((num) < -2147483648) || ((num) > 2147483647)
+			|| (check_rep(&heada, (int)num) == 1))
 		{
-			write(1, "error\n", 6);
-			free_list(pointer_heada);
+			write(1, "Error\n", 6);
+			free_list(&heada);
 			return (0);
 		}
-		pointer_heada = addAtEnd(pointer_heada, (int)num);
+		addAtEnd(&heada, (int)num);
 		i++;
 	}
 
 	printf("\nstack A:\n");
-	print(pointer_heada);
+	print(&heada);
 	printf("\nstack B:\n");
-	print(pointer_headb);
+	print(&headb);
 
-    //sort_tree(pointer_heada);
-    //sort_four(pointer_heada, pointer_headb);
-	sort(pointer_heada, pointer_headb);
-	//sort_five(pointer_heada, pointer_headb);
+	pre_sort(&heada, &headb);
 
-    printf("\nstack A:\n");
-	print(pointer_heada);
+	printf("\nstack A:\n");
+	print(&heada);
 	printf("\nstack B:\n");
-	print(pointer_headb);
-
-    //if (if_orden(pointer_heada, 3) > 0)
-    //if (if_orden(pointer_heada, 4) > 0)
-	if (if_orden(pointer_heada, 30) > 0)
-        printf ("\nSe han ordenado los numeros\n");
-    else
-        printf ("\nAlgo salio mal\n");
+	print(&headb);
 
 	return (0);
 }
