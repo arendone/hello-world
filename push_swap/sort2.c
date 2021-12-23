@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 16:45:35 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/22 21:33:39 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/23 04:58:49 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	data_subgroup(t_subg *sg, t_stack **head)
 	t_stack		*nx;
 	t_stack		*pr;
 	int			max;
-	int			flag;
 
 	nx = (*head)->next;
 	pr = (*head)->prev;
@@ -136,9 +135,9 @@ void	data_subgroup(t_subg *sg, t_stack **head)
 	max = maximum(6, sg->head_right, sg->head_left, sg->next_right,
 			sg->next_left, sg->prev_right, sg->prev_left);
 	fill_flags(max, sg);
-	printf("%d, %d, %d, %d, %d, %d \n", sg->head_right, sg->head_left,
+	/*printf("%d, %d, %d, %d, %d, %d \n", sg->head_right, sg->head_left,
 		sg->next_right, sg->next_left, sg->prev_right, sg->prev_left);
-	printf("%d, %d, %d \n", sg->flag1, sg->flag2, sg->flag3);
+	printf("%d, %d, %d \n", sg->flag1, sg->flag2, sg->flag3);*/
 }
 
 int	count_right(t_stack **node)
@@ -181,6 +180,7 @@ void	send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina)
 {
 	t_stack	*nxa;
 	t_stack	*pra;
+	t_stack	*prb;
 	int		min2;
 	int		max;
 
@@ -206,6 +206,7 @@ void	send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina)
 		}
 		nxa = (*heada)->next;
 		pra = (*heada)->prev;
+		prb = (*headb)->prev;
 		max = maximum(4, (*heada)->num, nxa->num, pra->num, (*headb)->num);
 		if (((*headb)->num) == max)
 			break ;
@@ -277,9 +278,8 @@ void	chose_subgroup(t_stack **heada, t_stack **headb, t_subg *data)
 void	reverse(t_stack **heada, t_stack **headb, int mina)
 {
 	t_stack	*nxb;
-	t_stack	*nxa;
 
-	nxb = ((*headb)->next);
+	nxb = (*headb);
 	if (mina < (nxb->num))
 	{
 		while (mina < (nxb->num) && (*headb != NULL))
@@ -289,8 +289,6 @@ void	reverse(t_stack **heada, t_stack **headb, int mina)
 				nxb = ((*headb)->next);
 		}
 	}
-	if (((*headb != NULL) && ((*headb)->num) < (nxb->num)))
-		sb(headb);
 }
 
 /*void	reverse(t_stack **heada, t_stack **headb, t_stack **mina)
@@ -374,44 +372,42 @@ void	sort(t_stack **heada, t_stack **headb, int size)
 	t_subg	*data;
 	t_stack	*nxa;
 	t_stack	*pra;
-	int		min;
-	int		min2;
 
 	data = (t_subg *)malloc(sizeof(t_subg));
 	chose_subgroup(heada, headb, data);
 	
-	printf("\nstack A:\n");
+	/*printf("\nstack A:\n");
 	print(heada);
 	printf("\nstack B:\n");
-	print(headb);
+	print(headb);*/
 	
 	while ((*heada) != NULL)
 	{
-		printf("tenemos que esconder al min\n");
+		/*printf("tenemos que esconder al min\n");*/
 		data_subgroup(data, heada);
 		hide_min(heada, data);
 
-		printf("\nstack A:\n");
+		/*printf("\nstack A:\n");
 		print(heada);
 		printf("\nstack B:\n");
-		print(headb);
+		print(headb);*/
 
 		nxa = (*heada)->next;
 		pra = (*heada)->prev;
-		printf("Reversa, para min \n");
+		/*printf("Reversa, para min \n");*/
 		reverse(heada, headb, pra->num);
-		printf("\nstack A:\n");
+		/*printf("\nstack A:\n");
 		print(heada);
 		printf("\nstack B:\n");
-		print(headb);
+		print(headb);*/
 
 		chose_subgroup(heada, headb, data);
 	}
 
-	printf("\nstack A:\n");
+	/*printf("\nstack A:\n");
 	print(heada);
 	printf("\nstack B:\n");
-	print(headb);
+	print(headb);*/
 	
 	send_back(heada, headb);
 	free (data);

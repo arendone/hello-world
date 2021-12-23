@@ -6,12 +6,13 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/22 22:17:44 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/23 03:06:51 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
+#include "./libft/libft.h" //ordena este desmadre
 
 void	print(t_stack **head)
 {
@@ -49,7 +50,7 @@ void	free_list(t_stack **head)
 	*head = NULL;
 }
 
-long long int	ft_atoi(const char *str)
+long long int	long_atoi(const char *str)
 {
 	long long int	n;
 	int				i;
@@ -99,6 +100,8 @@ int	main(int argc, char **argv)
 {
 	int				i;
 	int				j;
+	int				k;
+	char			**split;
 	long long int	num;
 	t_stack			*heada;
 	t_stack			*headb;
@@ -107,49 +110,56 @@ int	main(int argc, char **argv)
 		return (0);
 	heada = NULL;
 	headb = NULL;
-	i = 0;
-	while (i < (argc - 1))
+	i = 1;
+	while (i < (argc))
 	{
-		j = 0;
-		while (argv[i + 1][j])
+		split = ft_split(argv[i], ' '); //falta free
+		k = 0;
+		while (split[k])
 		{
-			if (argv[i + 1][j] < '0' || argv[i + 1][j] > '9')
+			j = 0;
+			while (split[k][j])
 			{
-				if (j == 0 && (argv[i + 1][j] == '+' || argv[i + 1][j] == '-')
-					&& (argv[i + 1][j + 1] >= '0' && argv[i + 1][j + 1] <= '9'))
-					j++;
-				else
+				if (split[k][j] < '0' || split[k][j] > '9')
 				{
-					write(1, "Error\n", 6);
-					free_list(&heada);
-					return (0);
+					if (j == 0 && (split[k][j] == '+' || split[k][j] == '-')
+						&& (split[k][j + 1] >= '0' && split[k][j + 1] <= '9'))
+						j++;
+					else
+					{
+						write(1, "Error\n", 6);
+						free_list(&heada);
+						return (0);
+					}
 				}
+				j++;
 			}
-			j++;
+			num = long_atoi(split[k]);
+			if (((num) < -2147483648) || ((num) > 2147483647)
+				|| (check_rep(&heada, (int)num) == 1))
+			{
+				write(1, "Error\n", 6);
+				free_list(&heada);
+				return (0);
+			}
+			addAtEnd(&heada, (int)num);
+			k++;
+			free(split);
 		}
-		num = ft_atoi(argv[i + 1]);
-		if (((num) < -2147483648) || ((num) > 2147483647)
-			|| (check_rep(&heada, (int)num) == 1))
-		{
-			write(1, "Error\n", 6);
-			free_list(&heada);
-			return (0);
-		}
-		addAtEnd(&heada, (int)num);
 		i++;
 	}
 
-	printf("\nstack A:\n");
+	/*printf("\nstack A:\n");
 	print(&heada);
 	printf("\nstack B:\n");
-	print(&headb);
+	print(&headb);*/
 
 	pre_sort(&heada, &headb);
 
-	printf("\nstack A:\n");
+	/*printf("\nstack A:\n");
 	print(&heada);
 	printf("\nstack B:\n");
-	print(&headb);
+	print(&headb);*/
 
 	return (0);
 }
