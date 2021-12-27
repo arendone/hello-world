@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/30 12:45:25 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/23 03:06:51 by arendon-         ###   ########.fr       */
+/*   Created: 2021/12/27 17:24:31 by arendon-          #+#    #+#             */
+/*   Updated: 2021/12/27 21:21:39 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_list(t_stack **head)
 	{
 		temp_node = (*head)->next;
 		free(*head);
-		*head = temp_node;
+		(*head) = temp_node;
 	}
 	free(*head);
 	*head = NULL;
@@ -96,6 +96,17 @@ int	check_rep(t_stack **heada, int numb)
 	return (0);
 }
 
+void	free_split(char **split)
+{
+	int k = 0;
+	while(split[k])
+	{
+		free(split[k]);
+		k++;
+	}
+	free(split);
+}
+
 int	main(int argc, char **argv)
 {
 	int				i;
@@ -113,7 +124,7 @@ int	main(int argc, char **argv)
 	i = 1;
 	while (i < (argc))
 	{
-		split = ft_split(argv[i], ' '); //falta free
+		split = ft_split(argv[i], ' ');
 		k = 0;
 		while (split[k])
 		{
@@ -127,8 +138,9 @@ int	main(int argc, char **argv)
 						j++;
 					else
 					{
-						write(1, "Error\n", 6);
+						write(2, "Error\n", 6);
 						free_list(&heada);
+						free_split(split);
 						return (0);
 					}
 				}
@@ -138,17 +150,17 @@ int	main(int argc, char **argv)
 			if (((num) < -2147483648) || ((num) > 2147483647)
 				|| (check_rep(&heada, (int)num) == 1))
 			{
-				write(1, "Error\n", 6);
+				write(2, "Error\n", 6);
 				free_list(&heada);
+				free_split(split);
 				return (0);
 			}
 			addAtEnd(&heada, (int)num);
 			k++;
-			free(split);
 		}
+		free_split(split);
 		i++;
 	}
-
 	/*printf("\nstack A:\n");
 	print(&heada);
 	printf("\nstack B:\n");
@@ -160,6 +172,6 @@ int	main(int argc, char **argv)
 	print(&heada);
 	printf("\nstack B:\n");
 	print(&headb);*/
-
+	//system("leaks push_swap");
 	return (0);
 }
