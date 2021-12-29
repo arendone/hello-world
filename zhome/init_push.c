@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_push.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/29 17:20:22 by arendon-          #+#    #+#             */
+/*   Updated: 2021/12/29 20:10:27 by arendon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_info	*init_push(void)
@@ -5,19 +17,20 @@ t_info	*init_push(void)
 	t_info		*push;
 
 	push = (t_info *)malloc(sizeof(t_info));
-    if (push == NULL)
-    {
-        write(2, "No space left\n", 15);
-        return (NULL);
-    }
+	if (push == NULL)
+	{
+		write(2, "No space left\n", 15);
+		return (NULL);
+	}
 	push->heada = NULL;
 	push->headb = NULL;
 	push->size_a = 0;
 	push->size_b = 0;
-    /*char	**input_array;
+	/*char	**input_array;
 	int		array_size;
 	int		chunk;
 	bool	swap;*/
+	//
 	return (push);
 }
 
@@ -34,12 +47,14 @@ t_stack	*addToEmpty(int numb)
 	return (temp);
 }
 
-t_stack	**addAtEnd(t_stack **head, int numb) //tengo que checar que se pueda llamar a esta funcion con (&(push->heada))
+t_stack	**addAtEnd(t_info *push, int numb)
 {
+	t_stack	**head;
 	t_stack	*new;
 	t_stack	*ex_new;
 
 	new = addToEmpty(numb);
+	head = &(push->heada);
 	if (*head == NULL)
 	{
 		*head = new;

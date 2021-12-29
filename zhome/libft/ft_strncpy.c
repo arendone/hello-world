@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test2_3strtrim.c                                   :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 16:56:11 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/22 15:50:12 by arendon-         ###   ########.fr       */
+/*   Created: 2021/12/29 18:46:40 by arendon-          #+#    #+#             */
+/*   Updated: 2021/12/29 18:46:53 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
-int	main()
+char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	printf("%s.\n", ft_strtrim(" hola camaradas ", " s"));
-	printf("%s.\n", ft_strtrim("", " s"));
-	printf("%s.\n", ft_strtrim("hola camaradas ", "h"));
-	printf("%s.\n", ft_strtrim(" hola camaradas ", "a"));
-	printf("%s.\n", ft_strtrim(" hola camaradas ", "  "));
-	printf("%s.\n", ft_strtrim(NULL, " "));
+	size_t	i;
+
+	i = 0;
+	if ((len + 1) < len)
+		return (NULL);
+	if (len > 0)
+	{
+		while (src[i] && i < len)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		while (i < len)
+		{
+			dst[i] = '\0';
+			i++;
+		}
+	}
+	return (dst);
 }

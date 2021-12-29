@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_string_argv.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/29 17:13:52 by arendon-          #+#    #+#             */
+/*   Updated: 2021/12/29 20:09:41 by arendon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*
@@ -9,35 +21,35 @@
 ** @nu - is where the final numbers as strings are saved.
 */
 
-int	long_atoi(char *str, char **nums, t_info *push)
+int	atoi_push_swap(char *str, char **nums, t_info *push)
 {
 	long long int	n;
-	bool				sign;
-	size_int		i;
+	int				sign;
+	size_t			i;
 
 	n = 0;
 	sign = 1;
-    i = 0;
+	i = 0;
 	if (str[i] == '-')
 		sign = -1;
-	else if (str[i] == '-' || str[i] == '+')
+	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		n = (n * 10) + (str[i] - '0');
 		i++;
-        if (sign * n > INT_MAX || sign * n < INT_MIN)
+		if (sign * n > INT_MAX || sign * n < INT_MIN)
 			error_exit(nums, push);
 	}
-	return ((int)sign * n);
+	return ((int)(sign * n));
 }
 
 int	check_rep(t_info *push, int numb)
 {
 	t_stack	*tem;
-    t_stack *head;
+	t_stack	*head;
 
-    head = push->heada;
+	head = push->heada;
 	if (head != NULL)
 	{
 		if ((head->num) == numb)
@@ -56,46 +68,42 @@ int	check_rep(t_info *push, int numb)
 	return (0);
 }
 
-int	invalid_argv(char *argv, t_info *push)
+int	invalid_argv(char *argv, t_info *push, size_t i)
 {
 	char		**nu;
-	size_t		i;
 	size_t		j;
 
-	i = 0;
-	nu = ft_strsplit(argv, ' '); //FALTAAA REVISAR EN LIBFT NUEVA Y NORMINATTE
+	nu = ft_split(argv, ' ');
 	if (nu[i] == NULL)
 	{
 		ft_freearray(nu);
-		return (-1);
+		return (1);
 	}
 	while (nu[i])
 	{
 		j = 0;
 		while (nu[i][j])
-        {
-            if (!((nu[i][j] >= '0' && nu[i][j] <= '9') ||
+		{
+			if (!((nu[i][j] >= '0' && nu[i][j] <= '9') ||
 				(nu[i][j] == '-' && j == 0 && nu[i][j + 1]) ||
 				(nu[i][j] == '+' && j == 0 && nu[i][j + 1])))
 				error_exit(nu, push);
-            j++;
-        }
-        checkandadd(t_info *push, nu, i);
-        i++;
+			j++;
+		}
+		checkandadd(push, nu, i);
+		i++;
 	}
 	ft_freearray(nu);
-	return (0); //tengo 27 lineas, mi idea es agregar una funcion con ft_freearray y valor de return, otra idea es definir a i y/o j en la funcion previa a esta ;)
+	return (0);
 }
 
-checkandadd(t_info *push, char **nu, size_t i)
+void	checkandadd(t_info *push, char **nu, size_t i)
 {
-    int numb;
-    t_stack       *head;
+	int		numb;
 
-    head = push->heada;
-    numb = atoi_push_swap(nu[i]);
-    if (check_rep(t_info *push, int numb) == 1)
-        error_exit(nu, push);
-    addAtEnd(&head, (int)numb);
-	push->size_a++; //hay que inizializar al push
+	numb = atoi_push_swap(nu[i], nu, push);
+	if (check_rep(push, numb) == 1)
+		error_exit(nu, push);
+	addAtEnd(push, (int)numb);
+	push->size_a++;
 }

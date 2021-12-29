@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/23 01:57:49 by arendon-          #+#    #+#              #
-#    Updated: 2021/12/27 19:24:41 by arendon-         ###   ########.fr        #
+#    Updated: 2021/12/29 17:48:47 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,26 +14,34 @@ NAME = push_swap
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
-SRC= play1.c operations.c sort.c sort2.c
+OBJS	= $(patsubst %.c, %.o, $(SRCS))
 
-OBJ = $(SRC:.c=.o)
+SRCS=	check_string_argv.c \
+		errorsandfree.c \
+		init_push.c \
+		main_pushswap.c \
+		print_stack.c
+
+%.o: %.c
+	$(CC) $(FLAGS) -Ilibft -c $< -o $@
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	make -C ./libft
-#	cp ./libft/libft.a $(NAME)
-	$(CC) -L./libft -lft -I./libft $(FLAGS) $(SRC) -o $(NAME)
-#ar -crs $(NAME) $(OBJ)
+$(NAME): libft/libft.a $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -Llibft -lft -o $(NAME) 
 
 clean:
 	rm -f *.o
-	cd ./libft && make clean
-	
+	rm -f *.out
+	make -C libft clean
+
 fclean: clean
+	make -C libft fclean	
 	rm -f $(NAME)
-	cd ./libft && make fclean
+
+re: fclean $(NAME)
 	
-re: fclean all
+libft/libft.a:
+	make -C libft all

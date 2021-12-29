@@ -6,22 +6,24 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:49:22 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/29 20:08:51 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
- 
+
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
+#include <stdio.h> //TEMPORAL
 
 # include "./libft/libft.h"
 
 typedef struct s_stack{
 	struct s_stack	*prev;
 	int				num;
-    bool            flag;
+	bool			flag;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -48,10 +50,10 @@ typedef struct s_info
 ** String check in file - check_string_argv.c
 */
 
-int	long_atoi(char *str, char **nums, t_info *push);
-int	check_rep(t_info *push, int numb);
-int	invalid_argv(char *argv, t_info *push);
-checkandadd(t_info *push, char **nu, size_t i);
+int		atoi_push_swap(char *str, char **nums, t_info *push);
+int		check_rep(t_info *push, int numb);
+int		invalid_argv(char *argv, t_info *push, size_t i);
+void	checkandadd(t_info *push, char **nu, size_t i);
 
 /*
 ** Malloc and initiation for t_info push and t_stacks
@@ -61,7 +63,8 @@ checkandadd(t_info *push, char **nu, size_t i);
 t_info	*init_push(void);
 //void				*ft_xmalloc(size_t size); ???
 t_stack	*addToEmpty(int numb);
-t_stack	**addAtEnd(t_stack **head, int numb);
+t_stack	**addAtEnd(t_info *push, int numb);
+//t_stack	**addAtEnd(t_stack **head, int numb);
 
 /*
 ** Operations in the project - files operations_p.c,
@@ -101,7 +104,7 @@ void	rrr(t_stack **pointer_heada, t_stack **pointer_headb);
 
 void	error_exit(char **nums, t_info *push);
 void	free_stack(t_stack *head);
-void	free_push(t_push *push);
+void	free_push(t_info *push);
 //void				error_operations(char *str, t_push *push);
 //, "KO", "OK" - for checker
 //void				ko(t_push *push);
@@ -110,14 +113,15 @@ void	free_push(t_push *push);
 /*
 **Just to see some steps - in file print_for_convenience.c
 */
-void	print(t_stack **head);
+void	print_stack(t_stack **head);
 
 
-void	sort_two(t_stack **ha);
+/*void	sort_two(t_stack **ha);
 void	sort_tree(t_stack **pointer_heada);
 void	sort_four(t_stack **ha, t_stack **hb);
 void	sort_five(t_stack **ha, t_stack **hb);
-int		if_orden(t_stack **ha, int num);
+int		if_orden(t_stack **ha, int num);*/
+
 /*
 int		count_left(t_stack **node);
 int		count_right(t_stack **node);
