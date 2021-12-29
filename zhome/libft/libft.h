@@ -69,5 +69,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 size_t	ft_maximum_sizet(size_t n, ...);
 size_t	ft_minimum_sizet(size_t n, ...);
 void	ft_putnstr_fd(char *s, int fd, int n);
+void	ft_freearray(char **array);
+void	ft_mapdel(char **map, int i);
+char	**ft_splitstr(char const *s, char c);
+
 
 #endif

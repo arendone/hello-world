@@ -63,10 +63,10 @@ int	invalid_argv(char *argv, t_info *push)
 	size_t		j;
 
 	i = 0;
-	nu = ft_strsplit(argv, ' '); //FALTAAA DEFINIR
+	nu = ft_strsplit(argv, ' '); //FALTAAA REVISAR EN LIBFT NUEVA Y NORMINATTE
 	if (nu[i] == NULL)
 	{
-		ft_arrdel(nu); //FALTAAA DEFINIR
+		ft_freearray(nu);
 		return (-1);
 	}
 	while (nu[i])
@@ -77,14 +77,14 @@ int	invalid_argv(char *argv, t_info *push)
             if (!((nu[i][j] >= '0' && nu[i][j] <= '9') ||
 				(nu[i][j] == '-' && j == 0 && nu[i][j + 1]) ||
 				(nu[i][j] == '+' && j == 0 && nu[i][j + 1])))
-				error_exit(nu, push); //falta definir
+				error_exit(nu, push);
             j++;
         }
         checkandadd(t_info *push, nu, i);
         i++;
 	}
-	ft_arrdel(nu); //FALTAAA DEFINIR
-	return (0); //tengo 27 lineas, mi idea es agregar a la funcion ft_arrdel lo que va a retornar return
+	ft_freearray(nu);
+	return (0); //tengo 27 lineas, mi idea es agregar una funcion con ft_freearray y valor de return, otra idea es definir a i y/o j en la funcion previa a esta ;)
 }
 
 checkandadd(t_info *push, char **nu, size_t i)

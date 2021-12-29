@@ -48,6 +48,7 @@ static char	**clean(char **split, int n)
 		i++;
 	}
 	free(split);
+    split = NULL;
 	return (NULL);
 }
 

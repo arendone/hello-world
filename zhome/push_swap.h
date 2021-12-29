@@ -54,44 +54,34 @@ int	invalid_argv(char *argv, t_info *push);
 checkandadd(t_info *push, char **nu, size_t i);
 
 /*
-** Malloc and free for t_push and t_stack and other structures
-** in file - other_functions.c
+** Malloc and initiation for t_info push and t_stacks
+** in file - init_push.c
 */
 
-//void				*ft_xmalloc(size_t size);
-//t_push				*init_push(void);
-//t_stack				*init_stack(void);
-//void				free_stack(t_stack *start);
-//void				free_push(t_push *push);
-
-/*
-** Initiation and push of numbers to stacks a and b
-** in file - push_init_stacks.c
-*/
-t_stack	*addToEmpty(int number);
-t_stack	**addAtEnd(t_stack **head, int number);
-//void				push_to_stack_a(t_push *push, int n);
-//void				push_to_stack_b(t_push *push, int n);
+t_info	*init_push(void);
+//void				*ft_xmalloc(size_t size); ???
+t_stack	*addToEmpty(int numb);
+t_stack	**addAtEnd(t_stack **head, int numb);
 
 /*
 ** Operations in the project - files operations_p.c,
 ** operations_r.c, operations_rr.c, operations_s.c
 */
 
-void				sa(t_push *push);
-void				sb(t_push *push);
-void				ss(t_push *push);
-
-void				pa(t_push *push);
-void				pb(t_push *push);
-
-void				ra(t_push *push);
-void				rb(t_push *push);
-void				rr(t_push *push);
-
-void				rra(t_push *push);
-void				rrb(t_push *push);
-void				rrr(t_push *push);
+//void				sa(t_push *push);
+//void				sb(t_push *push);
+//void				ss(t_push *push);
+//
+//void				pa(t_push *push);
+//void				pb(t_push *push);
+//
+//void				ra(t_push *push);
+//void				rb(t_push *push);
+//void				rr(t_push *push);
+//
+//void				rra(t_push *push);
+//void				rrb(t_push *push);
+//void				rrr(t_push *push);
 
 void	sa(t_stack **pointer_heada);
 void	sb(t_stack **pointer_headb);
@@ -106,11 +96,14 @@ void	rrb(t_stack **pointer_headb);
 void	rrr(t_stack **pointer_heada, t_stack **pointer_headb);
 
 /*
-** Answers that programs can give: "Error", "KO", "OK" - for checker
+** Answers that programs can give: "Error". And free.
 */
 
-//void				error_exit(char **nums, t_push *push);
+void	error_exit(char **nums, t_info *push);
+void	free_stack(t_stack *head);
+void	free_push(t_push *push);
 //void				error_operations(char *str, t_push *push);
+//, "KO", "OK" - for checker
 //void				ko(t_push *push);
 //void				ok(t_push *push);
 
