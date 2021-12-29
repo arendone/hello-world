@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:30:01 by arendon-          #+#    #+#             */
-/*   Updated: 2021/09/23 16:09:15 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/29 20:16:18 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	**clean(char **split, int n)
 		i++;
 	}
 	free(split);
-    split = NULL;
+	split = NULL;
 	return (NULL);
 }
 

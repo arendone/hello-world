@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 20:08:51 by arendon-         ###   ########.fr       */
+/*   Updated: 2021/12/29 22:23:05 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,12 @@ t_stack	**addAtEnd(t_info *push, int numb);
 //void				rrb(t_push *push);
 //void				rrr(t_push *push);
 
-void	sa(t_stack **pointer_heada);
-void	sb(t_stack **pointer_headb);
-void	ss(t_stack **pointer_heada, t_stack **pointer_headb);
-void	pa(t_stack **pointer_heada, t_stack **pointer_headb);
-void	pb(t_stack **pointer_heada, t_stack **pointer_headb);
+void	sa(t_info *push);
+void	sb(t_info *push);
+void	ss(t_info *push);
+void	pa(t_info *push);
+void	pb(t_info *push);
+void	close_p(t_info *push, char c);
 void	ra(t_stack **pointer_heada);
 void	rb(t_stack **pointer_headb);
 void	rr(t_stack **pointer_heada, t_stack **pointer_headb);
@@ -114,7 +115,6 @@ void	free_push(t_info *push);
 **Just to see some steps - in file print_for_convenience.c
 */
 void	print_stack(t_stack **head);
-
 
 /*void	sort_two(t_stack **ha);
 void	sort_tree(t_stack **pointer_heada);
