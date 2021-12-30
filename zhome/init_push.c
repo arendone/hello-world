@@ -43,6 +43,7 @@ t_stack	*addToEmpty(int numb)
 		return (NULL);
 	temp->prev = temp;
 	temp->num = numb;
+    temp->flag = 0;
 	temp->next = temp;
 	return (temp);
 }

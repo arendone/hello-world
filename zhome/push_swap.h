@@ -23,7 +23,7 @@
 typedef struct s_stack{
 	struct s_stack	*prev;
 	int				num;
-	bool			flag;
+	int			    flag;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -71,33 +71,21 @@ t_stack	**addAtEnd(t_info *push, int numb);
 ** operations_r.c, operations_rr.c, operations_s.c
 */
 
-//void				sa(t_push *push);
-//void				sb(t_push *push);
-//void				ss(t_push *push);
-//
-//void				pa(t_push *push);
-//void				pb(t_push *push);
-//
-//void				ra(t_push *push);
-//void				rb(t_push *push);
-//void				rr(t_push *push);
-//
-//void				rra(t_push *push);
-//void				rrb(t_push *push);
-//void				rrr(t_push *push);
-
 void	sa(t_info *push);
 void	sb(t_info *push);
 void	ss(t_info *push);
+
 void	pa(t_info *push);
 void	pb(t_info *push);
 void	close_p(t_info *push, char c);
-void	ra(t_stack **pointer_heada);
-void	rb(t_stack **pointer_headb);
-void	rr(t_stack **pointer_heada, t_stack **pointer_headb);
-void	rra(t_stack **pointer_heada);
-void	rrb(t_stack **pointer_headb);
-void	rrr(t_stack **pointer_heada, t_stack **pointer_headb);
+
+void	ra(t_info *push);
+void	rb(t_info *push);
+void	rr(t_info *push);
+
+void	rra(t_info *push);
+void	rrb(t_info *push);
+void	rrr(t_info *push);
 
 /*
 ** Answers that programs can give: "Error". And free.
@@ -116,11 +104,35 @@ void	free_push(t_info *push);
 */
 void	print_stack(t_stack **head);
 
-/*void	sort_two(t_stack **ha);
-void	sort_tree(t_stack **pointer_heada);
-void	sort_four(t_stack **ha, t_stack **hb);
-void	sort_five(t_stack **ha, t_stack **hb);
-int		if_orden(t_stack **ha, int num);*/
+/*
+** Algorithm starts here -
+** in file sort.c
+*/
+int	if_orden_a(t_info *push, int numb);
+void	pre_sort(t_info *push);
+
+/*
+** For 5 or less numbers
+** in file small_stack.c
+*/
+void	sort_two(t_info *push);
+void	sort_tree(t_info *push);
+void	sort_four(t_info *push);
+void	sort_five(t_info *push);
+
+/*
+**  Chunks algorithm
+** in file  .c
+*/
+
+
+/*
+** normalization, ismin and some other funtions used in the algorithm
+** in file algorithm_utils.c
+*/
+
+void    normalization(t_info *push);
+bool    ismin_stacka(t_info *push, int min, int init);
 
 /*
 int		count_left(t_stack **node);

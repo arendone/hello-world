@@ -38,6 +38,8 @@ void	pa(t_info *push)
 			close_p(push, 'a');
 		push->heada = push->headb;
 		push->headb = new_headb;
+        push->size_a++;
+        push->size_b--;
 	}
 	write(1, "pa\n", 3);
 }
@@ -68,6 +70,8 @@ void	pb(t_info *push)
 			close_p(push, 'b');
 		push->headb = push->heada;
 		push->heada = new_heada;
+        push->size_a--;
+        push->size_b++;
 	}
 	write(1, "pb\n", 3);
 }
