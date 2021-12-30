@@ -14,7 +14,7 @@
 
 void	error_exit(char **nums, t_info *push)
 {
-	ft_putendl_fd("Error", 2);
+	ft_putendl_fd("Error", STDERR_FILENO);
 	ft_freearray(nums);
 	free_push(push);
 	exit(1);

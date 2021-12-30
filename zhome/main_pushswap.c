@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-//gcc -L ./libft -lft .\check_string_argv.c .\errorsandfree.c .\init_push.c .\main_pushswap.c .\operations_p.c .\operations_s.c .\operations_r.c .\operations_rr.c .\small_stack.c sort.c .\print_stack.c .\algorithm_utils.c .\libft/ft_split.c .\libft\ft_freearray.c .\libft\ft_putendl_fd.c .\libft\ft_substr.c .\libft\ft_strtrim.c .\libft\ft_strlcpy.c .\libft\ft_strdup.c .\libft\ft_strlen.c .\libft\ft_putstr_fd.c .\libft\ft_strchr.c -o push_swap
+//gcc -L ./libft -lft .\check_string_argv.c .\errorsandfree.c .\init_push.c .\main_pushswap.c .\operations_p.c .\operations_s.c .\operations_r.c .\operations_rr.c .\small_stack.c sort.c .\print_stack.c .\algorithm_utils.c .\chunk.c .\libft/ft_split.c .\libft\ft_freearray.c .\libft\ft_putendl_fd.c .\libft\ft_substr.c .\libft\ft_strtrim.c .\libft\ft_strlcpy.c .\libft\ft_strdup.c .\libft\ft_strlen.c .\libft\ft_putstr_fd.c .\libft\ft_strchr.c -o push_swap
 
 int	main(int argc, char **argv)
 {

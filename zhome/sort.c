@@ -51,7 +51,7 @@ void	pre_sort(t_info *push)
 			sort_four(push);
 		else if (size == 5)
 			sort_five(push);
-		//else
-		//	chunk...(push->heada, headb, size);
+		else
+            algorithm_chunk(push);
 	}
 }

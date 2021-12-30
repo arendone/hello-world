@@ -26,11 +26,8 @@ t_info	*init_push(void)
 	push->headb = NULL;
 	push->size_a = 0;
 	push->size_b = 0;
-	/*char	**input_array;
-	int		array_size;
-	int		chunk;
-	bool	swap;*/
-	//
+	push->size_chunk = 0;
+	push->swap = false;
 	return (push);
 }
 

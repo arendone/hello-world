@@ -33,10 +33,8 @@ typedef struct s_info
 	t_stack	*headb;
 	int		size_a;
 	int		size_b;
-	/*char	**input_array;
-	int		array_size;
-	int		chunk;
-	bool	swap;*/
+	int		size_chunk;
+	bool	swap;
 }t_info;
 
 # define INT_MAX (2147483647)
@@ -122,17 +120,23 @@ void	sort_five(t_info *push);
 
 /*
 **  Chunks algorithm
-** in file  .c
+** in file  chunk.c
 */
-
+void	algorithm_size_chunkcalculator(t_info *push);
+void	algorithm_createchuncks(t_info *push);
+void	algorithm_pushinorder(t_info *push);
+void	algorithm_chunk(t_info *push);
 
 /*
-** normalization, ismin and some other funtions used in the algorithm
+** Some other funtions used in the Chunk-algorithm
 ** in file algorithm_utils.c
 */
 
 void    normalization(t_info *push);
 bool    ismin_stacka(t_info *push, int min, int init);
+int	algorithm_b_shortesway2rotate(t_info *push, int num);
+int	algorithm_a_shortesway2rotate(t_info *push, int num);
+void	algorithm_putnumbertop(t_info *push, int nbr);
 
 /*
 int		count_left(t_stack **node);
