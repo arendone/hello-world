@@ -114,15 +114,15 @@ void	send_min(t_info *push)
 	pr = (push->heada)->prev;
 	if (((nx->num) < ((push->heada)->num)) && ((nx->num) < (pr->num)))
 	{
-		sa(push->heada);
-		pb(push->heada, push->headb);
+		sa(push);
+		pb(push);
 	}
 	else if (((pr->num) < ((push->heada)->num))
 		&& ((pr->num) < (nx->num)))
 	{
-		rra(push->heada);
-		pb(push->heada, push->headb);
+		rra(push);
+		pb(push);
 	}
 	else
-		pb(push->heada, push->headb);
+		pb(push);
 }

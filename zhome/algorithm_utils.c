@@ -50,38 +50,21 @@ int	algorithm_b_shortesway2rotate(t_info *push, int num)
 	{
 		if (tmp->num == num)
 		{
+            printf("valor del return :%d ,", i > (push->size_b / 2));
 			return (i > (push->size_b / 2));
 		}
 		i++;
 		tmp = tmp->next;
 	}
-	return (1);
-}
-
-int	algorithm_a_shortesway2rotate(t_info *push, int num)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = push->heada;
-	i = 0;
-	while (i < push->size_a)
-	{
-		if (tmp->num == num)
-		{
-			return (i > (push->size_a / 2));
-		}
-		i++;
-		tmp = tmp->next;
-	}
+    printf("valor del return :%d ,", 1);
 	return (1);
 }
 
 void	algorithm_putnumbertop(t_info *push, int nbr)
 {
-	int	dir;
+	int	reverse;
 
-	dir = algorithm_b_shortesway2rotate(push, nbr);
+	reverse = algorithm_b_shortesway2rotate(push, nbr);
 	while (push->headb->num != nbr)
 	{
 		if (push->headb->num == (nbr - 1) && push->swap == false)
@@ -89,7 +72,7 @@ void	algorithm_putnumbertop(t_info *push, int nbr)
 			pa(push);
 			push->swap = true;
 		}			
-		else if (dir == 1)
+		else if (reverse == 1)
 			rrb(push);
 		else
 			rb(push);

@@ -16,6 +16,7 @@ void	algorithm_size_chunkcalculator(t_info *push)
 			res += 1;
 	}
 	push->size_chunk = res;
+    printf("chunk: %d", push->size_chunk);
 }
 
 void	algorithm_createchuncks(t_info *push)

@@ -117,6 +117,7 @@ void	sort_two(t_info *push);
 void	sort_tree(t_info *push);
 void	sort_four(t_info *push);
 void	sort_five(t_info *push);
+void	send_min(t_info *push);
 
 /*
 **  Chunks algorithm
@@ -135,7 +136,6 @@ void	algorithm_chunk(t_info *push);
 void    normalization(t_info *push);
 bool    ismin_stacka(t_info *push, int min, int init);
 int	algorithm_b_shortesway2rotate(t_info *push, int num);
-int	algorithm_a_shortesway2rotate(t_info *push, int num);
 void	algorithm_putnumbertop(t_info *push, int nbr);
 
 /*
