@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:20:22 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 20:10:27 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:32:01 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_stack	*addToEmpty(int numb)
 		return (NULL);
 	temp->prev = temp;
 	temp->num = numb;
-    temp->flag = 0;
+	temp->flag = 0;
 	temp->next = temp;
 	return (temp);
 }

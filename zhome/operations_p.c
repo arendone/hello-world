@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:37:21 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 22:22:41 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:38:18 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	pa(t_info *push)
 			close_p(push, 'a');
 		push->heada = push->headb;
 		push->headb = new_headb;
-        push->size_a++;
-        push->size_b--;
+		push->size_a++;
+		push->size_b--;
 	}
 	write(1, "pa\n", 3);
 }
@@ -70,8 +70,8 @@ void	pb(t_info *push)
 			close_p(push, 'b');
 		push->headb = push->heada;
 		push->heada = new_heada;
-        push->size_a--;
-        push->size_b++;
+		push->size_a--;
+		push->size_b++;
 	}
 	write(1, "pb\n", 3);
 }

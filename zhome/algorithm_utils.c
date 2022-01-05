@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:41:40 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/04 16:42:01 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:41:24 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,11 @@ int	algorithm_b_shortesway2rotate(t_info *push, int num)
 	{
 		if (tmp->num == num)
 		{
-            //printf("valor del return :%d ,", i > (push->size_b / 2));
 			return (i > (push->size_b / 2));
 		}
 		i++;
 		tmp = tmp->next;
 	}
-    //printf("valor del return :%d ,", 1);
 	return (1);
 }
 

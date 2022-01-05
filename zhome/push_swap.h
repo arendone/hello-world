@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/04 22:24:07 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:53:52 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
-#include <stdio.h> //TEMPORAL
 
 # include "./libft/libft.h"
 
@@ -92,11 +91,6 @@ void	free_stack(t_stack *head, t_info *push);
 void	free_push(t_info *push);
 
 /*
-**Just to see some steps - in file print_for_convenience.c
-*/
-void	print_stack(t_stack **head);
-
-/*
 ** Algorithm starts here -
 ** in file sort.c
 */
@@ -132,4 +126,8 @@ bool	ismin_stacka(t_info *push, int min, int init);
 int		algorithm_b_shortesway2rotate(t_info *push, int num);
 void	algorithm_putnumbertop(t_info *push, int nbr);
 
+/*
+**Just to see some steps - in file print_for_convenience.c
+
+void	print_stack(t_stack **head);*/
 #endif

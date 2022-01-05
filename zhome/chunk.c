@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 16:58:46 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/04 16:59:11 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:48:06 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@ void	algorithm_size_chunkcalculator(t_info *push)
 	if (push->size_a > 1)
 	{
 		res = ((3 * size) / 40) + (45 / 2);
-        //res = 5 + ((size - 400)/400)*6;
-        //make some test qith 100 and with 500 and then use the formula y_x =y0 + (x-x0/x1-x2)(y1-y0)
 		while (res % 5 != 0)
 			res += 1;
 	}
 	push->size_chunk = res;
-    //printf("chunk: %d", push->size_chunk);
 }
 
 void	algorithm_createchuncks(t_info *push)
@@ -46,7 +43,8 @@ void	algorithm_createchuncks(t_info *push)
 		if (tmp->num < (push->size_chunk * j))
 		{
 			pb(push);
-			if (tmp->num < (push->size_chunk * j) - (push->size_chunk / 2))
+			if (tmp->num < (push->size_chunk * j) - (push->size_chunk / 2)
+				&& push->size_chunk > 25)
 				rb(push);
 			i++;
 		}
@@ -84,31 +82,8 @@ void	algorithm_pushinorder(t_info *push)
 
 void	algorithm_chunk(t_info *push)
 {
-	//printf("\nstack A:\n");
-	//print_stack(&(push->heada));
-	//printf("\nstack B:\n");
-	//print_stack(&(push->headb));
-
 	normalization(push);
-
-	//printf("\nstack A:\n");
-	//print_stack(&(push->heada));
-	//printf("\nstack B:\n");
-	//print_stack(&(push->headb));
-
 	algorithm_createchuncks(push);
-
-	//printf("\nstack A:\n");
-	//print_stack(&(push->heada));
-	//printf("\nstack B:\n");
-	//print_stack(&(push->headb));
-
 	algorithm_pushinorder(push);
-
-	//printf("\nstack A:\n");
-	//print_stack(&(push->heada));
-	//printf("\nstack B:\n");
-	//print_stack(&(push->headb));
 	return ;
 }
-

@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/23 01:57:49 by arendon-          #+#    #+#              #
-#    Updated: 2022/01/03 17:22:28 by arendon-         ###   ########.fr        #
+#    Updated: 2022/01/05 14:54:08 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,7 @@ SRCS=	check_string_argv.c \
 		small_stack.c \
 		sort.c \
 		chunk.c \
-		algorithm_utils.c \
-		print_stack.c
+		algorithm_utils.c 
 
 %.o: %.c
 	$(CC) $(FLAGS) -Ilibft -c $< -o $@
