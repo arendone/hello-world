@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 12:30:48 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 22:23:05 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/04 22:24:07 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_stack{
 	struct s_stack	*prev;
 	int				num;
-	int			    flag;
+	int				flag;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -45,7 +45,7 @@ typedef struct s_info
 */
 
 /*
-** String check in file - check_string_argv.c
+** String check in file check_string_argv.c
 */
 
 int		atoi_push_swap(char *str, char **nums, t_info *push);
@@ -55,14 +55,12 @@ void	checkandadd(t_info *push, char **nu, size_t i);
 
 /*
 ** Malloc and initiation for t_info push and t_stacks
-** in file - init_push.c
+** in file init_push.c
 */
 
 t_info	*init_push(void);
-//void				*ft_xmalloc(size_t size); ???
 t_stack	*addToEmpty(int numb);
 t_stack	**addAtEnd(t_info *push, int numb);
-//t_stack	**addAtEnd(t_stack **head, int numb);
 
 /*
 ** Operations in the project - files operations_p.c,
@@ -90,12 +88,8 @@ void	rrr(t_info *push);
 */
 
 void	error_exit(char **nums, t_info *push);
-void	free_stack(t_stack *head);
+void	free_stack(t_stack *head, t_info *push);
 void	free_push(t_info *push);
-//void				error_operations(char *str, t_push *push);
-//, "KO", "OK" - for checker
-//void				ko(t_push *push);
-//void				ok(t_push *push);
 
 /*
 **Just to see some steps - in file print_for_convenience.c
@@ -106,7 +100,7 @@ void	print_stack(t_stack **head);
 ** Algorithm starts here -
 ** in file sort.c
 */
-int	if_orden_a(t_info *push, int numb);
+int		if_orden_a(t_info *push, int numb);
 void	pre_sort(t_info *push);
 
 /*
@@ -121,7 +115,7 @@ void	send_min(t_info *push);
 
 /*
 **  Chunks algorithm
-** in file  chunk.c
+** in file chunk.c
 */
 void	algorithm_size_chunkcalculator(t_info *push);
 void	algorithm_createchuncks(t_info *push);
@@ -133,23 +127,9 @@ void	algorithm_chunk(t_info *push);
 ** in file algorithm_utils.c
 */
 
-void    normalization(t_info *push);
-bool    ismin_stacka(t_info *push, int min, int init);
-int	algorithm_b_shortesway2rotate(t_info *push, int num);
+void	normalization(t_info *push);
+bool	ismin_stacka(t_info *push, int min, int init);
+int		algorithm_b_shortesway2rotate(t_info *push, int num);
 void	algorithm_putnumbertop(t_info *push, int nbr);
 
-/*
-int		count_left(t_stack **node);
-int		count_right(t_stack **node);
-int		lstsize(t_stack **head);
-int		maximum(int n, ...);
-int		minimum(int n, ...);
-int		minimum2(int n, ...);
-void	data_subgroup(t_subg *sg, t_stack **head);
-void	send_subgroup(t_stack **heada, t_stack **headb, t_stack **mina);
-void	pre_sort(t_stack **heada, t_stack **headb);
-void	sort(t_stack **heada, t_stack **headb, int size);
-void	reverse(t_stack **heada, t_stack **headb, int mina);
-void	hide_min(t_stack **heada, t_subg *data);
-void	send_back(t_stack **heada, t_stack **headb);*/
 #endif

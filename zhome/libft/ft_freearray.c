@@ -6,15 +6,15 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 20:14:03 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 20:14:05 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:19:30 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_freearray(char **array)
+void	ft_freearray(char **array)
 {
-	int			i;
+	int	i;
 
 	if (array == NULL)
 		return ;

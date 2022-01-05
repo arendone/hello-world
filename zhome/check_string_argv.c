@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:13:52 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 20:09:41 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/04 22:38:11 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	atoi_push_swap(char *str, char **nums, t_info *push)
 		if (sign * n > INT_MAX || sign * n < INT_MIN)
 			error_exit(nums, push);
 	}
-	return ((int)(sign * n));
+	return (sign * n);
 }
 
 int	check_rep(t_info *push, int numb)
@@ -77,7 +77,7 @@ int	invalid_argv(char *argv, t_info *push, size_t i)
 	if (nu[i] == NULL)
 	{
 		ft_freearray(nu);
-		return (1);
+		return (0);
 	}
 	while (nu[i])
 	{

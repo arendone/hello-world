@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 21:24:43 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 21:33:48 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:32:54 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sa(t_info *push)
 	t_stack	*second;
 	int		first_num;
 
-	if (push->heada != NULL)
+	if ((push->heada != NULL) && (push->size_a > 1))
 	{
 		first = push->heada;
 		second = first->next;
@@ -45,7 +45,7 @@ void	sb(t_info *push)
 	t_stack	*second;
 	int		first_num;
 
-	if (push->headb != NULL)
+	if ((push->headb != NULL) && (push->size_b > 1))
 	{
 		first = push->headb;
 		second = first->next;
@@ -66,7 +66,7 @@ void	ss(t_info *push)
 	t_stack	*second;
 	int		first_num;
 
-	if (push->heada != NULL)
+	if ((push->heada != NULL) && (push->size_a > 1))
 	{
 		first = push->heada;
 		second = first->next;
@@ -74,7 +74,7 @@ void	ss(t_info *push)
 		first->num = second->num;
 		second->num = first_num;
 	}
-	if (push->headb != NULL)
+	if ((push->headb != NULL) && (push->size_b > 1))
 	{
 		first = push->headb;
 		second = first->next;

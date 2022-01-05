@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   chunk.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/04 16:58:46 by arendon-          #+#    #+#             */
+/*   Updated: 2022/01/04 16:59:11 by arendon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	algorithm_size_chunkcalculator(t_info *push)
@@ -16,7 +28,7 @@ void	algorithm_size_chunkcalculator(t_info *push)
 			res += 1;
 	}
 	push->size_chunk = res;
-    printf("chunk: %d", push->size_chunk);
+    //printf("chunk: %d", push->size_chunk);
 }
 
 void	algorithm_createchuncks(t_info *push)
@@ -58,7 +70,8 @@ void	algorithm_pushinorder(t_info *push)
 		i--;
 		if (push->swap == true)
 		{
-			if (push->size_b > 1 && push->headb->num < push->headb->next->num)
+			if ((push->size_b > 1)
+				&& ((push->headb->num) < (push->headb->next->num)))
 				ss(push);
 			else
 				sa(push);
@@ -71,9 +84,31 @@ void	algorithm_pushinorder(t_info *push)
 
 void	algorithm_chunk(t_info *push)
 {
+	//printf("\nstack A:\n");
+	//print_stack(&(push->heada));
+	//printf("\nstack B:\n");
+	//print_stack(&(push->headb));
+
 	normalization(push);
+
+	//printf("\nstack A:\n");
+	//print_stack(&(push->heada));
+	//printf("\nstack B:\n");
+	//print_stack(&(push->headb));
+
 	algorithm_createchuncks(push);
+
+	//printf("\nstack A:\n");
+	//print_stack(&(push->heada));
+	//printf("\nstack B:\n");
+	//print_stack(&(push->headb));
+
 	algorithm_pushinorder(push);
+
+	//printf("\nstack A:\n");
+	//print_stack(&(push->heada));
+	//printf("\nstack B:\n");
+	//print_stack(&(push->headb));
 	return ;
 }
 

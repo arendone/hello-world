@@ -1,42 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithm_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/04 16:41:40 by arendon-          #+#    #+#             */
+/*   Updated: 2022/01/04 16:42:01 by arendon-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void    normalization(t_info *push)
+void	normalization(t_info *push)
 {
-    int i;
-    t_stack *tmp;
+	int		i;
+	t_stack	*tmp;
 
-    i = 0;
-    tmp = push->heada;
-    while (i < (push->size_a))
-    {
-        if ((tmp->flag == 0) && ismin_stacka(push, tmp->num, 1))
-        {
-            tmp->num = i;
-            tmp->flag = 1;
-            i++;
-        }
-        tmp = tmp->next;
-    }
+	i = 0;
+	tmp = push->heada;
+	while (i < (push->size_a))
+	{
+		if ((tmp->flag == 0) && ismin_stacka(push, tmp->num, 1))
+		{
+			tmp->num = i;
+			tmp->flag = 1;
+			i++;
+		}
+		tmp = tmp->next;
+	}
 }
 
-
-bool    ismin_stacka(t_info *push, int min, int init)
+bool	ismin_stacka(t_info *push, int min, int init)
 {
-    int i;
-    t_stack *tmp;
+	int		i;
+	t_stack	*tmp;
 
-    i = 0;
-    tmp = push->heada;
-    while (i < (push->size_a))
-    {
-        if (init && (min > (tmp->num)) && (tmp->flag == 0))
-            return (false);
-        if (!init && (min > (tmp->num)))
-            return (false);
-        tmp = tmp->next;
-        i++;
-    }
-    return (true);
+	i = 0;
+	tmp = push->heada;
+	while (i < (push->size_a))
+	{
+		if (init && (min > (tmp->num)) && (tmp->flag == 0))
+			return (false);
+		if (!init && (min > (tmp->num)))
+			return (false);
+		tmp = tmp->next;
+		i++;
+	}
+	return (true);
 }
 
 int	algorithm_b_shortesway2rotate(t_info *push, int num)
@@ -50,13 +61,13 @@ int	algorithm_b_shortesway2rotate(t_info *push, int num)
 	{
 		if (tmp->num == num)
 		{
-            printf("valor del return :%d ,", i > (push->size_b / 2));
+            //printf("valor del return :%d ,", i > (push->size_b / 2));
 			return (i > (push->size_b / 2));
 		}
 		i++;
 		tmp = tmp->next;
 	}
-    printf("valor del return :%d ,", 1);
+    //printf("valor del return :%d ,", 1);
 	return (1);
 }
 

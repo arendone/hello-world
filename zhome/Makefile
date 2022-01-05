@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/23 01:57:49 by arendon-          #+#    #+#              #
-#    Updated: 2021/12/29 21:47:35 by arendon-         ###   ########.fr        #
+#    Updated: 2022/01/03 17:22:28 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,12 @@ SRCS=	check_string_argv.c \
 		main_pushswap.c \
 		operations_s.c \
 		operations_p.c \
+		operations_r.c \
+		operations_rr.c \
+		small_stack.c \
+		sort.c \
+		chunk.c \
+		algorithm_utils.c \
 		print_stack.c
 
 %.o: %.c

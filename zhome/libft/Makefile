@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 16:20:05 by arendon-          #+#    #+#              #
-#    Updated: 2021/12/29 20:15:56 by arendon-         ###   ########.fr        #
+#    Updated: 2022/01/04 16:21:09 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ fclean: clean
 
 re: fclean all
 
-#to use them you have to do make bonus#
 bonus:
 	gcc $(CFLAGS) -c $(BONUS)
 	ar -crs $(NAME) *.o 

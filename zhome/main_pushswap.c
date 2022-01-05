@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:44:13 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 21:49:07 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/04 17:57:39 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,48 +19,54 @@ int	main(int argc, char **argv)
 	int		i;
 	t_info	*push;
 
-	i = 1;
-	push = init_push();
-	if (push == NULL)
-		return (-1);
 	if (argc > 1)
 	{
+		i = 1;
+		push = init_push();
+		if (push == NULL)
+			return (-1);
 		while (argv[i] && i < argc)
 		{
 			if (invalid_argv(argv[i], push, 0))
 			{
 				free_push(push);
-				return (-1);
+				return (0);
 			}
 			i++;
 		}
-        //pre_sort(push);
-        //return (1);
+		//printf("\nstack A:\n");
+		//print_stack(&(push->heada));
+		//printf("\nstack B:\n");
+		//print_stack(&(push->headb));
+		
+		pre_sort(push);
+		
+		//printf("\nstack A:\n");
+		//print_stack(&(push->heada));
+		//printf("\nstack B:\n");
+		//print_stack(&(push->headb));
+		free_push(push);
+		//system("leaks push_swap");
+		//while (1);
+		return (0);
 	}
-    //else
-    //   return (-1);
-
-
-	printf("\nstack A:\n");
-	print_stack(&(push->heada));
-	printf("\nstack B:\n");
-	print_stack(&(push->headb));
-
-	//pre_sort(&heada, &headb);
-	//ss(push);
-	//pb(push);
-    //pb(push);
-    //rrr(push);
-    //rb(push);
-    //normalization(push);
-    pre_sort(push); //debe ir dentro del if arriba
-	printf("\nstack A:\n");
-	print_stack(&(push->heada));
-	printf("\nstack B:\n");
-	print_stack(&(push->headb));
-    printf("size A: %d, ", push->size_a);
-    printf("size B: %d. ", push->size_b);
-	free_push(push);
-	//system("leaks push_swap");
 	return (0);
 }
+
+	//printf("\nstack A:\n");
+	//print_stack(&(push->heada));
+	//printf("\nstack B:\n");
+	//print_stack(&(push->headb));
+//
+    //pre_sort(push); //debe ir dentro del if arriba
+	//
+	//printf("\nstack A:\n");
+	//print_stack(&(push->heada));
+	//printf("\nstack B:\n");
+	//print_stack(&(push->headb));
+    //printf("size A: %d, ", push->size_a);
+    //printf("size B: %d. ", push->size_b);
+	//free_push(push);
+	//system("leaks push_swap");
+	//return (0);
+//}

@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 20:29:45 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/22 19:52:35 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/04 16:52:18 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	pre_sort(t_info *push)
 {
 	int		size;
 
-    size =push->size_a;
+	size = push->size_a;
 	if (if_orden_a(push, size) == 0)
 	{
 		if (size == 2)
@@ -52,6 +52,6 @@ void	pre_sort(t_info *push)
 		else if (size == 5)
 			sort_five(push);
 		else
-            algorithm_chunk(push);
+			algorithm_chunk(push);
 	}
 }

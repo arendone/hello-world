@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 17:19:59 by arendon-          #+#    #+#             */
-/*   Updated: 2021/12/29 17:20:10 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/04 22:38:06 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error_exit(char **nums, t_info *push)
 	exit(1);
 }
 
-void	free_stack(t_stack *head)
+void	free_stack(t_stack *head, t_info *push)
 {
 	t_stack	*temp_node;
 	t_stack	*prev;
@@ -33,16 +33,18 @@ void	free_stack(t_stack *head)
 	{
 		temp_node = head->next;
 		free(head);
+		push->size_a--;
 		head = temp_node;
 	}
 	free(head);
+	push->size_a--;
 	head = NULL;
 }
 
 void	free_push(t_info *push)
 {
-	free_stack(push->heada);
-	free_stack(push->headb);
+	free_stack(push->heada, push);
+	free_stack(push->headb, push);
 	free(push);
 	push = NULL;
 }
