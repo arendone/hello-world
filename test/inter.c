@@ -4,7 +4,7 @@ int	main(int arguments, char **inter)
 {
 	int i;
 	int j;
-	int flag[255];
+	int flag[256];
 
 	if (arguments == 3)
 	{

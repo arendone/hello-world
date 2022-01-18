@@ -5,7 +5,7 @@ int main(int arguments, char **uni)
 {
 	int i;
 	int j;
-	int flag[255];
+	int flag[256];
 
 	i = 0;
 	if(arguments == 3)
