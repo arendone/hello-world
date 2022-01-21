@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 16:03:57 by arendon-          #+#    #+#              #
-#    Updated: 2022/01/14 17:59:45 by arendon-         ###   ########.fr        #
+#    Updated: 2022/01/21 12:23:45 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,20 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-OBJS	= $(patsubst %.c, %.o, $(SRCS))
+OBJ	= $(patsubst %.c, %.o, $(SRCS))
 
 SRCS=	main.c 
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
-	
+	$(CC) $(OBJ) -L ./mlx/ -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 clean:
-	rm -f $(NAME) $(OBJFILES)
-	rmdir obj
+	rm -f $(NAME) $(OBJ)
 
 .PHONY: clean
+
+#quiero agregar todos los .o en carpeta obj, no olvides 
+#cambiar tambien lo que hay en obj y el clean fclean
