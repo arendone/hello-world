@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:56:40 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/25 13:33:06 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:52:53 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "./libft/libft.h"
 # include <math.h>
 # include <stdio.h> //BORRAR
+# include <stdbool.h>
 
 typedef struct s_info{
 	void	*mlx;
