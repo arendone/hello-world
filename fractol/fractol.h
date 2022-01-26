@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:56:40 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/25 15:52:53 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/26 11:26:50 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,9 @@ void	plot_window(t_info *fr);
 
 /* file interaccion.c */
 int		deal_key(int key, t_info *fr);
+
+/* colors.c */
+int		create_trgb(int t, int r, int g, int b);
+int		add_shade(int color, float transp);
+int		colors(int n);
 #endif
