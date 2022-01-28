@@ -1,4 +1,19 @@
 #include "ft_printf.h"
+#include <limits.h>
+
+ /*
+static size_t	num_digits(int n, int base)
+{
+	size_t	digits;
+
+	digits = 1;
+	while (n / base)
+	{
+		digits++;
+		n /= base;
+	}
+	return (digits);
+}*/
 
 static int printf_s(char *s)
 {
@@ -20,71 +35,49 @@ static int printf_s(char *s)
 
 }
 
-static int printf_d(int d, int reset)
+static void printf_d(int d, int *ret)
 {
-	static int ret;
 	char nbr;
 
-	if (reset == 1)
+	if (d == -INT_MIN)
 	{
-		ret = 0;
-	}
-	
-	if (d == -2147483648)
-	{
-		ret += write(1, "-2147483648", 11 );
-		return ret;
+		*ret += write(1, "-2147483648", 11 );
+		return ;
 	}
 	if ( d < 0)
 	{
-		ret += write(1, "-", 1);
+		*ret += write(1, "-", 1);
 		d *= (-1);
 	}
 	if( d / 10)
-		printf_d(d/10, 0);
-	nbr = '0' +  d % 10;
-	ret += write(1, &nbr, 1);
-	return ret;
+		printf_d(d/10, ret);
+	nbr = '0' + d % 10;
+	*ret += write(1, &nbr, 1);
+	return ;
 }
 
-static int printf_x(unsigned int x, int reset)
+static void printf_x(unsigned int x, int *ret)
 {
-	static int ret;
-	char c;
+	char *base = "0123456789abcdef";
 
-	if (reset == 1)
+	if(x > 15)
 	{
-		ret = 0;
+		printf_x(x / 16, ret);
+		x = x % 16;
 	}
-	//more checks
-	if (x == 0)
-		return (write(1, "0", 1));
-	if (x / 16)
-		printf_x( x / 16, 0);
-	if ((x % 16) > 9)
-		c = 'a' + (x % 16) - 10;
-	else
-		c = '0' + (x % 16); 
-	ret += write(1, &c, 1);
-	return ret;
+	*ret += write(1, &base[x], 1);
 }
 
-static int printf_p(unsigned long ptr, int reset)
+static void printf_p(unsigned long ptr, int *ret)
 {
-	static int ret;
-	char c;
+	char *base = "0123456789abcdef";
 
-	if (reset)
-		ret = 0;	
-	
-	if (ptr / 16)
-		printf_p(ptr / 16, 0);
-	if ( ptr % 16 > 9)
-		c = 'a' + (ptr % 16) - 10;
-	else
-		c = '0' + (ptr % 16);
-	ret += write (1, &c, 1);
-	return (ret);
+	if(ptr > 15)
+	{
+		printf_p(ptr / 16, ret);
+		ptr = ptr % 16;
+	}
+	*ret += write(1, &base[ptr], 1);
 }
 
 int ft_printf(const char *fmt, ...)
@@ -122,14 +115,18 @@ int ft_printf(const char *fmt, ...)
 			}
 			if(fmt[i] == 'd' || fmt[i] == 'i')
 			{
-				d = va_arg(ap, int);			
-				ret += printf_d(d, 1);
+				d = va_arg(ap, int);
+				//if (d < 0)
+				//	ret++;
+				//ret += num_digits(d, 10);			
+				printf_d(d, &ret);
 			}
 
 			if(fmt[i] == 'x')
 			{
 				x = va_arg(ap, unsigned int);
-				ret += printf_x(x, 1);
+				//ret += num_digits(x, 16);
+				printf_x(x, &ret);
 			}
 			if(fmt[i] == 'p')
 			{
@@ -139,7 +136,8 @@ int ft_printf(const char *fmt, ...)
 				else
 				{
 					ret += write(1, "0x", 2);
-					ret += printf_p(ptr, 1);					
+					//ret += 12;
+					printf_p(ptr, &ret);
 				}				
 			}
 			if(fmt[i] == '%')

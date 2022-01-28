@@ -6,13 +6,13 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 19:08:33 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/26 19:37:23 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/27 10:34:43 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <fcntl.h>
+//#include <stdio.h>
+//#include <fcntl.h>
 
 int	main(void)
 {

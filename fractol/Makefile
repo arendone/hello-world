@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 16:03:57 by arendon-          #+#    #+#              #
-#    Updated: 2022/01/26 11:27:00 by arendon-         ###   ########.fr        #
+#    Updated: 2022/01/27 19:44:10 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror
 
 OBJ	= $(patsubst %.c, %.o, $(SRCS))
 
-SRCS=	main.c interaction.c colors.c
+SRCS=	main.c interaction.c colors.c mandelbrot.c
 
 $(NAME): libft/libft.a $(OBJ)
 	$(CC) $(OBJ) -Llibft -lft -L ./mlx/ -lmlx -framework OpenGL -framework AppKit -o $(NAME)

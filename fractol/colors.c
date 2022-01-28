@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:28:56 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/26 12:42:09 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:20:12 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	colors(int n)
 		return (0x00000000);
 }
 
-/*rosa y verde psicodelico
-int	colors(int n)
+//rosa y verde psicodelico
+/*int	colors(int n)
 {
 	if (n < 4)
 		return (add_shade(0x00DF00FF, (n * 0.10)));
@@ -93,8 +93,8 @@ int	colors(int n)
 		return (0x00000000);
 }*/
 
-/* tonos lila-morado-centro blanco
-int	colors(int n)
+// tonos lila-morado-centro blanco
+/*int	colors(int n)
 {
 	if (n < 4)
 		return (add_shade(0x009400D3, (n * 0.25)));

@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:44:16 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/25 13:33:23 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/01/27 19:20:35 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ int	deal_key(int key, t_info *fr)
 	if (key == 53 || key == 12)
 		exit(0);
 	else if (key == 46)
-		printf("mandelbrot %lu", sizeof(fr));
+		//printf("mandelbrot %lu", sizeof(fr));
+		plot_window2(fr);
 		//cuadrado(fr, 600, 10, 0x0000FF00); SEGMENTATION FAUL
-	else if (key == 38)
-		printf("julia");
+	//else if (key == 38)
+		//printf("julia");
 		//cuadrado(fr, 600, 100, 0x000000FF);
+	plot_window(fr);
 	return (0);
 }
 /*
