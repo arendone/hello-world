@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:01:25 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/01 18:23:59 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/01 20:28:52 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	main(int arg, char **str)
 	{
 		init_window(fr);
 		mlx_key_hook(fr->win, deal_key, fr);
+		mlx_mouse_hook(fr->win, mouse_event, fr);
+		//int	mouse_event(int button, int x, int y, void *fr)
 		mlx_loop(fr->mlx);
 	}
 	else

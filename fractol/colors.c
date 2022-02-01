@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 11:28:56 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/31 20:52:28 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/01 21:03:46 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,15 @@ int	color_psycho(int n)
 	else if (n < 12)
 		return (add_shade(0x00DF00FF, ((n / 3) * 0.05)));
 	else if (n < 16)
-		return (add_shade(0x0021FF00, ((n / 4) * 0.05)));
+		return (add_shade(0x008231FF, ((n / 4) * 0.05)));
 	else if (n < 20)
-		return (add_shade(0x00DF00FF, ((n / 5) * 0.10)));
+		return (add_shade(0x0031FF82, ((n / 5) * 0.10)));
 	else if (n < 24)
 		return (add_shade(0x0021FF00, ((n / 6) * 0.10)));
 	else if (n < 28)
 		return (add_shade(0x00DF00FF, ((n / 7) * 0.05)));
 	else if (n < 32)
-		return (add_shade(0x0021FF00, ((n / 8) * 0.05)));
+		return (add_shade(0x008231FF, ((n / 8) * 0.05)));
 	else
 		return (0x00000000);
 }
@@ -113,6 +113,24 @@ int	color_lila(int n)
 		return (add_shade(0x00000000, ((n / 8) * 0.25)));
 	else
 		return (0x00000000);
+}
+
+void	paint_imagen_black(t_info *fr)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < fr->img_width)
+	{
+		j = 0;
+		while (j < fr->img_height)
+		{
+			my_mlx_pixel_put(fr, i, j, 0x00000000);
+			j++;
+		}
+		i++;
+	}
 }
 
 /*int	create_trgb(int t, int r, int g, int b)

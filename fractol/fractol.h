@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:56:40 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/01 18:52:15 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/01 21:04:03 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ int		deal_key(int key, t_info *fr);
 void	panning_x(t_info *fr, double p);
 void	panning_y(t_info *fr, double p);
 void	zoom(t_info *fr, double p);
-void	paint_imagen_black(t_info *fr); //no debe estar aqui
-
+int		mouse_event(int button, int x, int y, void *fr);
 
 /* colors.c */
 int		add_shade(int color, float transp);
 int		color_fuego(int n);
 int		color_psycho(int n);
 int		color_lila(int n);
+void	paint_imagen_black(t_info *fr);
 
 /*mandelbrot.c */
 void	init_mandelbrot(t_info *fr);

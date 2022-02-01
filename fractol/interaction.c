@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:44:16 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/01 18:34:00 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/01 21:03:29 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,25 @@ int	deal_key(int key, t_info *fr)
 		panning_y(fr, -0.05);
 	else if (key == 126)
 		panning_y(fr, 0.05);
-	//else if (key == 6)
-	//	zoom(fr, 0.8);
-	//else if (key == 7)
-	//	zoom(fr, 1.2);
+	else if (key == 6)
+		zoom(fr, 0.833);
+	else if (key == 7)
+		zoom(fr, 1.2);
+	plot_window(fr);
+	return (0);
+}
+
+int	mouse_event(int button, int x, int y, void *fr)
+{
+	printf("x: %i y: %i button: %i\n", x, y, button);
+	if (button == 4)
+		panning_y(fr, -0.1);
+	else if (button == 5)
+		panning_y(fr, 0.1);
+	else if (button == 6)
+		panning_x(fr, 0.1);
+	else if (button == 7)
+		panning_x(fr, -0.1);
 	plot_window(fr);
 	return (0);
 }
@@ -53,6 +68,13 @@ void	panning_x(t_info *fr, double p)
 	fr->rmax = fr->rmax + p;
 }
 
+/* despues de usarla mucho deja de moverse pero hace un efecto de brillo
+void	panning_x(t_info *fr, double p)
+{
+	fr->rmin = fr->rmin + (p * fr->rmax);
+	fr->rmax = fr->rmax + (p * fr->rmax);
+} */
+
 void	panning_y(t_info *fr, double p)
 {
 	fr->imin = fr->imin + p;
@@ -61,25 +83,10 @@ void	panning_y(t_info *fr, double p)
 
 void	zoom(t_info *fr, double p)
 {
-	
-}
-
-void	paint_imagen_black(t_info *fr)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < fr->img_width)
-	{
-		j = 0;
-		while (j < fr->img_height)
-		{
-			my_mlx_pixel_put(fr, i, j, 0x00000000);
-			j++;
-		}
-		i++;
-	}
+	fr->rmin = fr->rmin * p;
+	fr->rmax = fr->rmax * p;
+	fr->imin = fr->imin * p;
+	fr->imax = fr->imax * p;
 }
 
 /*
