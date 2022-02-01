@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 16:35:45 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/31 20:54:31 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/01 18:10:39 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int	init_t_info(t_info *fr, int arg, char **str)
 	fr->color = 'f';
 	fr->K_re = .353;
 	fr->K_im = .288;
-
 	ret = -1;
 	if (arg > 1)
 		ret = control_name(&str[1][0], fr);
 	if (arg > 2 && ret == 0)
 		ret = control_color(&str[2][0], fr);
+	else
+		fr->color = 'f';
 	if (arg > 3)
 		ret = control_k(&str[3][0], fr, 'r');
 	if (arg > 4)
@@ -119,11 +120,9 @@ int	control_k(char *param, t_info *fr, char t)
 		else
 			return (-1);
 	}
-	printf("K_RE = %f, K_RE = %f", fr->K_re, fr->K_im);
 	if (t == 'r')
 		fr->K_re = val;
 	if (t == 'i')
 		fr->K_im = val;
-	printf("K_RE = %f, K_RE = %f", fr->K_re, fr->K_im);
 	return (0);
 }

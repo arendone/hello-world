@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:56:40 by arendon-          #+#    #+#             */
-/*   Updated: 2022/01/31 19:53:37 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/01 18:52:15 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,18 @@
 # include <stdbool.h>
 # include <stdarg.h>
 
+typedef struct s_pan
+{
+	int		x;
+	int		y;
+}	t_pan;
+
 typedef struct s_info{
 	//init window
 	void		*mlx;
 	void		*win;
-	//int			w_width; //no se si las necesito
-	//int			w_height;
+	//int			w_wid; //no se si las necesito
+	//int			w_hei;
 	void		*img;
 	int			img_width;
 	int			img_height;
@@ -49,6 +55,8 @@ typedef struct s_info{
 	char		color;
 	double		K_re;
 	double		K_im;
+	//padding
+	//int			init;
 }	t_info;
 
 /*playing with minilibx, files: analitic_geometry.c colors.c*/
@@ -60,12 +68,16 @@ typedef struct s_info{
 /* file main.c */
 void	my_mlx_pixel_put(t_info *fr, int x, int y, int color);
 void	init_window(t_info *fr);
+void	plot_window_firsttime(t_info *fr);
 void	plot_window(t_info *fr);
+int		print_error(void); // no aqui
 
 /* file interaccion.c */
 int		deal_key(int key, t_info *fr);
-void	paint_imagen_black(t_info *fr);//no debe estar aqui
-void	reinit_mandelbrot(t_info *fr); //no debe estar aqui
+void	panning_x(t_info *fr, double p);
+void	panning_y(t_info *fr, double p);
+void	zoom(t_info *fr, double p);
+void	paint_imagen_black(t_info *fr); //no debe estar aqui
 
 
 /* colors.c */
@@ -75,8 +87,12 @@ int		color_psycho(int n);
 int		color_lila(int n);
 
 /*mandelbrot.c */
+void	init_mandelbrot(t_info *fr);
 void	mandelbrot(t_info *fr);
 void	color_point_mandelbrot(t_info *fr, int x, int y, int n);
+
+/*julia.c */
+void	init_julia(t_info *fr);
 void	julia(t_info *fr);
 void	color_point_julia(t_info *fr, int x, int y, int n);
 
