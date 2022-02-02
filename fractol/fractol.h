@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:56:40 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/01 21:04:03 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/02 12:27:19 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # include <stdbool.h>
 # include <stdarg.h>
 
-typedef struct s_pan
+typedef struct s_point
 {
 	int		x;
 	int		y;
-}	t_pan;
+}	t_point;
 
 typedef struct s_info{
 	//init window
@@ -95,6 +95,12 @@ void	color_point_mandelbrot(t_info *fr, int x, int y, int n);
 void	init_julia(t_info *fr);
 void	julia(t_info *fr);
 void	color_point_julia(t_info *fr, int x, int y, int n);
+
+/*tree.c */
+void	color_point_tree(t_info *fr, int x, int y, int times);
+void	draw_line(t_info *fr, t_point p1, t_point p2, int times);
+void	pythagorasTree(t_info *fr, t_point a, t_point b, int times);
+void	init_tree(t_info *fr);
 
 /* ft_atof.c */ //agregar a libft!!!!!!!!
 double	ft_atof(char *str);

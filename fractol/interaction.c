@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:44:16 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/01 21:03:29 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/02 13:08:33 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ int	deal_key(int key, t_info *fr)
 		init_mandelbrot(fr);
 	else if (key == 38)
 		init_julia(fr);
+	else if (key == 17)
+	{
+		fr->Maxint = 1;
+		init_tree(fr);
+	}
+	else if (key == 69 && fr->name_fr == 't')
+	{
+		fr->Maxint++;
+		init_tree(fr);
+	}
+	else if (key == 78 && fr->name_fr == 't')
+	{
+		fr->Maxint--;
+		init_tree(fr);
+	}
 	else if (key == 123)
 		panning_x(fr, -0.05);
 	else if (key == 124)

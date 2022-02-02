@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:01:25 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/01 20:28:52 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/02 13:06:16 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ void	plot_window_firsttime(t_info *fr)
 		init_mandelbrot(fr);
 	if (fr->name_fr == 'j')
 		init_julia(fr);
-	//if (fr->name_fr == 't')
-		//tree(fr);
+	if (fr->name_fr == 't')
+	{
+		fr->Maxint = 1;
+		init_tree(fr);
+	}
 	mlx_put_image_to_window(fr->mlx, fr->win, fr->img, 0, 0);
 }
 
@@ -58,8 +61,8 @@ void	plot_window(t_info *fr)
 		mandelbrot(fr);
 	if (fr->name_fr == 'j')
 		julia(fr);
-	//if (fr->name_fr == 't')
-		//tree(fr);
+	if (fr->name_fr == 't')
+		init_tree(fr);
 	mlx_put_image_to_window(fr->mlx, fr->win, fr->img, 0, 0);
 }
 
@@ -72,7 +75,9 @@ int	print_error(void)
 	\n\033[0;33m -Set of colors : fuego, psycho, lila\
 	\n\033[0;34m -Value of K_re (Only for fractal Julia)\
 	\n\033[0;35m -Value of K_im (Only for fractal Julia)\
-	\n\033[0;37m*Only name_of_fractal is essential :)\n\n");
+	\n\033[0;37m*Only name_of_fractal is essential :)\
+	\n\033[0;37m* In mandelbrot and julia you can zoom in 'Z' & zoom out 'X' or shift with the arrows :)\
+	\n\033[0;37m* The tree is interactive with '+' && '-'  :)\n\n");
 	return (EXIT_FAILURE);
 }
 
