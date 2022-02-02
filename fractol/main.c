@@ -6,13 +6,13 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:01:25 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/02 13:06:16 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:56:07 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-//gcc main.c -L ./mlx/ -lmlx -framework OpenGL -framework AppKit -o magic 
+/*gcc main.c -L ./mlx/ -lmlx -framework OpenGL -framework AppKit -o magic */
 
 void	my_mlx_pixel_put(t_info *fr, int x, int y, int color)
 {
@@ -26,14 +26,16 @@ void	my_mlx_pixel_put(t_info *fr, int x, int y, int color)
 void	init_window(t_info *fr)
 {
 	fr->mlx = mlx_init();
-	fr->img_width = 1024;//(fr->w_width);
-	fr->img_height = 768;//(fr->w_height);
+	fr->img_width = 1024;
+	fr->img_height = 768;
 	fr->win = mlx_new_window(fr->mlx, fr->img_width,
 			fr->img_height, "Fract-ol");
 	fr->img = mlx_new_image(fr->mlx, fr->img_width,
 			fr->img_height);
 	fr->addr = mlx_get_data_addr(fr->img, &fr->bits_per_pixel,
 			&fr->line_length, &fr->endian);
+	fr->point.x = fr->img_width / 2;
+	fr->point.y = fr->img_height / 2;
 	plot_window_firsttime(fr);
 }
 
@@ -76,7 +78,7 @@ int	print_error(void)
 	\n\033[0;34m -Value of K_re (Only for fractal Julia)\
 	\n\033[0;35m -Value of K_im (Only for fractal Julia)\
 	\n\033[0;37m*Only name_of_fractal is essential :)\
-	\n\033[0;37m* In mandelbrot and julia you can zoom in 'Z' & zoom out 'X' or shift with the arrows :)\
+	\n\033[0;37m* In mandelbrot and julia you can zoom in 'Z' & zoom out 'X' or move with the arrows :)\
 	\n\033[0;37m* The tree is interactive with '+' && '-'  :)\n\n");
 	return (EXIT_FAILURE);
 }
@@ -95,7 +97,6 @@ int	main(int arg, char **str)
 		init_window(fr);
 		mlx_key_hook(fr->win, deal_key, fr);
 		mlx_mouse_hook(fr->win, mouse_event, fr);
-		//int	mouse_event(int button, int x, int y, void *fr)
 		mlx_loop(fr->mlx);
 	}
 	else

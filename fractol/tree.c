@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/01 21:06:16 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/02 12:56:20 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/02 15:58:56 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,35 +88,3 @@ void	init_tree(t_info *fr)
 	fr->name_fr = 't';
 	pythagorasTree(fr, a, b, fr->Maxint);
 }
-
-/*int main()
-{
-	t_info	*fr;
-	int		ret;
-	t_point	p1;
-	t_point	p2;
-
-	p1.x = 500;
-	p1.y = 600;
-	p2.x = 600;
-	p2.y = 600;
-	
-
-	fr = (t_info *)malloc(sizeof(t_info));
-	if (!fr)
-		return (-1);
-	fr->mlx = mlx_init();
-	fr->img_width = 1024;
-	fr->img_height = 768;
-	fr->win = mlx_new_window(fr->mlx, fr->img_width,
-			fr->img_height, "Fract-ol");
-	fr->img = mlx_new_image(fr->mlx, fr->img_width,
-			fr->img_height);
-	fr->addr = mlx_get_data_addr(fr->img, &fr->bits_per_pixel,
-			&fr->line_length, &fr->endian);
-	init_tree(fr);
-
-	mlx_put_image_to_window(fr->mlx, fr->win, fr->img, 0, 0);
-	mlx_loop(fr->mlx);
-}*/
-

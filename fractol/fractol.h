@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 14:56:40 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/02 12:27:19 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/02 21:09:55 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ typedef struct s_point
 	int		y;
 }	t_point;
 
-typedef struct s_info{
-	//init window
+typedef struct s_info
+{
+	// init window
 	void		*mlx;
 	void		*win;
-	//int			w_wid; //no se si las necesito
-	//int			w_hei;
 	void		*img;
 	int			img_width;
 	int			img_height;
@@ -55,8 +54,8 @@ typedef struct s_info{
 	char		color;
 	double		K_re;
 	double		K_im;
-	//padding
-	//int			init;
+	// zoom
+	t_point		point;
 }	t_info;
 
 /*playing with minilibx, files: analitic_geometry.c colors.c*/
@@ -74,10 +73,15 @@ int		print_error(void); // no aqui
 
 /* file interaccion.c */
 int		deal_key(int key, t_info *fr);
+int		deal_key2(int key, t_info *fr);
 void	panning_x(t_info *fr, double p);
 void	panning_y(t_info *fr, double p);
 void	zoom(t_info *fr, double p);
-int		mouse_event(int button, int x, int y, void *fr);
+int		mouse_event(int button, int x, int y, t_info *fr);
+
+//double	inter_pol(double start, double end, double inter);
+//void	ft_zoom(t_info *fr, int x, int y);
+//void	ft_dezoom(t_info *fr, int x, int y);
 
 /* colors.c */
 int		add_shade(int color, float transp);
@@ -89,11 +93,13 @@ void	paint_imagen_black(t_info *fr);
 /*mandelbrot.c */
 void	init_mandelbrot(t_info *fr);
 void	mandelbrot(t_info *fr);
+void	mandelbrot2(t_info *fr, t_point p, double c_re, double c_im);
 void	color_point_mandelbrot(t_info *fr, int x, int y, int n);
 
 /*julia.c */
 void	init_julia(t_info *fr);
 void	julia(t_info *fr);
+void	julia2(t_info *fr, int x, int y);
 void	color_point_julia(t_info *fr, int x, int y, int n);
 
 /*tree.c */
