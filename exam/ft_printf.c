@@ -49,7 +49,7 @@ static void printf_d(int d, int *ret)
 		*ret += write(1, "-", 1);
 		d *= (-1);
 	}
-	if( d / 10)
+	if ( d / 10)
 		printf_d(d/10, ret);
 	nbr = '0' + d % 10;
 	*ret += write(1, &nbr, 1);
