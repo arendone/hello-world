@@ -5,7 +5,8 @@
 
 void	handler(int num)
 {
-	signal(SIGINT, handler); // si no lo pongo lo hace una vez y luego regresa el la sign con su funcion por defaut
+	signal(SIGINT, handler); // si no lo pongo lo hace una vez 
+	//y luego regresa el la sign con su funcion por defaut, creo que deberia usar otra vez sigaction
 	write(STDOUT_FILENO, "I won't die!\n", 13); // Hay que usar write o ft_printf pero NO printf >>>
 }
 
