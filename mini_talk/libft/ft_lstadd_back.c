@@ -6,24 +6,24 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 14:14:23 by arendon-          #+#    #+#             */
-/*   Updated: 2021/10/19 17:48:42 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:51:04 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *newe)
 {
 	t_list		*last;
 
-	if (new == NULL)
+	if (newe == NULL)
 		return ;
 	if (*lst == NULL)
 	{
-		*lst = new;
-		new->next = NULL;
+		*lst = newe;
+		newe->next = NULL;
 		return ;
 	}
 	last = ft_lstlast(*lst);
-	last->next = new;
+	last->next = newe;
 }

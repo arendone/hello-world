@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 16:19:59 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/03 16:55:45 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:09:33 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,28 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }t_list;
+
+typedef struct s_print
+{
+	va_list	args;
+	bool	dash;
+	bool	zero;
+	bool	number;
+	bool	space;
+	bool	sign;
+	bool	width;
+	size_t	width_details;
+	bool	precision;
+	size_t	precision_details;
+	int		len_total;
+}t_print;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -59,10 +75,10 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 t_list	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *newe);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *newe);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
@@ -72,5 +88,27 @@ size_t	ft_minimum_sizet(size_t n, ...);
 void	ft_putnstr_fd(char *s, int fd, int n);
 void	ft_freearray(char **array);
 double	ft_atof(char *str);
+
+/* ft_printf funtions */
+int		ft_printf(const char *fmt, ...);
+t_print	*ft_pf_spec_init(t_print *t_spec);
+t_print	*ft_pf_spec_reset(t_print *t_spec);
+void	*ft_pf_flags_characters(const char *format, int i, t_print *t_spec);
+int		ft_pf_print_format(const char *format, int i, t_print *t_spec);
+int		ft_pf_check_conversion(const char *format, int i, t_print *t_spec);
+int		ft_pf_flag_precision(const char *format, int i, t_print *t_spec);
+int		ft_pf_flag_width(const char *format, int i, t_print *t_spec);
+int		ft_pf_print_char(int i, t_print *t_spec);
+int		ft_pf_print_str(int i, t_print *t_spec);
+int		ft_pf_print_percentage(int i, t_print *t_spec);
+int		ft_pf_print_d(int i, t_print *t_spec);
+int		ft_pf_print_unsigned(int i, t_print *t_spec);
+int		ft_pf_print_x(int i, t_print *t_spec);
+int		ft_pf_print_upperX(int i, t_print *t_spec);
+int		ft_pf_print_p(int i, t_print *t_spec);
+int		ft_pf_print_zeros(int zeros);
+int		ft_pf_print_spaces(int spaces);
+int		ft_pf_print_str_width(char *str, int len, t_print *t_spec);
+size_t	ft_pf_print_null(t_print *t_spec);
 
 #endif

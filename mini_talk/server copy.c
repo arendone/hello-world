@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:59:27 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/10 16:44:34 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/10 16:18:12 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,21 @@ void	handler(int sig)
 	static int	bit = 7;
 	static int	i = 0;
 
+	//calloc buf
+	//bit = 7;
+	//i = 0;
 	if (sig == SIGUSR1)
 	{
+		//write(1, "1\n", 2);
+		//ft_printf("%c", &buf[i]);
 		buf[i] |= (1 << bit);
+		//ft_printf("%d, %c\n", buf[i], &buf[i]);
 	}
-	if (sig == SIGUSR2)
+		
+	if (sig == SIGUSR2)// no hace nada
 	{
 		buf[i] &= ~(1 << bit);
+		//ft_printf("%d, %c\n", buf[i], &buf[i]);
 	}
 	bit --;
 	if (bit == -1)
@@ -46,6 +54,7 @@ void	handler(int sig)
 		else
 		{
 			i++;
+			//ft_printf("i vale %d\n", i);
 		}
 	}
 }
@@ -54,17 +63,24 @@ int	main(void)
 {
 	pid_t				pid;
 	struct sigaction	sa;
+	//sigset_t			s;
 
 	pid = getpid();
 	ft_printf("server pid: %d\n", pid);
 	sa.sa_handler = handler;
+	//sigemptyset(&s);
+	//sigaddset(&s, SIGINT);
 	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
+	//sigprocmask(SIG_BLOCK, &s, NULL);
+	sa.sa_flags = 0; //SA_RESTART;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
 	{
 		pause();
+		//sigaction(SIGUSR1, &sa, NULL);
+		//sigaction(SIGUSR2, &sa, NULL);
 	}
+	//sigprocmask(SIG_UNBLOCK, &s, NULL);
 	return (0);
 }

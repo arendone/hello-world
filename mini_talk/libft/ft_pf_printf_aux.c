@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_pf_printf_aux.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/15 18:55:29 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/10 14:50:48 by arendon-         ###   ########.fr       */
+/*   Created: 2021/11/01 17:16:20 by marvin            #+#    #+#             */
+/*   Updated: 2022/02/10 13:35:33 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *newe)
+int	ft_pf_print_zeros(int zeros)
 {
-	if (newe != NULL)
+	int	j;
+
+	j = 0;
+	while (j < zeros)
 	{
-		newe->next = *lst;
-		*lst = newe;
+		ft_putchar_fd('0', 1);
+		j++;
 	}
+	return (zeros);
+}
+
+int	ft_pf_print_spaces(int spaces)
+{
+	int	j;
+
+	j = 0;
+	while (j < spaces)
+	{
+		ft_putchar_fd(' ', 1);
+		j++;
+	}
+	return (spaces);
 }

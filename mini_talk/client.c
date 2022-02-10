@@ -6,14 +6,14 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:24:01 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/09 18:54:54 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/10 16:39:09 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>    /* standard unix functions, like getpid()         */
 #include <signal.h>    /* signal name macros, and the signal() prototype */
 #include <stdio.h>
-#include "./libft/libft.h"
+#include "./libft/includes/libft.h" //puedo agregar ruta en el makefile.. ver makefile de libft
 
 //cambiarlo por tu fr_printf
 
@@ -60,12 +60,10 @@ static void	send_char(pid_t pid_server, char c)
 	{
 		if (c & (1 << bit))
 		{
-			write(1, "1\n", 2);
 			kill(pid_server, SIGUSR1);
 		}
 		else
 		{
-			write(1, "0\n", 2);
 			kill(pid_server, SIGUSR2);
 		}
 		usleep(100);
@@ -90,15 +88,21 @@ int	main(int argc, char **argv)
 {
 	pid_t	pid_client;
 	int		pid_server;
+	char	*pid_c;
+	char	*pid_f;
+	char	*pid_str;
 
 	pid_client = getpid();
-	printf("client pid: %d\n", pid_client);
+	ft_printf("pid client: %d", pid_client);
 	if (argc < 3)
 		return (-1);
+	pid_c = ft_itoa(pid_client);
+	pid_f = ft_strjoin(pid_c, "$");
 	pid_server = ft_atoi(argv[1]);
-	printf("server pid: %d\n", pid_server);
-	send_str(pid_server, argv[2]);
-	//usleep(15);
-	//kill(pid_server, SIGINT);
+	pid_str = ft_strjoin(pid_f, argv[2]);
+	send_str(pid_server, pid_str);
+	free(pid_c);
+	free(pid_f);
+	free(pid_str);
 	return (0);
 }
