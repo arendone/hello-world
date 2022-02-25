@@ -6,48 +6,35 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/09 11:39:33 by arendon-          #+#    #+#              #
-#    Updated: 2022/02/11 16:41:14 by arendon-         ###   ########.fr        #
+#    Updated: 2022/02/25 18:11:29 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME1 = server
-NAME2 = client
+NAME = philo
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
-FT = -Ilibft -Llibft -lft
+FLAGS = -Wall -Wextra -Werror -pthread
 
-OBJS1 = $(patsubst %.c, %.o, $(SRCS1))
-OBJS2 = $(patsubst %.c, %.o, $(SRCS2))
+OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-SRCS1 = server.c 
-SRCS2 = client.c
+SRCS = philosophers.c read_arg.c sit_philosophers.c
 
-FT_PATH = ./libft/
+all: $(NAME)
 
-all: $(NAME1) $(NAME2)
-
-$(NAME1): libft/libft.a $(OBJS1)
-	$(CC) $(OBJS1) ${FT} -o $(NAME1)
-
-$(NAME2): libft/libft.a $(OBJS2)
-	$(CC) $(OBJS2) ${FT} -o $(NAME2)
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS1) $(OBJS2)
-	${MAKE} -C ${FT_PATH} clean
+	rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME1) $(NAME2)
-	${MAKE} -C ${FT_PATH} fclean
+	rm -f $(NAME)
 
 re: fclean all
 
-libft/libft.a:
-	${MAKE} -C ${FT_PATH}
 
-.PHONY: all clean fclean re libft
+.PHONY: all clean fclean re

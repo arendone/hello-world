@@ -6,13 +6,13 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 13:59:27 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/11 16:41:22 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/11 15:30:03 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <signal.h>
-#include "./libft/includes/libft.h"
+#include "./libft/includes/libft.h" //puedo agregar ruta en el makefile.. ver makefile de libft
 
 /*
 30    SIGUSR1      terminate process    User defined signal 1
@@ -22,11 +22,9 @@
 int	g_pid = 0;
 
 typedef struct s_hand{
-	char	buf;
-	int		bit;
-	int		flag;
-	int		size_pib;
-	int		buf_del;
+	int	bit;
+	int	i;
+	int	size_pib;
 }	t_hand;
 
 void	get_pid(char *str, int *pid)
@@ -50,58 +48,62 @@ void	get_pid(char *str, int *pid)
 	free(str_pid);
 }
 
-void static	reset_bit(char *str_pid, t_hand *hand)
+void static	cleanbuf(char *buf, t_hand *hand)
+{
+	ft_printf("%s", &buf[hand->size_pib]);
+	hand->i = 0;
+	ft_bzero(buf, 49);
+	hand->size_pib = 0;
+}
+
+void static	reset_bit(char *buf, t_hand *hand)
 {
 	hand->bit = 7;
-	if (hand->flag == 0)
+	if (buf[hand->i] == '$' && hand->size_pib == 0)
 	{
-		str_pid[hand->size_pib] = hand->buf;
-		hand->size_pib++;
+		get_pid(buf, &g_pid);
+		hand->size_pib = hand->i + 1;
 	}
-	if (hand->buf == '$' && hand->flag == 0)
+	if (buf[hand->i] == '\0')
 	{
-		get_pid(str_pid, &g_pid);
-		hand->flag = 1;
-	}
-	if (hand->buf == '$' && hand->flag == 1)
-		hand->buf_del++;
-	if (hand->buf != '$' && hand->flag == 1)
-		ft_printf("%c", hand->buf);
-	else if (hand->buf == '$' && hand->buf_del > 1)
-		ft_printf("%c", hand->buf);
-	if (hand->buf == '\0')
-	{
+		ft_printf("%s", &buf[hand->size_pib]);
 		kill(g_pid, SIGUSR1);
 		g_pid = 0;
+		hand->i = 0;
+		free(buf);
 	}
-	hand->buf = '\0';
+	else
+	{
+		(hand->i)++;
+	}
 }
 
 static void	handler(int sig)
 {
+	static char		*buf;
 	static t_hand	hand;
-	static char		*str_pid;
 
 	if (g_pid == 0)
 	{
-		str_pid = (char *)ft_calloc(12, 1);
-		if (str_pid == NULL)
+		buf = (char *)ft_calloc(50, 1);
+		if (buf == NULL)
 		{
 			ft_printf("Calloc failed\n");
+			kill(g_pid, SIGUSR2);
 			exit (1);
 		}
 		hand.bit = 7;
-		hand.flag = 0;
+		hand.i = 0;
 		hand.size_pib = 0;
-		hand.buf_del = 0;
 		g_pid = 1;
-		hand.buf = '\0';
 	}
 	if (sig == SIGUSR1)
-		hand.buf |= (1 << hand.bit);
+		buf[hand.i] |= (1 << hand.bit);
 	hand.bit --;
+	if (hand.i == 48)
+		cleanbuf(buf, &hand);
 	if (hand.bit == -1)
-		reset_bit(str_pid, &hand);
+		reset_bit(buf, &hand);
 }
 
 int	main(void)

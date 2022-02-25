@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/20 16:20:05 by arendon-          #+#    #+#              #
-#    Updated: 2022/02/10 15:14:29 by arendon-         ###   ########.fr        #
+#    Updated: 2022/02/11 16:36:32 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ ft_pf_print_d.c ft_pf_printf_aux.c ft_pf_print_u.c ft_pf_checkconversion.c \
 ft_pf_print_x.c ft_pf_print_upperX.c ft_pf_print_p.c ft_printf.c \
 
 HDR_NAME= libft.h
-HDR= $(addprefix $(HDR_PATH)/,$(HDR_NAME))
+HDR = $(addprefix $(HDR_PATH)/,$(HDR_NAME))
 
 OBJ_NAME= $(SRC:.c=.o)
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
