@@ -6,7 +6,7 @@
 #    By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/09 11:39:33 by arendon-          #+#    #+#              #
-#    Updated: 2022/02/25 18:11:29 by arendon-         ###   ########.fr        #
+#    Updated: 2022/02/27 16:51:03 by arendon-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror -pthread
 
 OBJS = $(patsubst %.c, %.o, $(SRCS))
 
-SRCS = philosophers.c read_arg.c sit_philosophers.c
+SRCS = philosophers.c read_arg.c sit_philosophers.c utils.c exit.c routine.c
 
 all: $(NAME)
 

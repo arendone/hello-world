@@ -6,56 +6,58 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 17:43:10 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/25 19:09:20 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/27 17:00:24 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_info(t_info *info)
+/**
+ * @brief  create the philosophers and start the simulation
+ * @note
+ * @param ?
+ * @retval none?
+ */
+void	start_simulation()
 {
-	info->num_philo = 0;
-	info->time_die = 0;
-	info->time_eat = 0;
-	info->time_sleep = 0;
-	info->meals = 0;
-}
+	t_philo		**philos;
 
-void	start_simulation(t_info *info)
-{
-	t_philo		*set;
-	set = sit_philosophers(info);
-	if (set == NULL)
+	philos = sit_philosophers(true);
+	if (philos == NULL)
 	{
-		free(info);
-		printf("Fallo sit philosophers\n");
+		free_info();
+		printf("Failed create philosophers\n");
 		return ;
 	}
 	printf("Hola\n");
-	//usleep(1000000);
+	//usleep(10000000);
 	//printf("Hola2\n");
-	free(set);
-	free(info);
+	free_philos();
+	free_info();
 }
 
 int	main(int argc, char **argv)
 {
 	t_info		*info;
+	//t_philo		**philos;
 
-	info = malloc(sizeof(t_info));
+	info = NULL;
+	if (!(argc == 5 || argc == 6))
+		return (print_error());
+	info = set_info(argv);
 	if (info == NULL)
-	{
-		printf("Malloc failed\n");
-		return (1);
-	}
-	init_info(info);
-	if (read_arg(argc, argv, info) == 0)
-		start_simulation(info);
-	else
-	{
-		printf("Wrong arguments\n");
-		free(info);
-		return (1);
-	}
-	return (0);
+		return (EXIT_FAILURE);
+	//else
+	//{
+	//	philos = init_philos(true);
+	//	if (philos == NULL || philos[0] == NULL)
+	//	{
+	//		printf("Error while creating philosophers\n");
+	//		return (EXIT_FAILURE);
+	//	}
+	//	if (thread_creation(info, philos) == EXIT_FAILURE)
+	//		return (EXIT_FAILURE);
+	//}
+	start_simulation(); //cambiar
+	return (EXIT_SUCCESS);
 }
