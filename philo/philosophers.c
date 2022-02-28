@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 17:43:10 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/27 17:00:24 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:30:58 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,34 @@
  * @param ?
  * @retval none?
  */
-void	start_simulation()
-{
-	t_philo		**philos;
 
-	philos = sit_philosophers(true);
-	if (philos == NULL)
+
+void	print_ciclo(int num_philos)
+{
+	int	i;
+	int	j;
+	int cubiertos;
+
+	i = 0;
+	j = 0;
+	while (i < 10) //while(1)
 	{
-		free_info();
-		printf("Failed create philosophers\n");
-		return ;
+		cubiertos = 0;
+		j = 0;
+		while (cubiertos < num_philos / 2)
+		{
+			printf("come philo %d\n", (i + j) % num_philos); //if he is ready, otherwise the next...
+			j = j + 2;
+			cubiertos++;
+		}
+		i++;
 	}
-	printf("Hola\n");
-	//usleep(10000000);
-	//printf("Hola2\n");
-	free_philos();
-	free_info();
 }
 
 int	main(int argc, char **argv)
 {
 	t_info		*info;
-	//t_philo		**philos;
+	t_philo		**philos;
 
 	info = NULL;
 	if (!(argc == 5 || argc == 6))
@@ -47,17 +53,18 @@ int	main(int argc, char **argv)
 	info = set_info(argv);
 	if (info == NULL)
 		return (EXIT_FAILURE);
-	//else
-	//{
-	//	philos = init_philos(true);
-	//	if (philos == NULL || philos[0] == NULL)
-	//	{
-	//		printf("Error while creating philosophers\n");
-	//		return (EXIT_FAILURE);
-	//	}
-	//	if (thread_creation(info, philos) == EXIT_FAILURE)
-	//		return (EXIT_FAILURE);
-	//}
-	start_simulation(); //cambiar
+	philos = sit_philosophers(true);
+	if (philos == NULL)
+	{
+		free_info();
+		printf("Failed create philosophers\n");
+		return (EXIT_FAILURE);
+	}
+	printf("Hola\n");
+	//usleep(10000000);
+	//printf("Hola2\n");
+	free_philos();
+	free_info();
+	//print_ciclo(info->num_philo);
 	return (EXIT_SUCCESS);
 }

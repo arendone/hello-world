@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 19:50:42 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/27 16:57:11 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/28 12:43:25 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ t_info	*get_info(void);
 
 /* Init data in sit_philosophers.c*/
 t_philo	**sit_philosophers(bool value);
-int		init_philo(t_philo *elem, int i);
+//int		init_philo(t_philo *elem, int i);
+t_philo	*init_philo(int i);
 int		philos_join(t_philo	**philos);
 int		philos_mutex(t_philo	**philos);
 t_philo	**get_philos(void);

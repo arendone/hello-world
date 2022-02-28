@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 13:46:55 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/27 17:32:21 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:20:51 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,48 +28,56 @@ t_philo	**sit_philosophers(bool value)
 	if (value == false)
 		return (philos);
 	info = get_info();
-	philos = ft_calloc(info->num_philo + 1, sizeof(t_philo *));
+	philos = (t_philo **)ft_calloc(info->num_philo + 1, sizeof(t_philo *));
 	if (philos == NULL)
 		return (NULL);
 	i = 0;
-	printf("num de filosofos: %d\n", info->num_philo);
 	while (i < info->num_philo)
 	{
-		if (init_philo(philos[i], i) == EXIT_FAILURE)
+		philos[i] = init_philo(i);
+		if (philos[i] == NULL)
 		{
-			printf("philo in adress para i = 0 %p\n", philos[0]); //ayuda
 			free_philos();
 			return (NULL);
 		}
 		i++;
 	}
-	printf("philo in adress para i = 1 %p\n", philos[1]); //ayuda
-	if (philos_join(philos) == EXIT_FAILURE
-		|| philos_mutex(philos) == EXIT_FAILURE)
+	if (philos_join(philos) == EXIT_FAILURE)
+		//|| philos_mutex(philos) == EXIT_FAILURE)
 		free_philos();
-	printf("philo in adress para i = 1 %p\n", philos[1]); //ayuda
 	return (philos);
 }
 
 /**
  * @brief  create the thread philo
  * @note
- * @param adress of the struct where we cant to create the thread philo
- * @retval EXIT_SUCCESS or EXIT_FAILURE
+ * @param adress seat of the philo ???
+ * @retval pointer to the info of the philo
  */
-int	init_philo(t_philo *philo, int i)
+t_philo	*init_philo(int i)
 {
-	t_info			*info;
+	t_philo			*temp;
+	pthread_mutex_t	*fork;
 
-	info = get_info();
-	philo = calloc(1, sizeof(t_philo));
-	if (philo == NULL)
-		return (EXIT_FAILURE);
-	if (pthread_create(&philo->philo, NULL, &routine, (void *)info) != 0)
-		return (EXIT_FAILURE);
-	printf("created philo in adress %p\n", philo); // no se guarda esta info en sit...!!!!!!
-	philo->seat = i + 1; //cuidado con esto
-	return (EXIT_SUCCESS);
+	temp = (t_philo *)calloc(1, sizeof(t_philo));
+	if (temp == NULL)
+		return (NULL);
+	if (pthread_create(&temp->philo, NULL, &routine, (void *)temp) != 0)
+	{
+		free(temp);
+		return (NULL);
+	}
+	fork = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
+	if (fork == NULL)
+	{
+		free(temp);
+		return (NULL);
+	}
+	temp->fork = fork;
+	pthread_mutex_init(temp->fork, NULL);
+	//printf("created philo in adress %p\n", temp);
+	temp->seat = i; //cuidado con esto
+	return (temp);
 }
 
 /**
@@ -83,14 +91,11 @@ int	philos_join(t_philo	**philos)
 	int	i;
 
 	i = 0;
-	printf("Vine a join");
-	printf("philo in adress para i = 1 %p\n", philos[1]);
 	while (philos[i] != NULL)
 	{
-		printf("Entre al while");
 		if (pthread_join(philos[i]->philo, NULL) != 0)
 			return (EXIT_FAILURE);
-		printf("joined philo in adress %p\n", philos[i]);
+		//printf("joined philo in adress %p\n", philos[i]);
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -110,7 +115,7 @@ int	philos_mutex(t_philo	**philos)
 	i = 0;
 	while (philos[i])
 	{
-		fork = calloc(1, sizeof(pthread_mutex_t));
+		fork = (pthread_mutex_t *)calloc(1, sizeof(pthread_mutex_t));
 		if (fork == NULL)
 			return (EXIT_FAILURE);
 		philos[i]->fork = fork;

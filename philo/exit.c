@@ -6,7 +6,7 @@
 /*   By: arendon- <arendon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 17:23:19 by arendon-          #+#    #+#             */
-/*   Updated: 2022/02/27 16:51:34 by arendon-         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:31:25 by arendon-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,14 @@ void	free_philos(void)
 	int		i;
 
 	philos = get_philos();
+	//printf("philos adress%p\n", philos); //ayuda
 	i = 0;
 	while (philos[i])
 	{
+		//printf("philo in adress%p\n", philos[i]); //ayuda
 		free (philos[i]);
 		pthread_mutex_destroy(philos[i]->fork);
+		i++;
 	}
 	free(philos);
 	philos = NULL;
